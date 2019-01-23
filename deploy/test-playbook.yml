@@ -1,0 +1,5 @@
+---
+- hosts: manga
+  tasks:
+  - name: "Test task"
+    command: hostname
