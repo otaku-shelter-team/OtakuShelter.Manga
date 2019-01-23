@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Phema.Configuration;
 
 namespace OtakuShelter.Manga
 {
@@ -12,6 +13,7 @@ namespace OtakuShelter.Manga
 
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
+				.UseConfiguration<OtakuShelterMangaConfiguration>()
 				.UseStartup<Startup>();
 	}
 }

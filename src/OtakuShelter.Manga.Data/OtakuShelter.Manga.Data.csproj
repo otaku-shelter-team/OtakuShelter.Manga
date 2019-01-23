@@ -1,13 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netcoreapp2.1</TargetFramework>
+		<TargetFramework>netcoreapp2.2</TargetFramework>
 		<RootNamespace>OtakuShelter.Manga</RootNamespace>
 		<LangVersion>7.3</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\OtakuShelter.Manga\OtakuShelter.Manga.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.1" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.2.1" />
+	  <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
+	  <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.1" />
+	  <PackageReference Include="Phema.Configuration" Version="1.1.2" />
 	</ItemGroup>
 
 </Project>
