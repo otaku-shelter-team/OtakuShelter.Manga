@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Manga.Model", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Manga.Web", "src\OtakuShelter.Manga.Web\OtakuShelter.Manga.Web.csproj", "{2608BDCB-8017-47E1-9765-6619C4B8627A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Manga.Tests", "src\OtakuShelter.Manga.Tests\OtakuShelter.Manga.Tests.csproj", "{92599817-14A4-44D2-974C-82329DB05E81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,7 @@ Global
 		{A163778C-85F4-4C57-82FC-C2736D98D84B} = {FC1FF24A-A3C0-4B50-B2AA-5341F2990E08}
 		{84969196-1962-465D-8E40-8905E4E67FA9} = {FC1FF24A-A3C0-4B50-B2AA-5341F2990E08}
 		{2608BDCB-8017-47E1-9765-6619C4B8627A} = {FC1FF24A-A3C0-4B50-B2AA-5341F2990E08}
+		{92599817-14A4-44D2-974C-82329DB05E81} = {FC1FF24A-A3C0-4B50-B2AA-5341F2990E08}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{839A5C3A-BD4D-480C-AF16-75E751776946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -80,5 +83,17 @@ Global
 		{2608BDCB-8017-47E1-9765-6619C4B8627A}.Release|x64.Build.0 = Release|Any CPU
 		{2608BDCB-8017-47E1-9765-6619C4B8627A}.Release|x86.ActiveCfg = Release|Any CPU
 		{2608BDCB-8017-47E1-9765-6619C4B8627A}.Release|x86.Build.0 = Release|Any CPU
+		{92599817-14A4-44D2-974C-82329DB05E81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92599817-14A4-44D2-974C-82329DB05E81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92599817-14A4-44D2-974C-82329DB05E81}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{92599817-14A4-44D2-974C-82329DB05E81}.Debug|x64.Build.0 = Debug|Any CPU
+		{92599817-14A4-44D2-974C-82329DB05E81}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{92599817-14A4-44D2-974C-82329DB05E81}.Debug|x86.Build.0 = Debug|Any CPU
+		{92599817-14A4-44D2-974C-82329DB05E81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92599817-14A4-44D2-974C-82329DB05E81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92599817-14A4-44D2-974C-82329DB05E81}.Release|x64.ActiveCfg = Release|Any CPU
+		{92599817-14A4-44D2-974C-82329DB05E81}.Release|x64.Build.0 = Release|Any CPU
+		{92599817-14A4-44D2-974C-82329DB05E81}.Release|x86.ActiveCfg = Release|Any CPU
+		{92599817-14A4-44D2-974C-82329DB05E81}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
