@@ -1,5 +1,6 @@
 ---
 - hosts: manga
+  remote_user: application
   tasks:
   - name: "Test task"
     command: hostname
