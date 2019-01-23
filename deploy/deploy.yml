@@ -1,6 +1,7 @@
 ---
 - hosts: manga
   become: true
+  become_method: su
   remote_user: application
   roles:
     - install_dotnet
