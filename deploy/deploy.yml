@@ -1,7 +1,0 @@
----
-- hosts: manga
-  become: true
-  remote_user: application
-  roles:
-    - install_dotnet
-    

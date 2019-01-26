@@ -1,10 +1,12 @@
+using System.Runtime.Serialization;
 using Phema.Configuration;
 
 namespace OtakuShelter.Manga
 {
 	[Configuration]
-	public class OtakuShelterMangaConfiguration
+	public class OtakuShelterWebConfiguration
 	{
+		[DataMember(Name = "DataConfiguration")]
 		public OtakuShelterDataConfiguration DataConfiguration { get; set; }
 	}
 }

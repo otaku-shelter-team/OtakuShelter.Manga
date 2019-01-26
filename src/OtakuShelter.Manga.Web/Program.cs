@@ -13,7 +13,7 @@ namespace OtakuShelter.Manga
 
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
-				.UseConfiguration<OtakuShelterMangaConfiguration>()
+				.UseConfiguration<OtakuShelterWebConfiguration>()
 				.UseStartup<Startup>();
 	}
 }

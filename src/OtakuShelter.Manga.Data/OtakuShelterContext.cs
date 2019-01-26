@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OtakuShelter.Manga
 {
-	internal class OtakuShelterContext : DbContext
+	public class OtakuShelterContext : DbContext
 	{
 		public OtakuShelterContext()
 		{
@@ -12,5 +12,9 @@ namespace OtakuShelter.Manga
 			: base(options)
 		{
 		}
+
+		public DbSet<Manga> Mangas { get; set; }
+		public DbSet<Manga> Chapters { get; set; }
+		public DbSet<Manga> Pages { get; set; }
 	}
 }
