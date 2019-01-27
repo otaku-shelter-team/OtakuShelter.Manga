@@ -1,0 +1,9 @@
+---
+- name: mkdir {{ postgresql_path }}
+  file: path={{ postgresql_path }} state=directory
+
+- name: cp docker-compose.yml
+  template: src=docker-compose.yml.j2 dest={{ postgresql_path }}/docker-compose.yml mode=0755
+
+- name: docker-compose up
+  docker_service: project_src={{ postgresql_path }} state=present restarted=true

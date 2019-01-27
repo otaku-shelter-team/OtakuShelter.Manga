@@ -1,0 +1,16 @@
+- hosts: database
+  
+  vars:
+    ansible_become: true
+    ansible_become_pass: root
+    ansible_become_method: su
+    ansible_user: ansible
+
+  roles:
+  - install-docker
+  - { 
+      role: install-nginx,
+      nginx_path: /otakushelter/manga/loadbalancer,
+      nginx_upstream: manga_loadbalancer,
+      nginx_servers: "{{ groups.services }}"
+    }

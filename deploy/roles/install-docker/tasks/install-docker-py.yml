@@ -1,0 +1,3 @@
+---
+- name: pip install docker-py
+  pip: name=docker state=present

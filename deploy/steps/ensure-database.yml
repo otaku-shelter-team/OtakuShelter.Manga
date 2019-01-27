@@ -1,0 +1,20 @@
+---
+- hosts: database
+  
+  vars:
+    ansible_become: true
+    ansible_become_pass: root
+    ansible_become_method: su
+    ansible_user: ansible
+
+  roles:
+  - install-docker
+  - { 
+      role: install-postgresql,
+      postgresql_service: otakushelter-manga-database,
+      postgresql_path: /otakushelter/manga/database,
+      postgresql_data: data,
+      postgresql_database: otakushelter-manga-database,
+      postgresql_username: otakushelter-manga-database,
+      postgresql_password: otakushelter-manga-database 
+    }

@@ -1,0 +1,12 @@
+---
+- name: mkdir {{ nginx_path }}
+  file: path={{ nginx_path }} state=directory
+
+- name: cp docker-compose.yml
+  template: src=docker-compose.yml.j2 dest={{ nginx_path }}/docker-compose.yml mode=0755
+
+- name: cp nginx.conf
+  template: src=nginx.conf.j2 dest={{ nginx_path }}/nginx.conf mode=0755
+
+- name: docker-compose up
+  docker_service: project_src={{ nginx_path }} state=present restarted=true
