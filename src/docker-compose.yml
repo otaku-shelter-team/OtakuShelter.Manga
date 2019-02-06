@@ -1,9 +1,0 @@
-version: '3'
-services:
-  manga-service:
-    image: manga-service
-    build: 
-      context: .
-      dockerfile: src/OtakuShelter.Manga.Web/Dockerfile
-    ports:
-      - "80:80"

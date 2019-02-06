@@ -1,19 +1,33 @@
-﻿using Microsoft.AspNetCore;
+using System.IO;
+using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+
 using Phema.Configuration;
+using Phema.Configuration.Yaml;
 
 namespace OtakuShelter.Manga
 {
-	public class Program
+	public static class Program
 	{
-		public static void Main(string[] args)
+		public static async Task Main(string[] args)
 		{
-			CreateWebHostBuilder(args).Build().Run();
-		}
+			var app = new WebHostBuilder()
+				.UseKestrel()
+				.UseWebRoot(Directory.GetCurrentDirectory())
+				.ConfigureAppConfiguration((context, builder) =>
+					DesignTimeMangaContextFactory
+						.CreateConfigurationBuilderConfiguration(context.HostingEnvironment.WebRootPath)(builder))
+				.ConfigureLogging((context, builder) =>
+					builder.AddConsole()
+						.SetMinimumLevel(LogLevel.Warning))
+				.UseConfiguration<MangaWebConfiguration>()
+				.UseStartup<Startup>()
+				.Build();
 
-		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-			WebHost.CreateDefaultBuilder(args)
-				.UseConfiguration<OtakuShelterWebConfiguration>()
-				.UseStartup<Startup>();
+			await app.RunAsync();
+		}
 	}
 }
