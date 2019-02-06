@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+  manga-service:
+    build: 
+      context: .
+      dockerfile: src/OtakuShelter.Manga.Web/Dockerfile
+    ports:
+      - "80:80"
+    
+  manga-database:
+    image: postgres
+    restart: always
+    volumes:
+    - /otakushelter/manga/database:/var/lib/postgresql
+    ports:
+    - 5432:5432
+    environment:
+      POSTGRES_DB: otakushelter
+      POSTGRES_USER: otakushelter
+      POSTGRES_PASSWORD: otakushelter
