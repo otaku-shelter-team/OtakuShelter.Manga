@@ -1,5 +1,8 @@
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Phema.Routing;
+using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace OtakuShelter.Manga
 {
@@ -10,11 +13,31 @@ namespace OtakuShelter.Manga
 		{
 			services.AddMvcCore()
 				.AddJsonFormatters()
+				.AddApiExplorer()
 				.AddPhemaRouting(configuration => 
 					configuration.AddMangasController()
-						.AddChaptersController());
+						.AddChaptersController()
+						.AddPagesController()
+						.AddTypesController()
+						.AddTagsController()
+						.AddTranslatorsController()
+						.AddAuthorsController());
+
+			services.AddSwaggerGen(options => 
+				options.SwaggerDoc("v1", new Info { Title = "OtakuShelter API", Version = "v1" }));
 			
 			return services;
+		}
+
+		public static void EnsureDatabaseMigrated(this IApplicationBuilder app)
+		{
+			using (var scope = app.ApplicationServices.CreateScope())
+			{
+				scope.ServiceProvider
+					.GetRequiredService<MangaContext>()
+					.Database
+					.Migrate();
+			}
 		}
 	}
 }

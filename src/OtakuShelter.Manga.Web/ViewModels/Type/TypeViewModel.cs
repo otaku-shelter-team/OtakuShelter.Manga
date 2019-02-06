@@ -12,13 +12,9 @@ namespace OtakuShelter.Manga
 		public TypeViewModel(Type type)
 		{
 			Id = type.Id;
-			Name = type.Name;
 		}
 		
 		[DataMember(Name = "id")]
 		public int Id { get; set; }
-
-		[DataMember(Name = "name")]
-		public string Name { get; set; }
 	}
 }

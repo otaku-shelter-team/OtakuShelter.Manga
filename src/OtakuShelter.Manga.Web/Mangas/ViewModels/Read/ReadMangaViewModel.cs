@@ -10,7 +10,7 @@ namespace OtakuShelter.Manga
 	public class ReadMangaViewModel
 	{
 		[DataMember(Name = "mangas")]
-		public ICollection<ReadMangaItemViewModel> Mangas { get; set; }
+		public ICollection<ReadMangaItemViewModel> Mangas { get; private set; }
 		
 		public async Task Load(MangaContext context, int offset, int limit)
 		{

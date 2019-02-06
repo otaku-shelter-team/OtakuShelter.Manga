@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using OtakuShelter.Manga.ViewModels.Page;
+using OtakuShelter.Manga;
 
 namespace OtakuShelter.Manga
 {
@@ -19,7 +19,7 @@ namespace OtakuShelter.Manga
 			await context.SaveChangesAsync();
 		}
 
-		public async Task<ReadChapterViewModel> Read(int mangaId, PageViewModel filter)
+		public async Task<ReadChapterViewModel> Read(int mangaId, FilterViewModel filter)
 		{
 			var model = new ReadChapterViewModel();
 

@@ -1,8 +1,8 @@
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -27,6 +27,11 @@ namespace OtakuShelter.Manga
 		
 		public void Configure(IApplicationBuilder app)
 		{
+			app.EnsureDatabaseMigrated();
+			
+			app.UseSwagger();
+			app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "OtakuShelter API v1"));
+			
 			app.UseMvc();
 		}
 	}

@@ -21,6 +21,12 @@ namespace OtakuShelter.Manga
 		[DataMember(Name = "tags")]
 		public ICollection<TagViewModel> Tags { get; set; }
 		
+		[DataMember(Name = "translators")] 
+		public ICollection<TranslatorViewModel> Translators { get; set; }
+		
+		[DataMember(Name = "authors")] 
+		public ICollection<AuthorViewModel> Authors { get; set; }
+		
 		public async Task Update(MangaContext context, int mangaId)
 		{
 			var manga = await context.Mangas.FirstAsync(m => m.Id == mangaId);
@@ -37,26 +43,63 @@ namespace OtakuShelter.Manga
 
 			if (Type != null)
 			{
-				var type = await context.Types
-					.FirstAsync(t => t.Id == Type.Id || t.Name == Type.Name);
+				var type = await context.Types.FirstAsync(t => t.Id == Type.Id);
 
 				manga.Type = type;
 			}
 
 			if (Tags != null)
 			{
-				var mangaTagsToRemove = manga.MangaTags
-					.Where(mt => !Tags.Any(t => t.Id == mt.Tag.Id || t.Name == mt.Tag.Name))
+				var modelTagIds = Tags.Select(t => t.Id).ToList();
+				var mangaTagIds = manga.Tags.Select(t => t.Tag.Id).ToList();
+
+				var mangaTagsToRemove = mangaTagIds.Except(modelTagIds)
+					.Select(tagId => manga.Tags.First(t => t.Tag.Id == tagId))
 					.ToList();
 
-				var mangaTagsToAdd = Tags
-					.Where(tag => !manga.MangaTags.Any(t => t.Tag.Id == tag.Id || t.Tag.Name == tag.Name))
-					.Select(tag => context.Tags.First(t => tag.Id == t.Id || tag.Name == t.Name))
+				var mangaTagsToAdd = modelTagIds.Except(mangaTagIds)
+					.Select(tagId => context.Tags.First(t => t.Id == tagId))
 					.Select(tag => new MangaTag(tag, manga))
 					.ToList();
 
 				context.MangaTags.RemoveRange(mangaTagsToRemove);
 				await context.MangaTags.AddRangeAsync(mangaTagsToAdd);
+			}
+
+			if (Translators != null)
+			{
+				var modelTranslatorIds = Translators.Select(t => t.Id).ToList();
+				var mangaTranslatorIds = manga.Translators.Select(t => t.Translator.Id).ToList();
+
+				var mangaTranslatorsToRemove = mangaTranslatorIds.Except(modelTranslatorIds)
+					.Select(translatorId => manga.Translators.First(t => t.Translator.Id == translatorId))
+					.ToList();
+
+				var mangaTranslatorsToAdd = modelTranslatorIds.Except(mangaTranslatorIds)
+					.Select(translatorId => context.Translators.First(t => t.Id == translatorId))
+					.Select(translator => new MangaTranslator(translator, manga))
+					.ToList();
+				
+				context.MangaTranslators.RemoveRange(mangaTranslatorsToRemove);
+				await context.MangaTranslators.AddRangeAsync(mangaTranslatorsToAdd);
+			}
+			
+			if (Authors != null)
+			{
+				var modelAuthorIds = Authors.Select(t => t.Id).ToList();
+				var mangaAuthorIds = manga.Authors.Select(t => t.Author.Id).ToList();
+
+				var mangaAuthorsToRemove = mangaAuthorIds.Except(modelAuthorIds)
+					.Select(authorId => manga.Authors.First(t => t.Author.Id == authorId))
+					.ToList();
+
+				var mangaAuthorsToAdd = modelAuthorIds.Except(mangaAuthorIds)
+					.Select(authorId => context.Authors.First(t => t.Id == authorId))
+					.Select(author => new MangaAuthor(author, manga))
+					.ToList();
+				
+				context.MangaAuthors.RemoveRange(mangaAuthorsToRemove);
+				await context.MangaAuthors.AddRangeAsync(mangaAuthorsToAdd);
 			}
 		}
 	}

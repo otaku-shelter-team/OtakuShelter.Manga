@@ -6,10 +6,10 @@ namespace OtakuShelter.Manga
 	public class ReadChapterItemViewModel
 	{
 		[DataMember(Name = "id")]
-		public int Id { get; set; }
+		public int Id { get; }
 		
 		[DataMember(Name = "title")]
-		public string Title { get; set; }
+		public string Title { get; }
 		
 		public ReadChapterItemViewModel(Chapter chapter)
 		{

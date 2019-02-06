@@ -7,6 +7,6 @@ namespace OtakuShelter.Manga
 		public int Id { get; set; }
 		public string Name { get; set; }
 
-		public virtual ICollection<MangaTag> MangaTags { get; set; }
+		public virtual ICollection<MangaTag> Mangas { get; set; }
 	}
 }

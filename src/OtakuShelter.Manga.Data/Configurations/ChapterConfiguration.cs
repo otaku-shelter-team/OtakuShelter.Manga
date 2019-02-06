@@ -19,12 +19,12 @@ namespace OtakuShelter.Manga
 				.IsRequired();
 
 			builder.Property(c => c.UploadDate)
-				.HasColumnName("upload_date")
+				.HasColumnName("uploaddate")
 				.HasColumnType("date")
 				.IsRequired();
 
 			builder.Property(c => c.MangaId)
-				.HasColumnName("manga_id")
+				.HasColumnName("mangaid")
 				.IsRequired();
 			
 			builder.HasOne(m => m.Manga)

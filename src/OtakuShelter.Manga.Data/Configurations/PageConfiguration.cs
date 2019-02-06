@@ -13,13 +13,13 @@ namespace OtakuShelter.Manga
 				.HasColumnName("id")
 				.UseNpgsqlIdentityColumn();
 
-			builder.Property(p => p.PageUrl)
-				.HasColumnName("page_url")
+			builder.Property(p => p.Image)
+				.HasColumnName("image")
 				.HasMaxLength(50)
 				.IsRequired();
 
 			builder.Property(p => p.ChapterId)
-				.HasColumnName("chapter_id")
+				.HasColumnName("chapterid")
 				.IsRequired();
 			
 			builder.HasOne(c => c.Chapter)

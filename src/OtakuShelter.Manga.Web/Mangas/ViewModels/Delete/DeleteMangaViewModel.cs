@@ -15,7 +15,7 @@ namespace OtakuShelter.Manga
 			var manga = await context.Mangas.FirstAsync(m => m.Id == MangaId);
 
 			context.Mangas.Remove(manga);
-			context.MangaTags.RemoveRange(manga.MangaTags);
+			context.MangaTags.RemoveRange(manga.Tags);
 		}
 	}
 }

@@ -1,15 +1,15 @@
 using System.Runtime.Serialization;
 
-namespace OtakuShelter.Manga.ViewModels.Page
+namespace OtakuShelter.Manga
 {
 	[DataContract]
-	public class PageViewModel
+	public class FilterViewModel
 	{
-		public PageViewModel()
+		public FilterViewModel()
 		{
 		}
 
-		public PageViewModel(int offset, int limit)
+		public FilterViewModel(int offset, int limit)
 		{
 			Offset = offset;
 			Limit = limit;

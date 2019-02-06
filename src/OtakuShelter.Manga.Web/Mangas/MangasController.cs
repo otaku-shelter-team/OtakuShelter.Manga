@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OtakuShelter.Manga.ViewModels.Page;
+using OtakuShelter.Manga;
 
 namespace OtakuShelter.Manga
 {
@@ -20,7 +20,7 @@ namespace OtakuShelter.Manga
 			await context.SaveChangesAsync();
 		}
 		
-		public async Task<ReadMangaViewModel> Read(PageViewModel filter)
+		public async Task<ReadMangaViewModel> Read(FilterViewModel filter)
 		{
 			var model = new ReadMangaViewModel();
 			

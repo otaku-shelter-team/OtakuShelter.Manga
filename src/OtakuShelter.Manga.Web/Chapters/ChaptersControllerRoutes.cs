@@ -1,4 +1,4 @@
-using OtakuShelter.Manga.ViewModels.Page;
+using OtakuShelter.Manga;
 using Phema.Routing;
 
 namespace OtakuShelter.Manga
@@ -12,7 +12,7 @@ namespace OtakuShelter.Manga
 				controller.AddRoute("{mangaId}/chapters", c => c.Create(From.Route<int>(), From.Body<CreateChapterViewModel>()))
 					.HttpPost();
 
-				controller.AddRoute("{mangaId}/chapters", c => c.Read(From.Route<int>(), From.Query<PageViewModel>()))
+				controller.AddRoute("{mangaId}/chapters", c => c.Read(From.Route<int>(), From.Query<FilterViewModel>()))
 					.HttpGet();
 
 				controller.AddRoute("chapters/{chapterId}", c => c.Read(From.Route<int>()))
