@@ -1,0 +1,10 @@
+language: csharp
+mono: none
+dotnet: 2.2.103
+install:
+- dotnet restore
+script:
+- >
+    cd src/OtakuShelter.Manga.Web
+    dotnet publish -c Release -o publish
+
