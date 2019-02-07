@@ -6,8 +6,7 @@ dotnet: 2.2
 install:
 - dotnet restore
 script:
-- cd src/OtakuShelter.Manga.Web
-- dotnet publish -c Release -o publish
-- cd publish
-- ls
-
+- docker-compose build
+- docker login -u $OTAKUSHELTER_USERNAME -p $OTAKUSHELTER_PASSWORD
+- docker tag otaku-shelter.manga:1.0.$TRAVIS_BUILD_NUMBER otakushelter/otaku-shelter.manga:1.0.$TRAVIS_BUILD_NUMBER
+- docker push otakushelter/otaku-shelter.manga:1.0.$TRAVIS_BUILD_NUMBER

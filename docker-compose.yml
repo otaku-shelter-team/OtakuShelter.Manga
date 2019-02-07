@@ -1,7 +1,8 @@
 version: '3.1'
 services:
   manga-service:
-    build: 
+    image: otaku-shelter.manga:1.0.0
+    build:
       context: .
       dockerfile: src/OtakuShelter.Manga.Web/Dockerfile
     ports:
