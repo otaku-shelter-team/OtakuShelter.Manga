@@ -6,9 +6,8 @@ dotnet: 2.2
 install:
 - dotnet restore
 script:
-- >
-    cd src/OtakuShelter.Manga.Web
-    dotnet publish -c Release -o publish
-    cd publish
-    ls
+- cd src/OtakuShelter.Manga.Web
+- dotnet publish -c Release -o publish
+- cd publish
+- ls
 
