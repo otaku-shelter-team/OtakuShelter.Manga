@@ -9,4 +9,6 @@ script:
 - >
     cd src/OtakuShelter.Manga.Web
     dotnet publish -c Release -o publish
+    cd publish
+    ls
 
