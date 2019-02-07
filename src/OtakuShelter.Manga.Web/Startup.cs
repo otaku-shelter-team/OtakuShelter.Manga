@@ -21,16 +21,18 @@ namespace OtakuShelter.Manga
 		{
 			return services
 				.AddDataServices(configuration.Database)
-				.AddWebServices()
+				.AddWebServices(configuration)
 				.BuildServiceProvider();
 		}
 		
 		public void Configure(IApplicationBuilder app)
 		{
 			app.EnsureDatabaseMigrated();
+
+			app.UseAuthentication();
 			
 			app.UseSwagger();
-			app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "OtakuShelter API v1"));
+			app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "OtakuShelter Manga API v1"));
 			
 			app.UseMvc();
 		}

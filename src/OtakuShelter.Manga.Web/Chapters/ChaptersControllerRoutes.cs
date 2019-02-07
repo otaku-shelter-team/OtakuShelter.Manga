@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using OtakuShelter.Manga;
 using Phema.Routing;
 
@@ -10,7 +12,8 @@ namespace OtakuShelter.Manga
 			builder.AddController<ChaptersController>(controller =>
 			{
 				controller.AddRoute("{mangaId}/chapters", c => c.Create(From.Route<int>(), From.Body<CreateChapterViewModel>()))
-					.HttpPost();
+					.HttpPost()
+					.AddFilter(new AuthorizeFilter(new [] { new AuthorizeAttribute() }));
 
 				controller.AddRoute("{mangaId}/chapters", c => c.Read(From.Route<int>(), From.Query<FilterViewModel>()))
 					.HttpGet();
@@ -20,10 +23,12 @@ namespace OtakuShelter.Manga
 
 				controller.AddRoute("chapters/{chapterId}",
 						c => c.Update(From.Route<int>(), From.Body<UpdateChapterViewModel>()))
-					.HttpPut();
+					.HttpPut()
+					.AddFilter(new AuthorizeFilter(new [] { new AuthorizeAttribute() }));
 
 				controller.AddRoute("chapters/{chapterId}", c => c.Delete(From.Route<DeleteChapterViewModel>()))
-					.HttpDelete();
+					.HttpDelete()
+					.AddFilter(new AuthorizeFilter(new [] { new AuthorizeAttribute() }));
 			});
 			
 			return builder;

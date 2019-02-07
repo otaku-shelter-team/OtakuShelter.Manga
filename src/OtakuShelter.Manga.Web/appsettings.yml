@@ -5,3 +5,7 @@ database:
   userid: otakushelter
   password: otakushelter
   migrationstable: migrations
+  
+secret: secretsecretsecretsecretsecret
+issuer: otakushelter.issuer
+audience: otakushelter.audience
