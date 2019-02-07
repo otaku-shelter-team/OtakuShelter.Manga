@@ -10,5 +10,5 @@ script:
 - docker login -u $OTAKUSHELTER_USERNAME -p $OTAKUSHELTER_PASSWORD
 - docker tag otaku-shelter.manga:1.0.$TRAVIS_BUILD_NUMBER otakushelter/otaku-shelter.manga:1.0.$TRAVIS_BUILD_NUMBER
 - docker push otakushelter/otaku-shelter.manga:1.0.$TRAVIS_BUILD_NUMBER
-- apt-get install sshpass
-- ./deploy.sh | sshpass -p $MANGA_PASSWORD ssh $MANGA_USERNAME@MANGA_HOSTNAME "bash"
+- sudo apt-get install sshpass
+- sudo ./deploy.sh | sudo sshpass -p $MANGA_PASSWORD sudo ssh $MANGA_USERNAME@MANGA_HOSTNAME "bash"
