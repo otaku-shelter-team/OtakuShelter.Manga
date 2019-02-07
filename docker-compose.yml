@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   manga-service:
-    image: otaku-shelter.manga:1.0.0
+    image: "otaku-shelter.manga:1.0.${TRAVIS_BUILD_NUMBER}"
     build:
       context: .
       dockerfile: src/OtakuShelter.Manga.Web/Dockerfile
