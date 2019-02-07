@@ -5,11 +5,11 @@ dist: xenial
 dotnet: 2.2
 install:
 - dotnet restore
+- sudo apt-get install sshpass
 script:
 - docker-compose build
 - docker login -u $OTAKUSHELTER_USERNAME -p $OTAKUSHELTER_PASSWORD
 - docker tag otaku-shelter.manga:1.0.$TRAVIS_BUILD_NUMBER otakushelter/otaku-shelter.manga:1.0.$TRAVIS_BUILD_NUMBER
 - docker push otakushelter/otaku-shelter.manga:1.0.$TRAVIS_BUILD_NUMBER
-- sudo apt-get install sshpass
 - sudo chmod +x ./deploy.sh
-- ./deploy.sh | sudo sshpass -p $MANGA_PASSWORD ssh $MANGA_USERNAME@$MANGA_HOSTNAME "bash" -o StrictHostKeyChecking=no
+- sudo sshpass -p $MANGA_PASSWORD ssh $MANGA_USERNAME@$MANGA_HOSTNAME "./deploy.sh" -o StrictHostKeyChecking=no
