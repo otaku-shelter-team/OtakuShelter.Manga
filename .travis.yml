@@ -12,4 +12,4 @@ script:
 - docker tag otaku-shelter.manga:1.0.$TRAVIS_BUILD_NUMBER otakushelter/otaku-shelter.manga:1.0.$TRAVIS_BUILD_NUMBER
 - docker push otakushelter/otaku-shelter.manga:1.0.$TRAVIS_BUILD_NUMBER
 - sudo chmod +x ./deploy.sh
-- ./deploy.sh | sudo sshpass -p $MANGA_PASSWORD ssh $MANGA_USERNAME@$MANGA_HOSTNAME -o StrictHostKeyChecking=no
+- ./deploy.sh | sudo sshpass -p $MANGA_PASSWORD ssh -o StrictHostKeyChecking=no $MANGA_USERNAME@$MANGA_HOSTNAME
