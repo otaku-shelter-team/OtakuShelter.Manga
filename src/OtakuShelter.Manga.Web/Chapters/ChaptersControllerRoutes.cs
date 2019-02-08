@@ -13,7 +13,7 @@ namespace OtakuShelter.Manga
 			{
 				controller.AddRoute("{mangaId}/chapters", c => c.Create(From.Route<int>(), From.Body<CreateChapterViewModel>()))
 					.HttpPost()
-					.AddFilter(new AuthorizeFilter(new [] { new AuthorizeAttribute() }));
+					.Authorize();
 
 				controller.AddRoute("{mangaId}/chapters", c => c.Read(From.Route<int>(), From.Query<FilterViewModel>()))
 					.HttpGet();
@@ -24,11 +24,11 @@ namespace OtakuShelter.Manga
 				controller.AddRoute("chapters/{chapterId}",
 						c => c.Update(From.Route<int>(), From.Body<UpdateChapterViewModel>()))
 					.HttpPut()
-					.AddFilter(new AuthorizeFilter(new [] { new AuthorizeAttribute() }));
+					.Authorize();
 
 				controller.AddRoute("chapters/{chapterId}", c => c.Delete(From.Route<DeleteChapterViewModel>()))
 					.HttpDelete()
-					.AddFilter(new AuthorizeFilter(new [] { new AuthorizeAttribute() }));
+					.Authorize();
 			});
 			
 			return builder;

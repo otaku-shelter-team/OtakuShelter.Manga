@@ -1,10 +1,9 @@
-using System.Runtime.Serialization;
 using Phema.Configuration;
 
 namespace OtakuShelter.Manga
 {
 	[Configuration]
-	public class MangaDatabaseConfiguration
+	public class MangaContextConfiguration
 	{
 		public string MigrationsTable { get; set; }
 		public string Host { get; set; }

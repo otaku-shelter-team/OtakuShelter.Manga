@@ -18,8 +18,7 @@ namespace OtakuShelter.Manga
 				.UseKestrel()
 				.UseWebRoot(Directory.GetCurrentDirectory())
 				.ConfigureAppConfiguration((context, builder) =>
-					DesignTimeMangaContextFactory
-						.CreateConfigurationBuilderConfiguration(context.HostingEnvironment.WebRootPath)(builder))
+					MangaContextFactory.ConfigureBuilder(builder, context.HostingEnvironment.WebRootPath))
 				.ConfigureLogging((context, builder) =>
 					builder.AddConsole()
 						.SetMinimumLevel(LogLevel.Warning))

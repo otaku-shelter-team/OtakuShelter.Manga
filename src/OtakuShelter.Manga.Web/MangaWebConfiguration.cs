@@ -9,6 +9,6 @@ namespace OtakuShelter.Manga
 		public string Issuer { get; set; }
 		public string Audience { get; set; }
 		
-		public MangaDatabaseConfiguration Database { get; set; }
+		public MangaContextConfiguration Database { get; set; }
 	}
 }
