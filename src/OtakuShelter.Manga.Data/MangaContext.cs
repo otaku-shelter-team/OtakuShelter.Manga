@@ -4,10 +4,6 @@ namespace OtakuShelter.Manga
 {
 	public class MangaContext : DbContext
 	{
-		public MangaContext()
-		{
-		}
-		
 		public MangaContext(DbContextOptions<MangaContext> options)
 			: base(options)
 		{

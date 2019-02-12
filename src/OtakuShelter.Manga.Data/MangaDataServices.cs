@@ -8,7 +8,7 @@ namespace OtakuShelter.Manga
 			this IServiceCollection services,
 			MangaContextConfiguration mangaContext)
 		{
-			services.AddDbContext<MangaContext>(options => 
+			services.AddDbContextPool<MangaContext>(options => 
 				MangaContextFactory.ConfigureContext(options, mangaContext));
 			
 			return services;
