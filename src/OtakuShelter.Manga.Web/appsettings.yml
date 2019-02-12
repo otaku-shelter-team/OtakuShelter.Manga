@@ -1,9 +1,9 @@
 database:
-  host: manga.otaku-shelter.ru
+  host: database.otaku-shelter.ru
   port: 5432
-  database: otakushelter
-  userid: otakushelter
-  password: otakushelter
+  database: manga
+  userid: manga
+  password: manga
   migrationstable: migrations
   
 secret: secretsecretsecretsecretsecret
