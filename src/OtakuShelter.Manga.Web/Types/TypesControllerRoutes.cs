@@ -1,7 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.EntityFrameworkCore;
-using OtakuShelter.Manga;
 using Phema.Routing;
 
 namespace OtakuShelter.Manga
@@ -14,18 +10,18 @@ namespace OtakuShelter.Manga
 			{
 				controller.AddRoute(c => c.Create(From.Body<CreateTypeViewModel>()))
 					.HttpPost()
-					.Authorize();
+					.Authorize("admin");
 
 				controller.AddRoute(c => c.Read(From.Body<FilterViewModel>()))
 					.HttpGet();
 
 				controller.AddRoute("{typeId}", c => c.Update(From.Route<int>(), From.Body<UpdateTypeViewModel>()))
 					.HttpPut()
-					.Authorize();
+					.Authorize("admin");
 
 				controller.AddRoute("{typeId}", c => c.Delete(From.Route<DeleteTypeViewModel>()))
 					.HttpDelete()
-					.Authorize();
+					.Authorize("admin");
 			});
 			
 			return builder;
