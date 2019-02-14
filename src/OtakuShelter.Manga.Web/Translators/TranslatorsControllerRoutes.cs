@@ -6,20 +6,20 @@ namespace OtakuShelter.Manga
 	{
 		public static IRoutingBuilder AddTranslatorsController(this IRoutingBuilder builder)
 		{
-			builder.AddController<TranslatorsController>("translators", controller =>
+			builder.AddController<TranslatorsController>(controller =>
 			{
-				controller.AddRoute(c => c.Create(From.Body<CreateTranslatorViewModel>()))
+				controller.AddRoute("translators", c => c.Read(From.Query<FilterViewModel>()))
+					.HttpGet();
+				
+				controller.AddRoute("admin/translators", c => c.AdminCreate(From.Body<AdminCreateTranslatorViewModel>()))
 					.HttpPost()
 					.Authorize("admin");
 
-				controller.AddRoute(c => c.Read(From.Query<FilterViewModel>()))
-					.HttpGet();
-
-				controller.AddRoute("{translatorId}", c => c.Update(From.Route<int>(), From.Body<UpdateTranslatorViewModel>()))
+				controller.AddRoute("admin/translators/{translatorId}", c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateTranslatorViewModel>()))
 					.HttpPut()
 					.Authorize("admin");
 
-				controller.AddRoute("{translatorId}", c => c.Delete(From.Route<DeleteTranslatorViewModel>()))
+				controller.AddRoute("admin/translators/{translatorId}", c => c.AdminDelete(From.Route<AdminDeleteTranslatorViewModel>()))
 					.HttpDelete()
 					.Authorize("admin");
 			});

@@ -11,21 +11,21 @@ namespace OtakuShelter.Manga
 		{
 			builder.AddController<PagesController>(controller =>
 			{
-				controller.AddRoute("{chapterId}/pages", c => c.Create(From.Route<int>(), From.Body<CreatePageViewModel>()))
-					.HttpPost()
-					.Authorize("admin");
-
 				controller.AddRoute("{chapterId}/pages", c => c.Read(From.Route<int>(), From.Query<FilterViewModel>()))
 					.HttpGet();
 
 				controller.AddRoute("pages/{pageId}", c => c.ReadById(From.Route<int>()))
 					.HttpGet();
+				
+				controller.AddRoute("admin/{chapterId}/pages", c => c.AdminCreate(From.Route<int>(), From.Body<AdminCreatePageViewModel>()))
+					.HttpPost()
+					.Authorize("admin");
 
-				controller.AddRoute("pages/{pageId}", c => c.Update(From.Route<int>(), From.Body<UpdatePageViewModel>()))
+				controller.AddRoute("admin/pages/{pageId}", c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdatePageViewModel>()))
 					.HttpPut()
 					.Authorize("admin");
 
-				controller.AddRoute("pages/{pageId}", c => c.Delete(From.Route<DeletePageViewModel>()))
+				controller.AddRoute("admin/pages/{pageId}", c => c.AdminDelete(From.Route<AdminDeletePageViewModel>()))
 					.HttpDelete()
 					.Authorize("admin");
 			});

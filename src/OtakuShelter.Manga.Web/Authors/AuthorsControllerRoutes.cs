@@ -6,20 +6,20 @@ namespace OtakuShelter.Manga
 	{
 		public static IRoutingBuilder AddAuthorsController(this IRoutingBuilder builder)
 		{
-			builder.AddController<AuthorsController>("authors", controller =>
+			builder.AddController<AuthorsController>(controller =>
 			{
-				controller.AddRoute(c => c.Create(From.Body<CreateAuthorViewModel>()))
+				controller.AddRoute("authors", c => c.Read(From.Query<FilterViewModel>()))
+					.HttpGet();
+				
+				controller.AddRoute("admin/authors", c => c.AdminCreate(From.Body<AdminCreateAuthorViewModel>()))
 					.HttpPost()
 					.Authorize("admin");
 
-				controller.AddRoute(c => c.Read(From.Query<FilterViewModel>()))
-					.HttpGet();
-
-				controller.AddRoute("{authorId}", c => c.Update(From.Route<int>(), From.Body<UpdateAuthorViewModel>()))
+				controller.AddRoute("admin/authors/{authorId}", c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateAuthorViewModel>()))
 					.HttpPut()
 					.Authorize("admin");
 
-				controller.AddRoute("{authorId}", c => c.Delete(From.Route<DeleteAuthorViewModel>()))
+				controller.AddRoute("admin/authors/{authorId}", c => c.AdminDelete(From.Route<AdminDeleteAuthorViewModel>()))
 					.HttpDelete()
 					.Authorize("admin");
 			});

@@ -10,14 +10,7 @@ namespace OtakuShelter.Manga
 		{
 			this.context = context;
 		}
-
-		public async Task Create(CreateAuthorViewModel model)
-		{
-			await model.Create(context);
-
-			await context.SaveChangesAsync();
-		}
-
+		
 		public async Task<ReadAuthorViewModel> Read(FilterViewModel filter)
 		{
 			var model = new ReadAuthorViewModel();
@@ -26,15 +19,22 @@ namespace OtakuShelter.Manga
 
 			return model;
 		}
+		
+		public async Task AdminCreate(AdminCreateAuthorViewModel model)
+		{
+			await model.Create(context);
 
-		public async Task Update(int authorId, UpdateAuthorViewModel model)
+			await context.SaveChangesAsync();
+		}
+
+		public async Task AdminUpdate(int authorId, AdminUpdateAuthorViewModel model)
 		{
 			await model.Update(context, authorId);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task Delete(DeleteAuthorViewModel model)
+		public async Task AdminDelete(AdminDeleteAuthorViewModel model)
 		{
 			await model.Delete(context);
 

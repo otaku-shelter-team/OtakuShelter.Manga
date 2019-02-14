@@ -27,5 +27,15 @@
 	<ItemGroup>
 		<None Include="appsettings.yml" CopyToPublishDirectory="Always" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Authors\ViewModels\Admin" />
+	  <Folder Include="Chapters\ViewModels\Admin" />
+	  <Folder Include="Mangas\ViewModels\Admin" />
+	  <Folder Include="Pages\ViewModels\Admin" />
+	  <Folder Include="Tags\ViewModels\Admin" />
+	  <Folder Include="Translators\ViewModels\Admin" />
+	  <Folder Include="Types\ViewModels\Admin" />
+	</ItemGroup>
 	
 </Project>

@@ -6,20 +6,20 @@ namespace OtakuShelter.Manga
 	{
 		public static IRoutingBuilder AddTagsController(this IRoutingBuilder builder)
 		{
-			builder.AddController<TagsController>("tags", controller =>
+			builder.AddController<TagsController>(controller =>
 			{
-				controller.AddRoute(c => c.Create(From.Body<CreateTagViewModel>()))
+				controller.AddRoute("tags", c => c.Read(From.Query<FilterViewModel>()))
+					.HttpGet();
+				
+				controller.AddRoute("admin/tags", c => c.AdminCreate(From.Body<AdminCreateTagViewModel>()))
 					.HttpPost()
 					.Authorize("admin");
 
-				controller.AddRoute(c => c.Read(From.Query<FilterViewModel>()))
-					.HttpGet();
-
-				controller.AddRoute("{tagId}", c => c.Update(From.Route<int>(), From.Body<UpdateTagViewModel>()))
+				controller.AddRoute("admin/tags/{tagId}", c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateTagViewModel>()))
 					.HttpPut()
 					.Authorize("admin");
 
-				controller.AddRoute("{tagId}", c => c.Delete(From.Route<DeleteTagViewModel>()))
+				controller.AddRoute("admin/tags/{tagId}", c => c.AdminDelete(From.Route<AdminDeleteTagViewModel>()))
 					.HttpDelete()
 					.Authorize("admin");
 			});

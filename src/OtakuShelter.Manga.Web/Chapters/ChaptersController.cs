@@ -11,13 +11,6 @@ namespace OtakuShelter.Manga
 			this.context = context;
 		}
 		
-		public async Task Create(int mangaId, CreateChapterViewModel model)
-		{
-			await model.Create(context, mangaId);
-
-			await context.SaveChangesAsync();
-		}
-
 		public async Task<ReadChapterViewModel> Read(int mangaId, FilterViewModel filter)
 		{
 			var model = new ReadChapterViewModel();
@@ -27,7 +20,7 @@ namespace OtakuShelter.Manga
 			return model;
 		}
 		
-		public async Task<ReadByIdChapterViewModel> Read(int chapterId)
+		public async Task<ReadByIdChapterViewModel> ReadById(int chapterId)
 		{
 			var model = new ReadByIdChapterViewModel();
 
@@ -35,15 +28,22 @@ namespace OtakuShelter.Manga
 
 			return model;
 		}
+		
+		public async Task AdminCreate(int mangaId, AdminCreateChapterViewModel model)
+		{
+			await model.Create(context, mangaId);
 
-		public async Task Update(int chapterId, UpdateChapterViewModel model)
+			await context.SaveChangesAsync();
+		}
+
+		public async Task AdminUpdate(int chapterId, AdminUpdateChapterViewModel model)
 		{
 			await model.Update(context, chapterId);
 			
 			await context.SaveChangesAsync();
 		}
 
-		public async Task Delete(DeleteChapterViewModel model)
+		public async Task AdminDelete(AdminDeleteChapterViewModel model)
 		{
 			await model.Delete(context);
 
