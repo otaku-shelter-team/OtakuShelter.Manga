@@ -7,6 +7,7 @@ namespace OtakuShelter.Manga
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }
+		public int Order { get; set; }
 		public DateTime UploadDate { get; set; }
 
 		public int MangaId { get; set; }

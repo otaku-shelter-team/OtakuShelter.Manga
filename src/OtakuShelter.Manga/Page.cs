@@ -3,6 +3,7 @@ namespace OtakuShelter.Manga
 	public class Page
 	{
 		public int Id { get; set; }
+		public int Order { get; set; }
 		public string Image { get; set; }
 
 		public int ChapterId { get; set; }

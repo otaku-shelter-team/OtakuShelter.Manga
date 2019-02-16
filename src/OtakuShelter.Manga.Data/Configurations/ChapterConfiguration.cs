@@ -18,6 +18,14 @@ namespace OtakuShelter.Manga
 				.HasMaxLength(50)
 				.IsRequired();
 
+			builder.Property(c => c.Order)
+				.HasColumnName("order")
+				.IsRequired();
+
+			builder.HasIndex(c => new {c.MangaId, c.Order})
+				.IsUnique()
+				.HasName("UQ_mangaid_order");
+
 			builder.Property(c => c.UploadDate)
 				.HasColumnName("uploaddate")
 				.HasColumnType("date")
