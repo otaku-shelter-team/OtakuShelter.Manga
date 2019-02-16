@@ -8,7 +8,7 @@ namespace OtakuShelter.Manga
 		{
 			builder.AddController<AuthorsController>(controller =>
 			{
-				controller.AddRoute("authors", c => c.Read(From.Query<FilterViewModel>()))
+				controller.AddRoute("authors", c => c.Read(From.Query<FilterByMangaIdViewModel>()))
 					.HttpGet();
 				
 				controller.AddRoute("admin/authors", c => c.AdminCreate(From.Body<AdminCreateAuthorViewModel>()))

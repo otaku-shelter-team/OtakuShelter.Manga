@@ -12,9 +12,19 @@ namespace OtakuShelter.Manga
 		[DataMember(Name = "translators")]
 		public ICollection<ReadTranslatorItemViewModel> Translators { get; private set; }
 		
-		public async Task Load(MangaContext context, int offset, int limit)
+		public async Task Load(MangaContext context, int? mangaId, int offset, int limit)
 		{
-			Translators = await context.Translators
+			var translators = context.Translators.AsNoTracking();
+
+			if (mangaId != null)
+			{
+				var manga = await context.Mangas.FirstAsync(m => m.Id == mangaId);
+
+				translators = translators.Where(t => t.Mangas.Any(mt => mt.Manga == manga));
+			}
+			
+			Translators = await translators
+				.OrderBy(t => t.Name)
 				.Skip(offset)
 				.Take(limit)
 				.Select(t => new ReadTranslatorItemViewModel(t))

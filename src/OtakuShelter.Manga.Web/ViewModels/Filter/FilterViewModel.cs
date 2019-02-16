@@ -8,12 +8,6 @@ namespace OtakuShelter.Manga
 		public FilterViewModel()
 		{
 		}
-
-		public FilterViewModel(int offset, int limit)
-		{
-			Offset = offset;
-			Limit = limit;
-		}
 		
 		[DataMember(Name = "offset")]
 		public int Offset { get; set; } = 0;

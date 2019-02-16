@@ -12,9 +12,19 @@ namespace OtakuShelter.Manga
 		[DataMember(Name = "tags")]
 		public ICollection<ReadTagItemViewModel> Tags { get; private set; }
 		
-		public async Task Load(MangaContext context, int offset, int limit)
+		public async Task Load(MangaContext context, int? mangaId, int offset, int limit)
 		{
-			Tags = await context.Tags
+			var tags = context.Tags.AsNoTracking();
+
+			if (mangaId != null)
+			{
+				var manga = await context.Mangas.FirstAsync(m => m.Id == mangaId);
+
+				tags = tags.Where(t => t.Mangas.Any(mt => mt.Manga == manga));
+			}
+			
+			Tags = await tags
+				.OrderBy(t => t.Name)
 				.Skip(offset)
 				.Take(limit)
 				.Select(t => new ReadTagItemViewModel(t))
