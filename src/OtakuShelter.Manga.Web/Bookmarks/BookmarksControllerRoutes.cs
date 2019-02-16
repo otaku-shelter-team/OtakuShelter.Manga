@@ -8,24 +8,24 @@ namespace OtakuShelter.Manga
 		{
 			builder.AddController<BookmarksController>(controller =>
 			{
-				controller.AddRoute(c => c.Read(From.Query<FilterByMangaChapterAndPageIdViewModel>()))
+				controller.AddRoute("bookmarks", c => c.Read(From.Query<FilterByMangaChapterAndPageIdViewModel>()))
 					.HttpGet()
 					.Authorize();
 
-				controller.AddRoute(c => c.Create(From.Body<CreateBookmarkViewModel>()))
+				controller.AddRoute("bookmarks", c => c.Create(From.Body<CreateBookmarkViewModel>()))
 					.HttpPost()
 					.Authorize();
 
-				controller.AddRoute("{bookmarkId}", c => c.Delete(From.Route<DeleteBookmarkViewModel>()))
+				controller.AddRoute("bookmarks/{bookmarkId}", c => c.Delete(From.Route<DeleteBookmarkViewModel>()))
 					.HttpDelete()
 					.Authorize();
 
-				controller.AddRoute("{accountId}",
+				controller.AddRoute("admin/bookmarks/{accountId}",
 						c => c.ReadById(From.Route<int>(), From.Query<FilterByMangaChapterAndPageIdViewModel>()))
 					.HttpGet()
 					.Authorize("admin");
 
-				controller.AddRoute("{accountId}/{bookmarkId}",
+				controller.AddRoute("admin/bookmarks/{accountId}/{bookmarkId}",
 						c => c.DeleteById(From.Route<int>(), From.Route<DeleteBookmarkViewModel>()))
 					.HttpDelete()
 					.Authorize("admin");

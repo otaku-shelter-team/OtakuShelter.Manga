@@ -29,9 +29,9 @@ namespace OtakuShelter.Manga
 			Id = bookmark.Id;
 			Name = bookmark.Name;
 			Created = bookmark.Created;
-			MangaId = bookmark.Manga.Id;
-			ChapterId = bookmark.Chapter?.Id;
-			PageId = bookmark.Page?.Id;
+			MangaId = bookmark.MangaId;
+			ChapterId = bookmark.ChapterId;
+			PageId = bookmark.PageId;
 		}
 	}
 }

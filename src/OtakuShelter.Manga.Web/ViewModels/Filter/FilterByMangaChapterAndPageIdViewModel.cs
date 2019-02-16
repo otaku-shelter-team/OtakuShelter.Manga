@@ -6,7 +6,7 @@ namespace OtakuShelter.Manga
 	public class FilterByMangaChapterAndPageIdViewModel : FilterViewModel
 	{
 		[DataMember(Name = "mangaId")]
-		public int MangaId { get; set; }
+		public int? MangaId { get; set; }
 		
 		[DataMember(Name = "chapterId")]
 		public int? ChapterId { get; set; }

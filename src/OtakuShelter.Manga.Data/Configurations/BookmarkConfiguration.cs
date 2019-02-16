@@ -35,29 +35,26 @@ namespace OtakuShelter.Manga
 				.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict)
 				.HasConstraintName("FK_manga_bookmarks");
-			
+
 			builder.Property(b => b.ChapterId)
-				.HasColumnName("chapterid")
-				.IsRequired();
+				.HasColumnName("chapterid");
 
 			builder.HasOne(b => b.Chapter)
 				.WithMany(m => m.Bookmarks)
-				.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict)
 				.HasConstraintName("FK_chapter_bookmarks");
-			
+
 			builder.Property(b => b.PageId)
-				.HasColumnName("pageid")
-				.IsRequired();
+				.HasColumnName("pageid");
 
 			builder.HasOne(b => b.Page)
 				.WithMany(m => m.Bookmarks)
-				.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict)
 				.HasConstraintName("FK_page_bookmarks");
-			
-			builder.HasIndex(b => new {b.AccountId, b.MangaId, b.ChapterId, b.PageId})
+
+			builder.HasIndex(b => new { b.AccountId, b.MangaId, b.ChapterId, b.PageId })
 				.IsUnique()
+				.HasFilter(null)
 				.HasName("UQ_accountid_mangaid_chapterid_pageid");
 		}
 	}

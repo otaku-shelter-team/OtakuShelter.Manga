@@ -14,24 +14,34 @@ namespace OtakuShelter.Manga
 		[DataMember(Name = "bookmarks")]
 		public ICollection<ReadBookmarkItemViewModel> Bookmarks { get; set; }
 		
-		public async Task Read(MangaContext context, int accountId, int mangaId, int? chapterId, int? pageId, int offset, int limit)
+		public async Task Read(MangaContext context, int accountId, int? mangaId, int? chapterId, int? pageId, int offset, int limit)
 		{
-			var manga = await context.Mangas.FirstAsync(m => m.Id == mangaId);
-
-			var chapter = chapterId == null
-				? null
-				: await context.Chapters.FirstAsync(ch => ch.Id == chapterId);
-
-			var page = pageId == null
-				? null
-				: await context.Pages.FirstAsync(p => p.Id == pageId);
-
-			Bookmarks = await context.Bookmarks
+			var bookmarks = context.Bookmarks
 				.AsNoTracking()
-				.Where(b => b.AccountId == accountId)
-				.Where(b => b.Manga == manga)
-				.Where(b => b.Chapter == chapter)
-				.Where(b => b.Page == page)
+				.Where(b => b.AccountId == accountId);
+
+			if (mangaId != null)
+			{
+				var manga = await context.Mangas.FirstAsync(m => m.Id == mangaId);
+
+				bookmarks = bookmarks.Where(b => b.Manga == manga);
+			}
+
+			if (chapterId != null)
+			{
+				var chapter = await context.Chapters.FirstAsync(ch => ch.Id == chapterId);
+				
+				bookmarks = bookmarks.Where(b => b.Chapter == chapter);
+			}
+
+			if (pageId != null)
+			{
+				var page = await context.Pages.FirstAsync(p => p.Id == pageId);
+				
+				bookmarks = bookmarks.Where(b => b.Page == page);
+			}
+
+			Bookmarks = await bookmarks
 				.OrderByDescending(b => b.Created)
 				.Skip(offset)
 				.Take(limit)

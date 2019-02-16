@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OtakuShelter.Manga;
@@ -9,9 +10,10 @@ using OtakuShelter.Manga;
 namespace OtakuShelter.Manga.Migrations
 {
     [DbContext(typeof(MangaContext))]
-    partial class MangaContextModelSnapshot : ModelSnapshot
+    [Migration("20190216154203_FixBookmarkChapterAndPageNullability")]
+    partial class FixBookmarkChapterAndPageNullability
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,8 +75,7 @@ namespace OtakuShelter.Manga.Migrations
 
                     b.HasIndex("AccountId", "MangaId", "ChapterId", "PageId")
                         .IsUnique()
-                        .HasName("UQ_accountid_mangaid_chapterid_pageid")
-                        .HasFilter("0 = 0");
+                        .HasName("UQ_accountid_mangaid_chapterid_pageid");
 
                     b.ToTable("bookmarks");
                 });
