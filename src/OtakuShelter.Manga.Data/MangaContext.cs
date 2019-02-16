@@ -10,6 +10,8 @@ namespace OtakuShelter.Manga
 		}
 
 		public DbSet<Author> Authors { get; set; }
+
+		public DbSet<Bookmark> Bookmarks { get; set; }
 		public DbSet<Chapter> Chapters { get; set; }
 		public DbSet<MangaAuthor> MangaAuthors { get; set; }
 		public DbSet<Manga> Mangas { get; set; }
@@ -23,6 +25,7 @@ namespace OtakuShelter.Manga
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfiguration(new AuthorConfiguration());
+			modelBuilder.ApplyConfiguration(new BookmarkConfiguration());
 			modelBuilder.ApplyConfiguration(new ChapterConfiguration());
 			modelBuilder.ApplyConfiguration(new MangaAuthorConfiguration());
 			modelBuilder.ApplyConfiguration(new MangaConfiguration());

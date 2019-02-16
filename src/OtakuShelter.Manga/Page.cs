@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace OtakuShelter.Manga
 {
 	public class Page
@@ -8,5 +10,6 @@ namespace OtakuShelter.Manga
 
 		public int ChapterId { get; set; }
 		public virtual Chapter Chapter { get; set; }
+		public virtual ICollection<Bookmark> Bookmarks { get; set; }
 	}
 }

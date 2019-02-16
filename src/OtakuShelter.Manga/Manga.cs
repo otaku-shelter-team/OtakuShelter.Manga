@@ -16,5 +16,6 @@ namespace OtakuShelter.Manga
 		public virtual ICollection<Chapter> Chapters { get; set; }
 		public virtual ICollection<MangaTranslator> Translators { get; set; }
 		public virtual ICollection<MangaAuthor> Authors { get; set; }
+		public virtual ICollection<Bookmark> Bookmarks { get; set; }
 	}
 }

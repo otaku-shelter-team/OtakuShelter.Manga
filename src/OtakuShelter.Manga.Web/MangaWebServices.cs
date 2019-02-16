@@ -30,7 +30,8 @@ namespace OtakuShelter.Manga
 						.AddTypesController()
 						.AddTagsController()
 						.AddTranslatorsController()
-						.AddAuthorsController())
+						.AddAuthorsController()
+						.AddBookmarksController())
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 			var secret = Encoding.ASCII.GetBytes(configuration.Secret);
