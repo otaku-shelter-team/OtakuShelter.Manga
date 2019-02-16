@@ -7,6 +7,9 @@ namespace OtakuShelter.Manga
 	[DataContract]
 	public class AdminUpdatePageViewModel
 	{
+		[DataMember(Name = "order")]
+		public int? Order { get; set; }
+		
 		[DataMember(Name = "image")]
 		public string Image { get; set; }
 		
@@ -14,6 +17,11 @@ namespace OtakuShelter.Manga
 		{
 			var page = await context.Pages.FirstAsync(p => p.Id == pageId);
 
+			if (Order != null)
+			{
+				page.Order = Order.Value;
+			}
+			
 			if (Image != null)
 			{
 				page.Image = Image;

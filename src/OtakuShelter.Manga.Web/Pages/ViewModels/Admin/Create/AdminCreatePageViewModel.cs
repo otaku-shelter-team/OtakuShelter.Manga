@@ -7,6 +7,9 @@ namespace OtakuShelter.Manga
 	[DataContract]
 	public class AdminCreatePageViewModel
 	{
+		[DataMember(Name = "order")]
+		public int Order { get; set; }
+		
 		[DataMember(Name = "image")]
 		public string Image { get; set; }
       
@@ -16,6 +19,7 @@ namespace OtakuShelter.Manga
 
 			var page = new Page
 			{
+				Order = Order,
 				Chapter = chapter,
 				Image = Image
 			};

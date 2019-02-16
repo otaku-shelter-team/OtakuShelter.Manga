@@ -10,6 +10,9 @@ namespace OtakuShelter.Manga
 	{
 		[DataMember(Name = "title")]
 		public string Title { get; set; }
+
+		[DataMember(Name = "order")]
+		public int? Order { get; set; }
 		
 		[DataMember(Name = "uploadDate")]
 		public DateTime? UploadDate { get; set; }
@@ -21,6 +24,11 @@ namespace OtakuShelter.Manga
 			if (Title != null)
 			{
 				chapter.Title = Title;
+			}
+
+			if (Order != null)
+			{
+				chapter.Order = Order.Value;
 			}
 
 			if (UploadDate != null)

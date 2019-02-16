@@ -17,9 +17,10 @@ namespace OtakuShelter.Manga
 			var chapter = await context.Chapters.FirstAsync(ch => ch.Id == chapterId);
 
 			Pages = chapter.Pages
+				.OrderBy(page => page.Order)
 				.Skip(offset)
 				.Take(limit)
-				.Select(p => new ReadPageItemViewModel(p))
+				.Select(page => new ReadPageItemViewModel(page))
 				.ToList();
 		}
 	}

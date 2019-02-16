@@ -17,6 +17,7 @@ namespace OtakuShelter.Manga
 			var manga = await context.Mangas.FirstAsync(m => m.Id == mangaId);
 
 			Chapters = manga.Chapters
+				.OrderBy(chapter => chapter.Order)
 				.Skip(offset)
 				.Take(limit)
 				.Select(chapter => new ReadChapterItemViewModel(chapter))

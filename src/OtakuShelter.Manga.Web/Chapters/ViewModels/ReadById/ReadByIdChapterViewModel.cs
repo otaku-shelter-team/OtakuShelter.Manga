@@ -10,6 +10,9 @@ namespace OtakuShelter.Manga
 	{
 		[DataMember(Name = "title")]
 		public string Title { get; private set; }
+
+		[DataMember(Name = "order")]
+		public int Order { get; private set; }
 		
 		[DataMember(Name = "uploadDate")]
 		public DateTime UploadDate { get; private set; }
@@ -22,6 +25,7 @@ namespace OtakuShelter.Manga
 			var chapter = await context.Chapters.FirstAsync(ch => ch.Id == chapterId);
 
 			Title = chapter.Title;
+			Order = chapter.Order;
 			UploadDate = chapter.UploadDate;
 			MangaId = chapter.MangaId;
 		}
