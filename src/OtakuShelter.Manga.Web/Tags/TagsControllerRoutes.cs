@@ -8,7 +8,7 @@ namespace OtakuShelter.Manga
 		{
 			builder.AddController<TagsController>(controller =>
 			{
-				controller.AddRoute("tags", c => c.Read(From.Query<FilterByMangaIdViewModel>()))
+				controller.AddRoute("tags", c => c.Read(From.Query<FilterViewModel>()))
 					.HttpGet();
 				
 				controller.AddRoute("admin/tags", c => c.AdminCreate(From.Body<AdminCreateTagViewModel>()))

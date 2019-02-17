@@ -22,7 +22,7 @@ namespace OtakuShelter.Manga
 		[DataMember(Name = "type")]
 		public ReadTypeItemViewModel Type { get; private set; }
 		
-		public async Task Load(MangaContext context, int mangaId)
+		public async Task ReadById(MangaContext context, int mangaId)
 		{
 			var manga = await context.Mangas.FirstAsync(m => m.Id == mangaId);
 

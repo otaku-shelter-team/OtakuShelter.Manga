@@ -21,12 +21,12 @@ namespace OtakuShelter.Manga
 					.Authorize();
 
 				controller.AddRoute("admin/bookmarks/{accountId}",
-						c => c.ReadById(From.Route<int>(), From.Query<FilterByMangaChapterAndPageIdViewModel>()))
+						c => c.AdminReadById(From.Route<int>(), From.Query<FilterByMangaChapterAndPageIdViewModel>()))
 					.HttpGet()
 					.Authorize("admin");
 
-				controller.AddRoute("admin/bookmarks/{accountId}/{bookmarkId}",
-						c => c.DeleteById(From.Route<int>(), From.Route<DeleteBookmarkViewModel>()))
+				controller.AddRoute("admin/bookmarks/{bookmarkId}",
+						c => c.AdminDeleteById(From.Route<AdminDeleteByIdBookmarkViewModel>()))
 					.HttpDelete()
 					.Authorize("admin");
 			});

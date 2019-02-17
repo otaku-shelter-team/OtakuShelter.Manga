@@ -11,11 +11,11 @@ namespace OtakuShelter.Manga
 			this.context = context;
 		}
 
-		public async Task<ReadTagViewModel> Read(FilterByMangaIdViewModel filter)
+		public async Task<ReadTagViewModel> Read(FilterViewModel filter)
 		{
 			var model = new ReadTagViewModel();
 
-			await model.Load(context, filter.MangaId, filter.Offset, filter.Limit);
+			await model.Load(context, filter.Offset, filter.Limit);
 
 			return model;
 		}

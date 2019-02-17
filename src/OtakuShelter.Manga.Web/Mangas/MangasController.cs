@@ -26,7 +26,34 @@ namespace OtakuShelter.Manga
 		{
 			var model = new ReadByIdMangaViewModel();
 
-			await model.Load(context, mangaId);
+			await model.ReadById(context, mangaId);
+
+			return model;
+		}
+
+		public async Task<ReadMangaAuthorsByIdViewModel> ReadAuthorsById(int mangaId, FilterViewModel filter)
+		{
+			var model = new ReadMangaAuthorsByIdViewModel();
+
+			await model.Read(context, mangaId, filter.Offset, filter.Limit);
+
+			return model;
+		}
+		
+		public async Task<ReadMangaTagsByIdViewModel> ReadTagsById(int mangaId, FilterViewModel filter)
+		{
+			var model = new ReadMangaTagsByIdViewModel();
+
+			await model.Read(context, mangaId, filter.Offset, filter.Limit);
+
+			return model;
+		}
+		
+		public async Task<ReadMangaTranslatorsByIdViewModel> ReadTranslatorsById(int mangaId, FilterViewModel filter)
+		{
+			var model = new ReadMangaTranslatorsByIdViewModel();
+
+			await model.Read(context, mangaId, filter.Offset, filter.Limit);
 
 			return model;
 		}

@@ -14,6 +14,18 @@ namespace OtakuShelter.Manga
 				controller.AddRoute("mangas/{mangaId}", c => c.ReadById(From.Route<int>()))
 					.HttpGet();
 
+				controller.AddRoute("mangas/{mangaId}/authors",
+						c => c.ReadAuthorsById(From.Route<int>(), From.Query<FilterViewModel>()))
+					.HttpGet();
+				
+				controller.AddRoute("mangas/{mangaId}/tags",
+						c => c.ReadTagsById(From.Route<int>(), From.Query<FilterViewModel>()))
+					.HttpGet();
+				
+				controller.AddRoute("mangas/{mangaId}/translators",
+						c => c.ReadTranslatorsById(From.Route<int>(), From.Query<FilterViewModel>()))
+					.HttpGet();
+
 				controller.AddRoute("admin/mangas", c => c.AdminCreate(From.Body<AdminCreateMangaViewModel>()))
 					.HttpPost()
 					.Authorize("admin");

@@ -42,7 +42,7 @@ namespace OtakuShelter.Manga
 			await context.SaveChangesAsync();
 		}
 
-		public async Task<ReadBookmarkViewModel> ReadById(int accountId, FilterByMangaChapterAndPageIdViewModel filter)
+		public async Task<ReadBookmarkViewModel> AdminReadById(int accountId, FilterByMangaChapterAndPageIdViewModel filter)
 		{
 			var model = new ReadBookmarkViewModel();
 
@@ -51,9 +51,9 @@ namespace OtakuShelter.Manga
 			return model;
 		}
 		
-		public async Task DeleteById(int accountId, DeleteBookmarkViewModel model)
+		public async Task AdminDeleteById(AdminDeleteByIdBookmarkViewModel model)
 		{
-			await model.Delete(context, accountId);
+			await model.DeleteById(context);
 
 			await context.SaveChangesAsync();
 		}
