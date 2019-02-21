@@ -20,6 +20,16 @@ namespace OtakuShelter.Manga
 			return model;
 		}
 		
+		
+		public async Task<ReadTranslatorsByIdViewModel> ReadById(int mangaId, FilterViewModel filter)
+		{
+			var model = new ReadTranslatorsByIdViewModel();
+
+			await model.Read(context, mangaId, filter.Offset, filter.Limit);
+
+			return model;
+		}
+		
 		public async Task AdminCreate(AdminCreateTranslatorViewModel model)
 		{
 			await model.Create(context);

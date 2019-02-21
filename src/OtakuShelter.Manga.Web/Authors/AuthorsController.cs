@@ -19,6 +19,15 @@ namespace OtakuShelter.Manga
 
 			return model;
 		}
+
+		public async Task<ReadAuthorsByIdViewModel> ReadById(int mangaId, FilterViewModel filter)
+		{
+			var model = new ReadAuthorsByIdViewModel();
+
+			await model.Read(context, mangaId, filter.Offset, filter.Limit);
+
+			return model;
+		}
 		
 		public async Task AdminCreate(AdminCreateAuthorViewModel model)
 		{

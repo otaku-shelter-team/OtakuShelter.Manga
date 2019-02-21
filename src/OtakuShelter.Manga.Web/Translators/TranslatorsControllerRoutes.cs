@@ -11,6 +11,10 @@ namespace OtakuShelter.Manga
 				controller.AddRoute("translators", c => c.Read(From.Query<FilterViewModel>()))
 					.HttpGet();
 				
+				controller.AddRoute("{mangaId}/translators",
+						c => c.ReadById(From.Route<int>(), From.Query<FilterViewModel>()))
+					.HttpGet();
+				
 				controller.AddRoute("admin/translators", c => c.AdminCreate(From.Body<AdminCreateTranslatorViewModel>()))
 					.HttpPost()
 					.Authorize("admin");

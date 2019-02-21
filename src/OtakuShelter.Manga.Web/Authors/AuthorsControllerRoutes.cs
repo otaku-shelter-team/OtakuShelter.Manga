@@ -11,6 +11,10 @@ namespace OtakuShelter.Manga
 				controller.AddRoute("authors", c => c.Read(From.Query<FilterViewModel>()))
 					.HttpGet();
 				
+				controller.AddRoute("{mangaId}/authors",
+						c => c.ReadById(From.Route<int>(), From.Query<FilterViewModel>()))
+					.HttpGet();
+				
 				controller.AddRoute("admin/authors", c => c.AdminCreate(From.Body<AdminCreateAuthorViewModel>()))
 					.HttpPost()
 					.Authorize("admin");

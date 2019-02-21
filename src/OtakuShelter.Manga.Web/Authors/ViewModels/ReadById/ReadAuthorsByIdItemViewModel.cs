@@ -3,17 +3,17 @@ using System.Runtime.Serialization;
 namespace OtakuShelter.Manga
 {
 	[DataContract]
-	public class ReadMangaTagsByIdItemViewModel
+	public class ReadAuthorsByIdItemViewModel
 	{
-		public ReadMangaTagsByIdItemViewModel(Tag tag)
+		public ReadAuthorsByIdItemViewModel(Author author)
 		{
-			Id = tag.Id;
-			Name = tag.Name;
+			Id = author.Id;
+			Name = author.Name;
 		}
 
 		[DataMember(Name = "id")]
 		public int Id { get; }
-		
+
 		[DataMember(Name = "name")]
 		public string Name { get; }
 	}
