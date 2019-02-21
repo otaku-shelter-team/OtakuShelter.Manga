@@ -8,23 +8,23 @@ using Microsoft.EntityFrameworkCore;
 namespace OtakuShelter.Manga
 {
 	[DataContract]
-	public class ReadMangaAuthorsByIdViewModel
+	public class ReadTagsByIdViewModel
 	{
-		[DataMember(Name = "authors")]
-		public ICollection<ReadMangaAuthorsByIdItemViewModel> Authors { get; private set; }		
+		[DataMember(Name = "tags")]
+		public ICollection<ReadTagsByIdItemViewModel> Tags { get; private set; }		
 
 		public async Task Read(MangaContext context, int mangaId, int offset, int limit)
 		{
 			var manga = await context.Mangas.FirstAsync(m => m.Id == mangaId);
 
-			Authors = await context.MangaAuthors
+			Tags = await context.MangaTags
 				.AsNoTracking()
 				.Where(ma => ma.Manga == manga)
-				.Select(ma => ma.Author)
+				.Select(ma => ma.Tag)
 				.OrderBy(a => a.Name)
 				.Skip(offset)
 				.Take(limit)
-				.Select(a => new ReadMangaAuthorsByIdItemViewModel(a))
+				.Select(tag => new ReadTagsByIdItemViewModel(tag))
 				.ToListAsync();
 		}
 	}

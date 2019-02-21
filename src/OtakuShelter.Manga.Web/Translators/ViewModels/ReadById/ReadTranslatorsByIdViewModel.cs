@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OtakuShelter.Manga
 {
-	public class ReadMangaTranslatorsByIdViewModel
+	public class ReadTranslatorsByIdViewModel
 	{
 		[DataMember(Name = "translators")]
-		public ICollection<ReadMangaTranslatorsByIdItemViewModel> Translators { get; private set; }		
+		public ICollection<ReadTranslatorsByIdItemViewModel> Translators { get; private set; }		
 
 		public async Task Read(MangaContext context, int mangaId, int offset, int limit)
 		{
@@ -23,7 +23,7 @@ namespace OtakuShelter.Manga
 				.OrderBy(a => a.Name)
 				.Skip(offset)
 				.Take(limit)
-				.Select(translator => new ReadMangaTranslatorsByIdItemViewModel(translator))
+				.Select(translator => new ReadTranslatorsByIdItemViewModel(translator))
 				.ToListAsync();
 		}
 	}

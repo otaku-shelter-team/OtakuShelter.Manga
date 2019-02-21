@@ -3,9 +3,9 @@ using System.Runtime.Serialization;
 namespace OtakuShelter.Manga
 {
 	[DataContract]
-	public class ReadMangaTranslatorsByIdItemViewModel
+	public class ReadTranslatorsByIdItemViewModel
 	{
-		public ReadMangaTranslatorsByIdItemViewModel(Translator translator)
+		public ReadTranslatorsByIdItemViewModel(Translator translator)
 		{
 			Id = translator.Id;
 			Name = translator.Name;

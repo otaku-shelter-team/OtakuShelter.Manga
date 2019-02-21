@@ -11,6 +11,10 @@ namespace OtakuShelter.Manga
 				controller.AddRoute("tags", c => c.Read(From.Query<FilterViewModel>()))
 					.HttpGet();
 				
+				controller.AddRoute("{mangaId}/tags",
+						c => c.ReadTagsById(From.Route<int>(), From.Query<FilterViewModel>()))
+					.HttpGet();
+				
 				controller.AddRoute("admin/tags", c => c.AdminCreate(From.Body<AdminCreateTagViewModel>()))
 					.HttpPost()
 					.Authorize("admin");

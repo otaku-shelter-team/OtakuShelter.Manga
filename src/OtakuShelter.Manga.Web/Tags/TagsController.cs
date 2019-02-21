@@ -20,6 +20,15 @@ namespace OtakuShelter.Manga
 			return model;
 		}
 		
+		public async Task<ReadTagsByIdViewModel> ReadTagsById(int mangaId, FilterViewModel filter)
+		{
+			var model = new ReadTagsByIdViewModel();
+
+			await model.Read(context, mangaId, filter.Offset, filter.Limit);
+
+			return model;
+		}
+		
 		public async Task AdminCreate(AdminCreateTagViewModel model)
 		{
 			await model.Create(context);
