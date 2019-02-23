@@ -4,7 +4,7 @@ namespace OtakuShelter.Manga
 {
 	public static class TypesControllerRoutes
 	{
-		public static IRoutingBuilder AddTypesController(this IRoutingBuilder builder)
+		public static IRoutingBuilder AddTypesController(this IRoutingBuilder builder, MangaRoleConfiguration roles)
 		{
 			builder.AddController<TypesController>(controller =>
 			{
@@ -13,15 +13,15 @@ namespace OtakuShelter.Manga
 
 				controller.AddRoute("admin/types", c => c.AdminCreate(From.Body<AdminCreateTypeViewModel>()))
 					.HttpPost()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 				
 				controller.AddRoute("admin/types/{typeId}", c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateTypeViewModel>()))
 					.HttpPut()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 
 				controller.AddRoute("admin/types/{typeId}", c => c.AdminDelete(From.Route<AdminDeleteTypeViewModel>()))
 					.HttpDelete()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 			});
 			
 			return builder;

@@ -4,7 +4,7 @@ namespace OtakuShelter.Manga
 {
 	public static class TagsControllerRoutes
 	{
-		public static IRoutingBuilder AddTagsController(this IRoutingBuilder builder)
+		public static IRoutingBuilder AddTagsController(this IRoutingBuilder builder, MangaRoleConfiguration roles)
 		{
 			builder.AddController<TagsController>(controller =>
 			{
@@ -17,15 +17,15 @@ namespace OtakuShelter.Manga
 				
 				controller.AddRoute("admin/tags", c => c.AdminCreate(From.Body<AdminCreateTagViewModel>()))
 					.HttpPost()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 
 				controller.AddRoute("admin/tags/{tagId}", c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateTagViewModel>()))
 					.HttpPut()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 
 				controller.AddRoute("admin/tags/{tagId}", c => c.AdminDelete(From.Route<AdminDeleteTagViewModel>()))
 					.HttpDelete()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 			});
 			
 			return builder;

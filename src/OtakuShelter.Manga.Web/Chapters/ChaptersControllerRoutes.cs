@@ -4,7 +4,7 @@ namespace OtakuShelter.Manga
 {
 	public static class ChaptersControllerRoutes
 	{
-		public static IRoutingBuilder AddChaptersController(this IRoutingBuilder builder)
+		public static IRoutingBuilder AddChaptersController(this IRoutingBuilder builder, MangaRoleConfiguration roles)
 		{
 			builder.AddController<ChaptersController>(controller =>
 			{
@@ -17,17 +17,17 @@ namespace OtakuShelter.Manga
 				controller.AddRoute("admin/{mangaId}/chapters",
 						c => c.AdminCreate(From.Route<int>(), From.Body<AdminCreateChapterViewModel>()))
 					.HttpPost()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 
 				controller.AddRoute("admin/chapters/{chapterId}",
 						c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateChapterViewModel>()))
 					.HttpPut()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 
 				controller.AddRoute("admin/chapters/{chapterId}",
 						c => c.AdminDelete(From.Route<AdminDeleteChapterViewModel>()))
 					.HttpDelete()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 			});
 			
 			return builder;

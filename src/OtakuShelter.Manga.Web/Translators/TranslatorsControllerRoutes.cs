@@ -4,7 +4,7 @@ namespace OtakuShelter.Manga
 {
 	public static class TranslatorsControllerRoutes
 	{
-		public static IRoutingBuilder AddTranslatorsController(this IRoutingBuilder builder)
+		public static IRoutingBuilder AddTranslatorsController(this IRoutingBuilder builder, MangaRoleConfiguration roles)
 		{
 			builder.AddController<TranslatorsController>(controller =>
 			{
@@ -17,15 +17,15 @@ namespace OtakuShelter.Manga
 				
 				controller.AddRoute("admin/translators", c => c.AdminCreate(From.Body<AdminCreateTranslatorViewModel>()))
 					.HttpPost()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 
 				controller.AddRoute("admin/translators/{translatorId}", c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateTranslatorViewModel>()))
 					.HttpPut()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 
 				controller.AddRoute("admin/translators/{translatorId}", c => c.AdminDelete(From.Route<AdminDeleteTranslatorViewModel>()))
 					.HttpDelete()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 			});
 			
 			return builder;

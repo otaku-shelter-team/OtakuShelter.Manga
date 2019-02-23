@@ -4,7 +4,7 @@ namespace OtakuShelter.Manga
 {
 	public static class BookmarksControllerRoutes
 	{
-		public static IRoutingBuilder AddBookmarksController(this IRoutingBuilder builder)
+		public static IRoutingBuilder AddBookmarksController(this IRoutingBuilder builder, MangaRoleConfiguration roles)
 		{
 			builder.AddController<BookmarksController>(controller =>
 			{
@@ -23,12 +23,12 @@ namespace OtakuShelter.Manga
 				controller.AddRoute("admin/bookmarks/{accountId}",
 						c => c.AdminReadById(From.Route<int>(), From.Query<FilterByMangaChapterAndPageIdViewModel>()))
 					.HttpGet()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 
 				controller.AddRoute("admin/bookmarks/{bookmarkId}",
 						c => c.AdminDeleteById(From.Route<AdminDeleteByIdBookmarkViewModel>()))
 					.HttpDelete()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 			});
 			
 			return builder;

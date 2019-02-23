@@ -21,7 +21,9 @@ namespace OtakuShelter.Manga
 		{
 			return services
 				.AddDataServices(configuration.Database)
-				.AddWebServices(configuration)
+				.AddMvcServices(configuration.Roles)
+				.AddAuthenticationServices(configuration)
+				.AddSwaggerServices()
 				.BuildServiceProvider();
 		}
 		

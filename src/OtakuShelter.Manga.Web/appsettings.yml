@@ -4,6 +4,10 @@ database:
   database: manga
   userid: manga
   migrationstable: migrations
+
+roles:
+  admin: admin
+  user: user
   
 issuer: otakushelter.issuer
 audience: otakushelter.audience
