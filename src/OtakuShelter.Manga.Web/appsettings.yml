@@ -5,6 +5,5 @@ database:
   userid: manga
   migrationstable: migrations
   
-secret: secretsecretsecretsecretsecret
 issuer: otakushelter.issuer
 audience: otakushelter.audience
