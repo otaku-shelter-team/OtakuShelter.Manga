@@ -27,7 +27,8 @@ namespace OtakuShelter.Manga
 		public static void ConfigureBuilder(IConfigurationBuilder builder, string path)
 		{
 			builder.SetBasePath(path)
-				.AddYamlFile("appsettings.yml");
+				.AddYamlFile("appsettings.yml")
+				.AddEnvironmentVariables("OTAKUSHELTER:");
 		}
 
 		public static void ConfigureContext(DbContextOptionsBuilder options, MangaContextConfiguration mangaContext)

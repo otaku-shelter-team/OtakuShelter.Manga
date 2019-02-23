@@ -3,7 +3,6 @@ database:
   port: 5432
   database: manga
   userid: manga
-  password: manga
   migrationstable: migrations
   
 secret: secretsecretsecretsecretsecret
