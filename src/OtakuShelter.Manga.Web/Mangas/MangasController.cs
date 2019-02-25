@@ -13,41 +13,41 @@ namespace OtakuShelter.Manga
 			this.context = context;
 		}
 	
-		public async Task<ReadMangaViewModel> Read(FilterViewModel filter)
+		public async ValueTask<ReadMangaResponse> Read(FilterResponse filter)
 		{
-			var model = new ReadMangaViewModel();
+			var response = new ReadMangaResponse();
 			
-			await model.Load(context, filter.Offset, filter.Limit);
+			await response.Load(context, filter.Offset, filter.Limit);
 			
-			return model;
+			return response;
 		}
 
-		public async Task<ReadByIdMangaViewModel> ReadById(int mangaId)
+		public async ValueTask<ReadByIdMangaResponse> ReadById(int mangaId)
 		{
-			var model = new ReadByIdMangaViewModel();
+			var response = new ReadByIdMangaResponse();
 
-			await model.ReadById(context, mangaId);
+			await response.ReadById(context, mangaId);
 
-			return model;
+			return response;
 		}
 			
-		public async Task AdminCreate(AdminCreateMangaViewModel model)
+		public async ValueTask AdminCreate(AdminCreateMangaRequest request)
 		{
-			await model.Create(context);
+			await request.Create(context);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task AdminUpdate(int mangaId, AdminUpdateMangaViewModel model)
+		public async ValueTask AdminUpdate(int mangaId, AdminUpdateMangaRequest request)
 		{
-			await model.Update(context, mangaId);
+			await request.Update(context, mangaId);
 			
 			await context.SaveChangesAsync();
 		}
 
-		public async Task AdminDelete(AdminDeleteMangaViewModel model)
+		public async ValueTask AdminDelete(AdminDeleteMangaRequest request)
 		{
-			await model.Delete(context);
+			await request.Delete(context);
 			
 			await context.SaveChangesAsync();
 		}

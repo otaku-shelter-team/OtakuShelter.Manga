@@ -11,41 +11,41 @@ namespace OtakuShelter.Manga
 			this.context = context;
 		}
 		
-		public async Task<ReadChapterViewModel> Read(int mangaId, FilterViewModel filter)
+		public async ValueTask<ReadChapterResponse> Read(int mangaId, FilterResponse filter)
 		{
-			var model = new ReadChapterViewModel();
+			var response = new ReadChapterResponse();
 
-			await model.Load(context, mangaId, filter.Offset, filter.Limit);
+			await response.Load(context, mangaId, filter.Offset, filter.Limit);
 
-			return model;
+			return response;
 		}
 		
-		public async Task<ReadByIdChapterViewModel> ReadById(int chapterId)
+		public async ValueTask<ReadByIdChapterResponse> ReadById(int chapterId)
 		{
-			var model = new ReadByIdChapterViewModel();
+			var response = new ReadByIdChapterResponse();
 
-			await model.Load(context, chapterId);
+			await response.Load(context, chapterId);
 
-			return model;
+			return response;
 		}
 		
-		public async Task AdminCreate(int mangaId, AdminCreateChapterViewModel model)
+		public async ValueTask AdminCreate(int mangaId, AdminCreateChapterRequest request)
 		{
-			await model.Create(context, mangaId);
+			await request.Create(context, mangaId);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task AdminUpdate(int chapterId, AdminUpdateChapterViewModel model)
+		public async ValueTask AdminUpdate(int chapterId, AdminUpdateChapterRequest request)
 		{
-			await model.Update(context, chapterId);
+			await request.Update(context, chapterId);
 			
 			await context.SaveChangesAsync();
 		}
 
-		public async Task AdminDelete(AdminDeleteChapterViewModel model)
+		public async ValueTask AdminDelete(AdminDeleteChapterRequest request)
 		{
-			await model.Delete(context);
+			await request.Delete(context);
 
 			await context.SaveChangesAsync();
 		}

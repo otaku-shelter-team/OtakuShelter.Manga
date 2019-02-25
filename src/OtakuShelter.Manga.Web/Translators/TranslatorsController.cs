@@ -11,42 +11,42 @@ namespace OtakuShelter.Manga
 			this.context = context;
 		}
 
-		public async Task<ReadTranslatorViewModel> Read(FilterViewModel filter)
+		public async ValueTask<ReadTranslatorResponse> Read(FilterResponse filter)
 		{
-			var model = new ReadTranslatorViewModel();
+			var response = new ReadTranslatorResponse();
 
-			await model.Read(context, filter.Offset, filter.Limit);
+			await response.Read(context, filter.Offset, filter.Limit);
 
-			return model;
+			return response;
 		}
 		
 		
-		public async Task<ReadTranslatorsByIdViewModel> ReadById(int mangaId, FilterViewModel filter)
+		public async ValueTask<ReadTranslatorsByIdResponse> ReadById(int mangaId, FilterResponse filter)
 		{
-			var model = new ReadTranslatorsByIdViewModel();
+			var response = new ReadTranslatorsByIdResponse();
 
-			await model.Read(context, mangaId, filter.Offset, filter.Limit);
+			await response.Read(context, mangaId, filter.Offset, filter.Limit);
 
-			return model;
+			return response;
 		}
 		
-		public async Task AdminCreate(AdminCreateTranslatorViewModel model)
+		public async ValueTask AdminCreate(AdminCreateTranslatorRequest request)
 		{
-			await model.Create(context);
+			await request.Create(context);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task AdminUpdate(int translatorId, AdminUpdateTranslatorViewModel model)
+		public async ValueTask AdminUpdate(int translatorId, AdminUpdateTranslatorRequest request)
 		{
-			await model.Update(context, translatorId);
+			await request.Update(context, translatorId);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task AdminDelete(AdminDeleteTranslatorViewModel model)
+		public async ValueTask AdminDelete(AdminDeleteTranslatorRequest request)
 		{
-			await model.Delete(context);
+			await request.Delete(context);
 
 			await context.SaveChangesAsync();
 		}

@@ -29,13 +29,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Authors\ViewModels\Admin" />
-	  <Folder Include="Chapters\ViewModels\Admin" />
-	  <Folder Include="Mangas\ViewModels\Admin" />
-	  <Folder Include="Pages\ViewModels\Admin" />
-	  <Folder Include="Tags\ViewModels\Admin" />
-	  <Folder Include="Translators\ViewModels\Admin" />
-	  <Folder Include="Types\ViewModels\Admin" />
+	  <Folder Include="Authors\Requests\Admin" />
+	  <Folder Include="Chapters\Requests\Admin" />
+	  <Folder Include="Mangas\Requests\Admin" />
+	  <Folder Include="Pages\Requests\Admin" />
+	  <Folder Include="Tags\Requests\Admin" />
+	  <Folder Include="Translators\Requests\Admin" />
+	  <Folder Include="Types\Requests\Admin" />
 	</ItemGroup>
 	
 </Project>

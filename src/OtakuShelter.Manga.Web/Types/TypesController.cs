@@ -13,32 +13,32 @@ namespace OtakuShelter.Manga
 			this.context = context;
 		}
 		
-		public async Task<ReadTypeViewModel> Read(FilterViewModel filter)
+		public async ValueTask<ReadTypeResponse> Read(FilterResponse filter)
 		{
-			var model = new ReadTypeViewModel();
+			var response = new ReadTypeResponse();
 
-			await model.Load(context, filter.Offset, filter.Limit);
+			await response.Load(context, filter.Offset, filter.Limit);
 
-			return model;
+			return response;
 		}
 
-		public async Task AdminCreate(AdminCreateTypeViewModel model)
+		public async ValueTask AdminCreate(AdminCreateTypeRequest request)
 		{
-			await model.Create(context);
+			await request.Create(context);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task AdminUpdate(int typeId, AdminUpdateTypeViewModel model)
+		public async ValueTask AdminUpdate(int typeId, AdminUpdateTypeRequest request)
 		{
-			await model.Update(context, typeId);
+			await request.Update(context, typeId);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task AdminDelete(AdminDeleteTypeViewModel model)
+		public async ValueTask AdminDelete(AdminDeleteTypeRequest request)
 		{
-			await model.Delete(context);
+			await request.Delete(context);
 
 			await context.SaveChangesAsync();
 		}

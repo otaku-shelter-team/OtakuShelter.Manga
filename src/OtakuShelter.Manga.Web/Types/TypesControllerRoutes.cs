@@ -8,18 +8,18 @@ namespace OtakuShelter.Manga
 		{
 			builder.AddController<TypesController>(controller =>
 			{
-				controller.AddRoute("types", c => c.Read(From.Body<FilterViewModel>()))
+				controller.AddRoute("types", c => c.Read(From.Body<FilterResponse>()))
 					.HttpGet();
 
-				controller.AddRoute("admin/types", c => c.AdminCreate(From.Body<AdminCreateTypeViewModel>()))
+				controller.AddRoute("admin/types", c => c.AdminCreate(From.Body<AdminCreateTypeRequest>()))
 					.HttpPost()
 					.Authorize(roles.Admin);
 				
-				controller.AddRoute("admin/types/{typeId}", c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateTypeViewModel>()))
+				controller.AddRoute("admin/types/{typeId}", c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateTypeRequest>()))
 					.HttpPut()
 					.Authorize(roles.Admin);
 
-				controller.AddRoute("admin/types/{typeId}", c => c.AdminDelete(From.Route<AdminDeleteTypeViewModel>()))
+				controller.AddRoute("admin/types/{typeId}", c => c.AdminDelete(From.Route<AdminDeleteTypeRequest>()))
 					.HttpDelete()
 					.Authorize(roles.Admin);
 			});

@@ -13,47 +13,47 @@ namespace OtakuShelter.Manga
 			this.context = context;
 		}
 
-		public async Task Create(CreateBookmarkViewModel model)
+		public async ValueTask Create(CreateBookmarkRequest request)
 		{
 			var accountId = int.Parse(User.Identity.Name);
 
-			await model.Create(context, accountId);
+			await request.Create(context, accountId);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task<ReadBookmarkViewModel> Read(FilterByMangaChapterAndPageIdViewModel filter)
+		public async ValueTask<ReadBookmarkResponse> Read(FilterByMangaChapterAndPageIdRequest filter)
 		{
 			var accountId = int.Parse(User.Identity.Name);
 			
-			var model = new ReadBookmarkViewModel();
+			var response = new ReadBookmarkResponse();
 
-			await model.Read(context, accountId, filter.MangaId, filter.ChapterId, filter.PageId, filter.Offset, filter.Limit);
+			await response.Read(context, accountId, filter.MangaId, filter.ChapterId, filter.PageId, filter.Offset, filter.Limit);
 
-			return model;
+			return response;
 		}
 
-		public async Task Delete(DeleteBookmarkViewModel model)
+		public async ValueTask Delete(DeleteBookmarkRequest request)
 		{
 			var accountId = int.Parse(User.Identity.Name);
 
-			await model.Delete(context, accountId);
+			await request.Delete(context, accountId);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task<ReadBookmarkViewModel> AdminReadById(int accountId, FilterByMangaChapterAndPageIdViewModel filter)
+		public async ValueTask<ReadBookmarkResponse> AdminReadById(int accountId, FilterByMangaChapterAndPageIdRequest filter)
 		{
-			var model = new ReadBookmarkViewModel();
+			var response = new ReadBookmarkResponse();
 
-			await model.Read(context, accountId, filter.MangaId, filter.ChapterId, filter.PageId, filter.Offset, filter.Limit);
+			await response.Read(context, accountId, filter.MangaId, filter.ChapterId, filter.PageId, filter.Offset, filter.Limit);
 
-			return model;
+			return response;
 		}
 		
-		public async Task AdminDeleteById(AdminDeleteByIdBookmarkViewModel model)
+		public async ValueTask AdminDeleteById(AdminDeleteByIdBookmarkRequest request)
 		{
-			await model.DeleteById(context);
+			await request.DeleteById(context);
 
 			await context.SaveChangesAsync();
 		}

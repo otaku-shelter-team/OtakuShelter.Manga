@@ -11,41 +11,41 @@ namespace OtakuShelter.Manga
 			this.context = context;
 		}
 
-		public async Task<ReadTagViewModel> Read(FilterViewModel filter)
+		public async ValueTask<ReadTagResponse> Read(FilterResponse filter)
 		{
-			var model = new ReadTagViewModel();
+			var response = new ReadTagResponse();
 
-			await model.Load(context, filter.Offset, filter.Limit);
+			await response.Load(context, filter.Offset, filter.Limit);
 
-			return model;
+			return response;
 		}
 		
-		public async Task<ReadTagsByIdViewModel> ReadTagsById(int mangaId, FilterViewModel filter)
+		public async ValueTask<ReadTagsByIdResponse> ReadById(int mangaId, FilterResponse filter)
 		{
-			var model = new ReadTagsByIdViewModel();
+			var response = new ReadTagsByIdResponse();
 
-			await model.Read(context, mangaId, filter.Offset, filter.Limit);
+			await response.Read(context, mangaId, filter.Offset, filter.Limit);
 
-			return model;
+			return response;
 		}
 		
-		public async Task AdminCreate(AdminCreateTagViewModel model)
+		public async ValueTask AdminCreate(AdminCreateTagRequest request)
 		{
-			await model.Create(context);
+			await request.Create(context);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task AdminUpdate(int tagId, AdminUpdateTagViewModel model)
+		public async ValueTask AdminUpdate(int tagId, AdminUpdateTagRequest request)
 		{
-			await model.Update(context, tagId);
+			await request.Update(context, tagId);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task AdminDelete(AdminDeleteTagViewModel model)
+		public async ValueTask AdminDelete(AdminDeleteTagRequest request)
 		{
-			await model.Delete(context);
+			await request.Delete(context);
 
 			await context.SaveChangesAsync();
 		}

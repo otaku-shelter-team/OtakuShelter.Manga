@@ -3,10 +3,8 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
 
 using Phema.Configuration;
-using Phema.Configuration.Yaml;
 
 namespace OtakuShelter.Manga
 {
