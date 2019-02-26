@@ -20,6 +20,9 @@ script:
     ansible-playbook deploy.yml \
     -e \"\
     otakushelter_hosts=mangas \
+    otakushelter_nginx_server_name=manga.otaku-shelter.ru \
+    otakushelter_nginx_proxy_pass=http://localhost:4001 \
+    otakushelter_nginx_config=manga \
     otakushelter_container=otakushelter_manga \
     otakushelter_image=otakushelter/manga \
     otakushelter_port=4001 \
