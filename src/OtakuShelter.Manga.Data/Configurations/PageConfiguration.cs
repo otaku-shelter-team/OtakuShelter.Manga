@@ -19,7 +19,7 @@ namespace OtakuShelter.Manga
 
 			builder.HasIndex(p => new {p.ChapterId, p.Order})
 				.IsUnique()
-				.HasName("UQ_chapterid_order");
+				.HasName("UQ_chapter_id_order");
 
 			builder.Property(p => p.Image)
 				.HasColumnName("image")
@@ -27,7 +27,7 @@ namespace OtakuShelter.Manga
 				.IsRequired();
 
 			builder.Property(p => p.ChapterId)
-				.HasColumnName("chapterid")
+				.HasColumnName("chapter_id")
 				.IsRequired();
 			
 			builder.HasOne(c => c.Chapter)

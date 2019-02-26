@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Phema.Configuration.Yaml;
 
@@ -35,7 +36,7 @@ namespace OtakuShelter.Manga
 		{
 			options.UseNpgsql(mangaContext.ConnectionString, builder =>
 					builder.MigrationsHistoryTable(mangaContext.MigrationsTable))
-				.UseLazyLoadingProxies();
+				.ConfigureWarnings(builder => builder.Throw(RelationalEventId.QueryClientEvaluationWarning));
 		}
 	}
 }

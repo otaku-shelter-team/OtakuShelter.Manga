@@ -29,7 +29,7 @@ namespace OtakuShelter.Manga
 				.IsRequired();
 
 			builder.Property(m => m.TypeId)
-				.HasColumnName("typeid")
+				.HasColumnName("type_id")
 				.IsRequired();
 			
 			builder.HasOne(m => m.Type)

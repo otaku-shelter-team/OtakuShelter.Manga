@@ -15,11 +15,9 @@ namespace OtakuShelter.Manga
 
 		public async ValueTask Read(MangaContext context, int mangaId, int offset, int limit)
 		{
-			var manga = await context.Mangas.FirstAsync(m => m.Id == mangaId);
-
 			Tags = await context.MangaTags
 				.AsNoTracking()
-				.Where(ma => ma.Manga == manga)
+				.Where(ma => ma.MangaId == mangaId)
 				.Select(ma => ma.Tag)
 				.OrderBy(a => a.Name)
 				.Skip(offset)

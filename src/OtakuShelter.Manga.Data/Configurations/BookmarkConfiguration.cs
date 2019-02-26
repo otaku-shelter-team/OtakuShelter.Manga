@@ -14,7 +14,7 @@ namespace OtakuShelter.Manga
 				.UseNpgsqlIdentityColumn();
 
 			builder.Property(b => b.AccountId)
-				.HasColumnName("accountid")
+				.HasColumnName("account_id")
 				.IsRequired();
 
 			builder.Property(b => b.Name)
@@ -27,7 +27,7 @@ namespace OtakuShelter.Manga
 				.IsRequired();
 
 			builder.Property(b => b.MangaId)
-				.HasColumnName("mangaid")
+				.HasColumnName("manga_id")
 				.IsRequired();
 
 			builder.HasOne(b => b.Manga)
@@ -37,7 +37,7 @@ namespace OtakuShelter.Manga
 				.HasConstraintName("FK_manga_bookmarks");
 
 			builder.Property(b => b.ChapterId)
-				.HasColumnName("chapterid");
+				.HasColumnName("chapter_id");
 
 			builder.HasOne(b => b.Chapter)
 				.WithMany(m => m.Bookmarks)
@@ -45,7 +45,7 @@ namespace OtakuShelter.Manga
 				.HasConstraintName("FK_chapter_bookmarks");
 
 			builder.Property(b => b.PageId)
-				.HasColumnName("pageid");
+				.HasColumnName("page_id");
 
 			builder.HasOne(b => b.Page)
 				.WithMany(m => m.Bookmarks)

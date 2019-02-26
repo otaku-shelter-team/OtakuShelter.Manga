@@ -15,9 +15,10 @@ namespace OtakuShelter.Manga
 		public async ValueTask Load(MangaContext context, int offset, int limit)
 		{
 			Types = await context.Types
+				.AsNoTracking()
 				.Skip(offset)
 				.Take(limit)
-				.Select(t => new ReadTypeItemResponse(t))
+				.Select(type => new ReadTypeItemResponse(type))
 				.ToListAsync();
 		}
 	}

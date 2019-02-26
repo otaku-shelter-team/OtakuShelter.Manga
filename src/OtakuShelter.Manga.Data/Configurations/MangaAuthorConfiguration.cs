@@ -12,11 +12,11 @@ namespace OtakuShelter.Manga
 			builder.HasKey(mt => new { mt.MangaId, TranslatorId = mt.AuthorId });
 
 			builder.Property(mt => mt.MangaId)
-				.HasColumnName("mangaid")
+				.HasColumnName("manga_id")
 				.IsRequired();
 
 			builder.Property(mt => mt.AuthorId)
-				.HasColumnName("authorid")
+				.HasColumnName("author_id")
 				.IsRequired();
 
 			builder.HasOne(mt => mt.Manga)

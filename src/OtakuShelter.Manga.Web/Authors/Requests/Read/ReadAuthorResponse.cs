@@ -19,7 +19,7 @@ namespace OtakuShelter.Manga
 				.OrderBy(a => a.Name)
 				.Skip(offset)
 				.Take(limit)
-				.Select(a => new ReadAuthorItemRequest(a))
+				.Select(author => new ReadAuthorItemRequest(author))
 				.ToListAsync();
 		}
 	}

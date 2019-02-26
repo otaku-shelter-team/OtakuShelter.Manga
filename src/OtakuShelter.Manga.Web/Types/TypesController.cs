@@ -1,6 +1,4 @@
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Internal;
-using OtakuShelter.Manga;
 
 namespace OtakuShelter.Manga
 {

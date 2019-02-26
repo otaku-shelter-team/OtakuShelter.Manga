@@ -17,7 +17,7 @@ namespace OtakuShelter.Manga
 			Mangas = await context.Mangas
 				.Skip(offset)
 				.Take(limit)
-				.Select(m => new ReadMangaItemResponse(m))
+				.Select(manga => new ReadMangaItemResponse(manga))
 				.ToListAsync();
 		}
 	}

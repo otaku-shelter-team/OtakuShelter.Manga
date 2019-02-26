@@ -45,7 +45,7 @@ namespace OtakuShelter.Manga
 				.OrderByDescending(b => b.Created)
 				.Skip(offset)
 				.Take(limit)
-				.Select(b => new ReadBookmarkItemResponse(b))
+				.Select(bookmark => new ReadBookmarkItemResponse(bookmark))
 				.ToListAsync();
 		}
 	}

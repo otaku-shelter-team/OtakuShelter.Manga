@@ -29,7 +29,11 @@ namespace OtakuShelter.Manga
 		
 		public async ValueTask Update(MangaContext context, int mangaId)
 		{
-			var manga = await context.Mangas.FirstAsync(m => m.Id == mangaId);
+			var manga = await context.Mangas
+				.Include(m => m.Tags)
+				.Include(m => m.Translators)
+				.Include(m => m.Authors)
+				.FirstAsync(m => m.Id == mangaId);
 			
 			if (Title != null)
 			{

@@ -14,14 +14,12 @@ namespace OtakuShelter.Manga
 
 		public async ValueTask Load(MangaContext context, int mangaId, int offset, int limit)
 		{
-			var manga = await context.Mangas.FirstAsync(m => m.Id == mangaId);
-
-			Chapters = manga.Chapters
+			Chapters = await context.Chapters.Where(ch => ch.MangaId == mangaId)
 				.OrderBy(chapter => chapter.Order)
 				.Skip(offset)
 				.Take(limit)
 				.Select(chapter => new ReadChapterItemResponse(chapter))
-				.ToList();
+				.ToListAsync();
 		}
 	}
 }

@@ -12,7 +12,9 @@ namespace OtakuShelter.Manga
 		
 		public async ValueTask Delete(MangaContext context)
 		{
-			var chapter = await context.Chapters.FirstAsync(ch => ch.Id == ChapterId);
+			var chapter = await context.Chapters
+				.Include(ch => ch.Pages)
+				.FirstAsync(ch => ch.Id == ChapterId);
 
 			context.Chapters.Remove(chapter);
 			context.Pages.RemoveRange(chapter.Pages);
