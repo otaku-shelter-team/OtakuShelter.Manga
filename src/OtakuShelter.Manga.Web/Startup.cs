@@ -24,6 +24,7 @@ namespace OtakuShelter.Manga
 				.AddMvcServices(configuration.Roles)
 				.AddAuthenticationServices(configuration)
 				.AddSwaggerServices()
+				.AddHelthServices(configuration.Database)
 				.BuildServiceProvider();
 		}
 		
@@ -31,6 +32,8 @@ namespace OtakuShelter.Manga
 		{
 			app.EnsureDatabaseMigrated();
 
+			app.UseHealthChecks("/health");
+			
 			app.UseAuthentication();
 			
 			app.UseSwagger();
