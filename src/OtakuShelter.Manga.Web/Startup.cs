@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -25,6 +26,8 @@ namespace OtakuShelter.Manga
 				.AddAuthenticationServices(configuration)
 				.AddSwaggerServices()
 				.AddHelthServices(configuration.Database)
+				.AddRabbitMqServices(configuration.RabbitMq)
+				.AddExceptionHandlingServices()
 				.BuildServiceProvider();
 		}
 		

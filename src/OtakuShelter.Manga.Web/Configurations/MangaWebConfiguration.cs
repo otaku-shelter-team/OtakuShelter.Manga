@@ -15,6 +15,7 @@ namespace OtakuShelter.Manga
 		
 		public MangaRoleConfiguration Roles { get; set; }
 		public MangaContextConfiguration Database { get; set; }
+		public MangaRabbitMqConfiguration RabbitMq { get; set; }
 
 		public SymmetricSecurityKey SymmetricSecurityKey => new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Secret));
 	}

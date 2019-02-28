@@ -5,6 +5,13 @@ database:
   userid: manga
   migrationstable: migrations
 
+rabbitmq:
+  instancename: mangas
+  username: otakushelter
+  port: 5672
+  virtualhost: /
+  hostname: rabbitmq.otaku-shelter.ru
+
 roles:
   admin: admin
   user: user
