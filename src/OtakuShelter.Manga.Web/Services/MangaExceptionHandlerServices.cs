@@ -11,7 +11,8 @@ namespace OtakuShelter.Manga
 		public static IServiceCollection AddExceptionHandlingServices(this IServiceCollection services)
 		{
 			return services.AddPhemaExceptionHandling(options =>
-				options.AddExceptionHandler<Exception, MangaExceptionHandler>(e => true));
+				options.AddExceptionHandler<Exception, MangaExceptionHandler>(e => true))
+				.AddHttpContextAccessor();
 		}
 	}
 }

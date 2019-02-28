@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using Phema.ExceptionHandling;
@@ -11,16 +12,19 @@ namespace OtakuShelter.Manga
 	public class MangaExceptionHandler : IExceptionHandler<Exception>
 	{
 		private readonly IRabbitMqProducer<ErrorQueueMessage> producer;
+		private readonly IHttpContextAccessor accessor;
 
-		public MangaExceptionHandler(IRabbitMqProducer<ErrorQueueMessage> producer)
+		public MangaExceptionHandler(IRabbitMqProducer<ErrorQueueMessage> producer, IHttpContextAccessor accessor)
 		{
 			this.producer = producer;
+			this.accessor = accessor;
 		}
 		
 		public async ValueTask<IActionResult> Handle(Exception exception)
 		{
 			var message = new ErrorQueueMessage
 			{
+				TraceId = accessor.HttpContext.TraceIdentifier,
 				Type = exception.GetType().ToString(),
 				Project = "manga",
 				Message = exception.Message,
@@ -30,7 +34,7 @@ namespace OtakuShelter.Manga
 
 			await producer.Produce(message);
 			
-			return new BadRequestObjectResult(new {error = exception.Message});
+			return new BadRequestObjectResult(new {traceId = message.TraceId});
 		}
 	}
 }
