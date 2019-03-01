@@ -10,9 +10,9 @@ namespace OtakuShelter.Manga
 			MangaRabbitMqConfiguration rabbitMq)
 		{
 			services.AddHealthChecks()
-				.AddNpgSql(database.ConnectionString)
-				.AddRabbitMQ(rabbitMq.ConnectionString);
-			
+				.AddNpgSql(database.ConnectionString, tags: new[] {"PostgreSQL"})
+				.AddRabbitMQ(rabbitMq.ConnectionString, tags: new[] {"RabbitMQ"});
+
 			return services;
 		}
 	}
