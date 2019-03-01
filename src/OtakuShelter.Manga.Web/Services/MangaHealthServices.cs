@@ -6,10 +6,12 @@ namespace OtakuShelter.Manga
 	{
 		public static IServiceCollection AddHelthServices(
 			this IServiceCollection services,
-			MangaContextConfiguration database)
+			MangaContextConfiguration database,
+			MangaRabbitMqConfiguration rabbitMq)
 		{
 			services.AddHealthChecks()
-				.AddNpgSql(database.ConnectionString);
+				.AddNpgSql(database.ConnectionString)
+				.AddRabbitMQ(rabbitMq.ConnectionString);
 			
 			return services;
 		}

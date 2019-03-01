@@ -1,5 +1,9 @@
 using System;
+
+using HealthChecks.UI.Client;
+
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +29,7 @@ namespace OtakuShelter.Manga
 				.AddMvcServices(configuration.Roles)
 				.AddAuthenticationServices(configuration)
 				.AddSwaggerServices()
-				.AddHelthServices(configuration.Database)
+				.AddHelthServices(configuration.Database, configuration.RabbitMq)
 				.AddRabbitMqServices(configuration.RabbitMq)
 				.AddExceptionHandlingServices()
 				.BuildServiceProvider();
@@ -35,7 +39,10 @@ namespace OtakuShelter.Manga
 		{
 			app.EnsureDatabaseMigrated();
 
-			app.UseHealthChecks("/health");
+			app.UseHealthChecks("/health", new HealthCheckOptions
+			{
+				ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+			});
 			
 			app.UseAuthentication();
 			
