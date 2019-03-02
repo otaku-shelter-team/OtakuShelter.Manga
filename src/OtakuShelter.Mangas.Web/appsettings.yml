@@ -1,0 +1,23 @@
+name: mangas
+
+database:
+  host: databases.staging.otaku-shelter.ru
+  port: 5432
+  database: mangas
+  userid: mangas
+  migrationstable: migrations
+
+jwt:
+  issuer: account.otaku-shelter.ru
+  audience: otaku-shelter.ru
+
+rabbitmq:
+  instancename: mangas
+  username: mangas
+  port: 5672
+  virtualhost: /
+  hostname: rabbitmq.staging.otaku-shelter.ru
+
+roles:
+  admin: admin
+  user: user

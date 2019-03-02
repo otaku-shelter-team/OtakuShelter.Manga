@@ -5,13 +5,13 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{65B11731-2026-431F-AE46-C1EAA4B26FA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Manga", "src\OtakuShelter.Manga\OtakuShelter.Manga.csproj", "{DB7EB429-4A90-4547-BC57-EBDE71E5C74B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Mangas", "src\OtakuShelter.Mangas\OtakuShelter.Mangas.csproj", "{DB7EB429-4A90-4547-BC57-EBDE71E5C74B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Manga.Data", "src\OtakuShelter.Manga.Data\OtakuShelter.Manga.Data.csproj", "{E8758E91-A047-4F86-A887-45679736062B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Mangas.Data", "src\OtakuShelter.Mangas.Data\OtakuShelter.Mangas.Data.csproj", "{E8758E91-A047-4F86-A887-45679736062B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Manga.Parser", "src\OtakuShelter.Manga.Parser\OtakuShelter.Manga.Parser.csproj", "{4B043038-AFD5-48D5-9C55-67D208884DF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Mangas.Parser", "src\OtakuShelter.Mangas.Parser\OtakuShelter.Mangas.Parser.csproj", "{4B043038-AFD5-48D5-9C55-67D208884DF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Manga.Web", "src\OtakuShelter.Manga.Web\OtakuShelter.Manga.Web.csproj", "{9AA115FA-A95F-4381-93BB-6B9FCE5C9068}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Mangas.Web", "src\OtakuShelter.Mangas.Web\OtakuShelter.Mangas.Web.csproj", "{9AA115FA-A95F-4381-93BB-6B9FCE5C9068}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
