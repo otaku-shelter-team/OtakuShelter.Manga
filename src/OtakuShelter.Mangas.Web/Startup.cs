@@ -39,7 +39,7 @@ namespace OtakuShelter.Mangas
 		{
 			app.EnsureDatabaseMigrated();
 			
-			app.UseHealthChecks("/health");
+			app.UseMangasHealthchecks();
 			app.UseAuthentication();
 			app.UseMangasSwagger();
 			app.UseMvc();

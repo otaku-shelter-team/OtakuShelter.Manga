@@ -23,7 +23,8 @@ namespace OtakuShelter.Mangas
 					.AddTagsController(roles)
 					.AddTranslatorsController(roles)
 					.AddAuthorsController(roles)
-					.AddBookmarksController(roles))
+					.AddBookmarksController(roles)
+					.AddVersionController())
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 			return services;
