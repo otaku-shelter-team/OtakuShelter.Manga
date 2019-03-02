@@ -21,7 +21,9 @@ namespace OtakuShelter.Mangas
 		
 		public async ValueTask ReadById(MangasContext context, int mangaId)
 		{
-			var manga = await context.Mangas.FirstAsync(m => m.Id == mangaId);
+			var manga = await context.Mangas
+				.Include(m => m.Type)
+				.FirstAsync(m => m.Id == mangaId);
 
 			Title = manga.Title;
 			Description = manga.Description;
