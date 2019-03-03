@@ -7,7 +7,7 @@ namespace OtakuShelter.Mangas
 	{
 		public void Configure(EntityTypeBuilder<MangaAuthor> builder)
 		{
-			builder.ToTable("mangaauthors");
+			builder.ToTable("manga_authors");
 			
 			builder.HasKey(mt => new { mt.MangaId, TranslatorId = mt.AuthorId });
 
@@ -23,13 +23,13 @@ namespace OtakuShelter.Mangas
 				.WithMany(m => m.Authors)
 				.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict)
-				.HasConstraintName("FK_manga_mangaauthors");
+				.HasConstraintName("FK_manga_manga_authors");
 
 			builder.HasOne(mt => mt.Author)
 				.WithMany(t => t.Mangas)
 				.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict)
-				.HasConstraintName("FK_author_mangaauthors");
+				.HasConstraintName("FK_author_manga_authors");
 		}
 	}
 }

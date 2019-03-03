@@ -7,7 +7,7 @@ namespace OtakuShelter.Mangas
 	{
 		public void Configure(EntityTypeBuilder<MangaTag> builder)
 		{
-			builder.ToTable("mangatags");
+			builder.ToTable("manga_tags");
 			
 			builder.HasKey(mt => new { mt.TagId, mt.MangaId });
 
@@ -23,13 +23,13 @@ namespace OtakuShelter.Mangas
 				.WithMany(t => t.Mangas)
 				.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict)
-				.HasConstraintName("FK_tag_mangatags");
+				.HasConstraintName("FK_tag_manga_tags");
 			
 			builder.HasOne(mt => mt.Manga)
 				.WithMany(t => t.Tags)
 				.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict)
-				.HasConstraintName("FK_manga_mangatags");
+				.HasConstraintName("FK_manga_manga_tags");
 		}
 	}
 }
