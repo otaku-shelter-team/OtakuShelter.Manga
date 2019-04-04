@@ -29,7 +29,7 @@ script:
     otakushelter_jwt_secret=$OTAKUSHELTER_JWT_SECRET\" \
     -i inventories/staging"
 
-- docker build -t otakushelter/parsers:1.0.${TRAVIS_BUILD_NUMBER} -f src/OtakuShelter.Mangas.Parsers/Dockerfile .
+- docker build -t otakushelter/parsers:1.0.${TRAVIS_BUILD_NUMBER} -f src/OtakuShelter.Mangas.Parser/Dockerfile .
 - docker push otakushelter/parsers:1.0.$TRAVIS_BUILD_NUMBER
 - |
   sudo sshpass -p $ANSIBLE_PASSWORD ssh -o StrictHostKeyChecking=no $ANSIBLE_CONNECTION \
