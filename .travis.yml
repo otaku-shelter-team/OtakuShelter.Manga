@@ -40,5 +40,5 @@ script:
     otakushelter_port=4007 \
     otakushelter_image=otakushelter/parsers \
     otakushelter_build_number=$TRAVIS_BUILD_NUMBER \
-    otakushelter_database_password=$OTAKUSHELTER_DATABASE_PASSWORD \
+    otakushelter_database_password=$OTAKUSHELTER_DATABASE_PASSWORD\" \
     -i inventories/staging"
