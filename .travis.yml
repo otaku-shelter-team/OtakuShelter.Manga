@@ -40,5 +40,8 @@ script:
     otakushelter_port=4007 \
     otakushelter_image=otakushelter/parsers \
     otakushelter_build_number=$TRAVIS_BUILD_NUMBER \
-    otakushelter_database_password=$OTAKUSHELTER_DATABASE_PASSWORD\" \
+    otakushelter_server_name=parsers.staging.otaku-shelter.ru \
+    otakushelter_database_password=$OTAKUSHELTER_DATABASE_PASSWORD \
+    otakushelter_rabbitmq_password=$OTAKUSHELTER_RABBITMQ_PASSWORD \
+    otakushelter_jwt_secret=$OTAKUSHELTER_JWT_SECRET\" \
     -i inventories/staging"
