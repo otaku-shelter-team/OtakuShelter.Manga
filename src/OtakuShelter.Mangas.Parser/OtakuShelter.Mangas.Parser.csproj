@@ -1,22 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+	<PropertyGroup>
 		<RootNamespace>OtakuShelter.Mangas</RootNamespace>
 		<LangVersion>7.3</LangVersion>
 		<Version>0.0.1</Version>
 		<OutputType>Exe</OutputType>
 		<TargetFramework>netcoreapp2.2</TargetFramework>
-  </PropertyGroup>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\OtakuShelter.Mangas.Data\OtakuShelter.Mangas.Data.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\OtakuShelter.Mangas.Data\OtakuShelter.Mangas.Data.csproj"/>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.0"/>
+		<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0"/>
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="2.2.0"/>
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="appsettings.yml" CopyToPublishDirectory="Always"/>
+	</ItemGroup>
 
 </Project>
