@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-
 using Phema.Routing;
 
 namespace OtakuShelter.Mangas

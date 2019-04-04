@@ -1,15 +1,9 @@
 using System;
 
-using HealthChecks.UI.Client;
-
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-
-using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace OtakuShelter.Mangas
 {

@@ -11,40 +11,46 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "title")]
 		public string Title { get; set; }
-		
+
 		[DataMember(Name = "description")]
-    public string Description { get; set; }
+		public string Description { get; set; }
 
-    [DataMember(Name = "image")]
-    public string Image { get; set; }
-    
-    [DataMember(Name = "type")]
-    public TypeResponse Type { get; set; }
-    
-    [DataMember(Name = "tags")]
-    public ICollection<TagResponse> Tags { get; set; }
+		[DataMember(Name = "image")]
+		public string Image { get; set; }
 
-    [DataMember(Name = "translators")]
-    public ICollection<TranslatorResponse> Translators { get; set; }
-    
-    [DataMember(Name = "authors")]
-    public ICollection<AuthorResponse> Authors { get; set; }
-		
+		[DataMember(Name = "type")]
+		public TypeResponse Type { get; set; }
+
+		[DataMember(Name = "tags")]
+		public ICollection<TagResponse> Tags { get; set; }
+
+		[DataMember(Name = "translators")]
+		public ICollection<TranslatorResponse> Translators { get; set; }
+
+		[DataMember(Name = "authors")]
+		public ICollection<AuthorResponse> Authors { get; set; }
+
 		public async ValueTask Create(MangasContext context)
 		{
 			var type = await context.Types
 				.FirstAsync(t => t.Id == Type.Id);
+
+			var tagsIds = Tags.Select(t => t.Id).ToList();
 			
 			var tags = await context.Tags
-				.Where(tag => Tags.Any(t => t.Id == tag.Id))
+				.Where(tag => tagsIds.Contains(tag.Id))
 				.ToListAsync();
 
+			var translatorsIds = Translators.Select(t => t.Id).ToList();
+			
 			var translators = await context.Translators
-				.Where(translator => Translators.Any(t => t.Id == translator.Id))
+				.Where(translator => translatorsIds.Contains(translator.Id))
 				.ToListAsync();
+
+			var authorsIds = Authors.Select(a => a.Id).ToList();
 			
 			var authors = await context.Authors
-				.Where(translator => Authors.Any(t => t.Id == translator.Id))
+				.Where(author => authorsIds.Contains(author.Id))
 				.ToListAsync();
 
 			var manga = new Manga
@@ -60,7 +66,7 @@ namespace OtakuShelter.Mangas
 
 			await context.MangaTranslators
 				.AddRangeAsync(translators.Select(translator => new MangaTranslator(translator, manga)));
-			
+
 			await context.MangaAuthors
 				.AddRangeAsync(authors.Select(author => new MangaAuthor(author, manga)));
 

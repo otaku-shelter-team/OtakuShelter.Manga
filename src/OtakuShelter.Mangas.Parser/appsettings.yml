@@ -1,0 +1,8 @@
+name: mangas
+
+database:
+  host: databases.staging.otaku-shelter.ru
+  port: 5432
+  database: mangas
+  userid: mangas
+  migrationstable: migrations

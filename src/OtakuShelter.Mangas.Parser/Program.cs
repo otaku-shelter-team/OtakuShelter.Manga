@@ -1,15 +1,13 @@
 using System.IO;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-
 using Phema.Configuration;
 
 namespace OtakuShelter.Mangas
 {
-	public static class Program
+	public class Program
 	{
 		public static async Task Main()
 		{
@@ -24,7 +22,7 @@ namespace OtakuShelter.Mangas
 				.UseKestrel()
 				.UseStartup<Startup>()
 				.UseConfiguration(CreateConfiguration())
-				.UsePhemaConfiguration<MangasConfiguration>()
+				.UsePhemaConfiguration<MangasParserConfiguration>()
 				.ConfigureLogging((context, builder) =>
 					builder.AddConsole()
 						.SetMinimumLevel(LogLevel.Warning));

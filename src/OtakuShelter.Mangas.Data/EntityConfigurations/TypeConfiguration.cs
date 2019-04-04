@@ -17,6 +17,10 @@ namespace OtakuShelter.Mangas
 				.HasColumnName("name")
 				.HasMaxLength(50)
 				.IsRequired();
+			
+			builder.HasIndex(t => t.Name)
+				.IsUnique()
+				.HasName("ux_types_name");
 		}
 	}
 }
