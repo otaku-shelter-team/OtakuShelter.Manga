@@ -77,16 +77,19 @@ namespace OtakuShelter.Mangas.MangaChan
                 .Select(x => new Tag {Name = x.FirstChild.NodeValue}).ToList();
         }
 
-        public List<Chapter> ParseChapters()
+        public List<Task<Chapter>> ParseChapters()
         {
             return cq
                 .Find(".table_cha tr")
                 .Filter(x =>
                     x.GetAttribute("class") == "no_zaliv" || x.GetAttribute("class") == "zaliv")
-                .Select(x => new Chapter
+                .Select(async x => new Chapter
                 {
                     Title = x.FirstChild.FirstChild.FirstChild.InnerText,
-                    UploadDate = Convert.ToDateTime(x.LastChild.FirstChild.InnerText)
+                    UploadDate = Convert.ToDateTime(x.LastChild.FirstChild.InnerText),
+                    Pages = await ParsePages(
+                        "https://mangachan.me" +
+                        x.FirstChild.FirstChild.FirstChild.GetAttribute("href"))
                 }).ToList();
         }
 
@@ -166,14 +169,33 @@ namespace OtakuShelter.Mangas.MangaChan
                     .Children()
                     .Select(x => new Translator
                     {
-                        Name = x.InnerText.Replace("\n", "")
+                        Name = x.InnerText.Replace("\n", "").Replace("\r", "")
                     })
-                    .Where((x, index) => index % 2 == 0 && x.Name != "")
+                    .Where((x, index) => x.Name != "")
+                    .Where((x, index) => index % 2 == 0)
                     .ToList();
                 translators.AddRange(pageTranslators);
             }
 
             return translators;
+        }
+
+        private static async Task<List<Page>> ParsePages(string getAttribute)
+        {
+            var client = new HttpClient();
+            var response = await client
+                .GetAsync(getAttribute).Result.Content
+                .ReadAsStringAsync();
+            var localcq = CQ.Create(response);
+            var current = localcq.Find("center").Prev().Text();
+            var firstIndex = current.IndexOf("\"fullimg\":[", StringComparison.Ordinal) + 11;
+            var secondIndex = current.IndexOf(",]", StringComparison.Ordinal);
+            var stringArray = current.Substring(firstIndex, secondIndex - firstIndex).Split(",");
+            var pages = stringArray.Select(s => new Page
+            {
+                Image = s.Replace("\"", "")
+            }).ToList();
+            return pages;
         }
     }
 }
