@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OtakuShelter.Mangas;
@@ -9,9 +10,10 @@ using OtakuShelter.Mangas;
 namespace OtakuShelter.Mangas.Migrations
 {
     [DbContext(typeof(MangasContext))]
-    partial class MangaContextModelSnapshot : ModelSnapshot
+    [Migration("20190408161300_FixImage")]
+    partial class FixImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,7 +205,7 @@ namespace OtakuShelter.Mangas.Migrations
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnName("image")
-                        .HasMaxLength(300);
+                        .HasMaxLength(50);
 
                     b.Property<int>("Order")
                         .HasColumnName("order");

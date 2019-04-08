@@ -23,7 +23,7 @@ namespace OtakuShelter.Mangas
 
 			builder.Property(p => p.Image)
 				.HasColumnName("image")
-				.HasMaxLength(50)
+				.HasMaxLength(300)
 				.IsRequired();
 
 			builder.Property(p => p.ChapterId)
