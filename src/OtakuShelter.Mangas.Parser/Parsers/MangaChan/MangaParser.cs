@@ -83,10 +83,11 @@ namespace OtakuShelter.Mangas.MangaChan
                 .Find(".table_cha tr")
                 .Filter(x =>
                     x.GetAttribute("class") == "no_zaliv" || x.GetAttribute("class") == "zaliv")
-                .Select(async x => new Chapter
+                .Select(async (x, index) => new Chapter
                 {
                     Title = x.FirstChild.FirstChild.FirstChild.InnerText,
                     UploadDate = Convert.ToDateTime(x.LastChild.FirstChild.InnerText),
+                    Order = index,
                     Pages = await ParsePages(
                         "https://mangachan.me" +
                         x.FirstChild.FirstChild.FirstChild.GetAttribute("href"))
@@ -117,7 +118,7 @@ namespace OtakuShelter.Mangas.MangaChan
                 .Children()
                 .Select(x => new Type
                 {
-                    Name = x.InnerText.Replace("\n", "")
+                    Name = x.InnerText.Replace("\n", "").Replace("\r", "")
                 })
                 .Where(x => x.Name != "").ToList();
         }
@@ -141,7 +142,7 @@ namespace OtakuShelter.Mangas.MangaChan
                     .Children()
                     .Select(x => new Author
                     {
-                        Name = x.InnerText.Replace("\n", "")
+                        Name = x.InnerText.Replace("\n", "").Replace("\r", "")
                     })
                     .Where(x => x.Name != "").ToList();
                 authors.AddRange(pageAuthors);
@@ -191,11 +192,21 @@ namespace OtakuShelter.Mangas.MangaChan
             var firstIndex = current.IndexOf("\"fullimg\":[", StringComparison.Ordinal) + 11;
             var secondIndex = current.IndexOf(",]", StringComparison.Ordinal);
             var stringArray = current.Substring(firstIndex, secondIndex - firstIndex).Split(",");
-            var pages = stringArray.Select(s => new Page
+            var pages = stringArray.Select((s, index) => new Page
             {
-                Image = s.Replace("\"", "")
+                Image = s.Replace("\"", ""),
+                Order = index
             }).ToList();
             return pages;
+        }
+
+        public List<string> ParseMangaList(string response)
+        {
+            var localcq = CQ.Create(response);
+            return localcq
+                .Find(".title_link")
+                .Select(x => $"https://mangachan.me{x.GetAttribute("href")}")
+                .ToList();
         }
     }
 }
