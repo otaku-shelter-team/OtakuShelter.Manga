@@ -74,7 +74,7 @@ namespace OtakuShelter.Mangas.MangaChan
             return table
                 .Filter((x, index) => index == 5).Find("a")
                 .Where(x => x.FirstChild != null)
-                .Select(x => new Tag {Name = x.FirstChild.NodeValue}).ToList();
+                .Select(x => new Tag {Name = x.FirstChild.NodeValue.Replace("_", " ")}).ToList();
         }
 
         public List<Task<Chapter>> ParseChapters()
@@ -83,6 +83,7 @@ namespace OtakuShelter.Mangas.MangaChan
                 .Find(".table_cha tr")
                 .Filter(x =>
                     x.GetAttribute("class") == "no_zaliv" || x.GetAttribute("class") == "zaliv")
+                .Reverse()
                 .Select(async (x, index) => new Chapter
                 {
                     Title = x.FirstChild.FirstChild.FirstChild.InnerText,

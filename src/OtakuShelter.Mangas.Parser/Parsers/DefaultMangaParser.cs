@@ -24,10 +24,14 @@ namespace OtakuShelter.Mangas
 
         public async Task Parse(CancellationToken cancellationToken)
         {
-            return;
+//            return;
 
             var response = "";
             var parser = new MangaParser();
+            var authors = context.Authors.ToList();
+//            var translators = context.Translators.ToList();
+            var tags = context.Tags.ToList();
+            var types = context.Types.ToList();
 
 //            var response = await client
 //                .GetAsync("https://mangachan.me/catalog", cancellationToken).Result.Content
@@ -36,46 +40,54 @@ namespace OtakuShelter.Mangas
 //                .Parse(response);
 
 
-//            response = await client
-//                .GetAsync("https://mangachan.me/tags/", cancellationToken).Result.Content
-//                .ReadAsStringAsync();
-//            var allTags = new MangaParser {cq = CQ.Create(response)}.ParseAllTags();
-//            await context.Tags.AddRangeAsync(allTags, cancellationToken);
-//            
-//            await context.SaveChangesAsync(cancellationToken);
-//
-//            response = await client
-//                .GetAsync("https://mangachan.me/type/", cancellationToken).Result.Content
-//                .ReadAsStringAsync();
-//            var allTypes = new MangaParser {cq = CQ.Create(response)}.ParseAllTypes();
-//            await context.Types.AddRangeAsync(allTypes, cancellationToken);
-//            
-//            await context.SaveChangesAsync(cancellationToken);
+            response = await client
+                .GetAsync("https://mangachan.me/tags/", cancellationToken).Result.Content
+                .ReadAsStringAsync();
+            var allTags = new MangaParser {cq = CQ.Create(response)}.ParseAllTags();
+            var changesTags = tags.Where(x => allTags.All(y => x.Name != y.Name)).ToList();
+            if (changesTags.Count != 0)
+            {
+                await context.Tags.AddRangeAsync(changesTags, cancellationToken);
+                await context.SaveChangesAsync(cancellationToken);
+                tags = context.Tags.ToList();
+            }
+
+            response = await client
+                .GetAsync("https://mangachan.me/type/", cancellationToken).Result.Content
+                .ReadAsStringAsync();
+            var allTypes = new MangaParser {cq = CQ.Create(response)}.ParseAllTypes();
+            var changesTypes = types.Where(x => allTypes.All(y => x.Name != y.Name)).ToList();
+            if (changesTypes.Count != 0)
+            {
+                await context.Types.AddRangeAsync(changesTypes, cancellationToken);
+                await context.SaveChangesAsync(cancellationToken);
+                types = context.Types.ToList();
+            }
+
 //
 //            response = await client
 //                .GetAsync("https://mangachan.me/mangaka/", cancellationToken).Result.Content
 //                .ReadAsStringAsync();
 //            var allAuthors = await new MangaParser {cq = CQ.Create(response)}.ParseAllAuthors();
 //            await context.Authors.AddRangeAsync(allAuthors, cancellationToken);
-//            
 //            await context.SaveChangesAsync(cancellationToken);
-//
+
 //            response = await client
 //                .GetAsync("https://mangachan.me/translation/", cancellationToken).Result.Content
 //                .ReadAsStringAsync();
 //            var allTranslators = await new MangaParser {cq = CQ.Create(response)}.ParseAllTranslators();
-//            await context.Translators.AddRangeAsync(allTranslators, cancellationToken);
-//
-//            await context.SaveChangesAsync(cancellationToken);
+//            var changesTranslators = translators.Where(x => allTranslators.All(y => x.Name != y.Name)).ToList();
+//            if (changesTypes.Count != 0)
+//            {
+//                await context.Translators.AddRangeAsync(changesTranslators, cancellationToken);
+//                await context.SaveChangesAsync(cancellationToken);
+//                translators = context.Translators.ToList();
+//            }
 
             response = await client
                 .GetAsync("https://mangachan.me/catalog?offset=0", cancellationToken).Result.Content
                 .ReadAsStringAsync();
             var mangaListUrLs = parser.ParseMangaList(response);
-
-            var authors = context.Authors.ToList();
-            var translators = context.Translators.ToList();
-            var tags = context.Tags.ToList();
 
             foreach (var mangaListUrl in mangaListUrLs)
             {
@@ -123,7 +135,7 @@ namespace OtakuShelter.Mangas
                     Title = title,
                     Description = description,
                     Image = image,
-                    Type = type,
+                    Type = types.FirstOrDefault(x => x.Name == type.Name),
                     Tags = parsedTags
                         .Select(tag =>
                             new MangaTag
@@ -134,13 +146,14 @@ namespace OtakuShelter.Mangas
                         .Select(author =>
                             new MangaAuthor
                             {
-                                Author = author
+                                Author = context.Authors.FirstOrDefault(x => x.Name == author.Name) ?? author
                             }).ToList(),
                     Translators = parsedTranslators
                         .Select(translator =>
                             new MangaTranslator
                             {
-                                Translator = translators.FirstOrDefault(x => x.Name == translator.Name)
+                                Translator = context.Translators.FirstOrDefault(x => x.Name == translator.Name) ??
+                                             translator
                             }).ToList(),
                     Chapters = parsedChapters
                         .Select(chapter =>
