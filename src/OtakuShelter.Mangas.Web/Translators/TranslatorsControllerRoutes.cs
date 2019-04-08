@@ -11,7 +11,7 @@ namespace OtakuShelter.Mangas
 				controller.AddRoute("translators", c => c.Read(From.Query<FilterResponse>()))
 					.HttpGet();
 				
-				controller.AddRoute("{mangaId}/translators",
+				controller.AddRoute("translators/{mangaId}",
 						c => c.ReadById(From.Route<int>(), From.Query<FilterResponse>()))
 					.HttpGet();
 				
