@@ -32,19 +32,16 @@ namespace OtakuShelter.Mangas
 //            var translators = context.Translators.ToList();
             var tags = context.Tags.ToList();
             var types = context.Types.ToList();
+            var mangas = context.Mangas.ToList();
 
-//            var response = await client
-//                .GetAsync("https://mangachan.me/catalog", cancellationToken).Result.Content
-//                .ReadAsStringAsync();
-//            var pagination = PaginationParser
-//                .Parse(response);
-
+            #region parse Tags, Translators, Types, Authors
 
             response = await client
                 .GetAsync("https://mangachan.me/tags/", cancellationToken).Result.Content
                 .ReadAsStringAsync();
-            var allTags = new MangaParser {cq = CQ.Create(response)}.ParseAllTags();
-            var changesTags = tags.Where(x => allTags.All(y => x.Name != y.Name)).ToList();
+            parser.cq = CQ.Create(response);
+            var allTags = parser.ParseAllTags();
+            var changesTags = allTags.Where(x => tags.All(y => x.Name != y.Name)).ToList();
             if (changesTags.Count != 0)
             {
                 await context.Tags.AddRangeAsync(changesTags, cancellationToken);
@@ -55,8 +52,9 @@ namespace OtakuShelter.Mangas
             response = await client
                 .GetAsync("https://mangachan.me/type/", cancellationToken).Result.Content
                 .ReadAsStringAsync();
-            var allTypes = new MangaParser {cq = CQ.Create(response)}.ParseAllTypes();
-            var changesTypes = types.Where(x => allTypes.All(y => x.Name != y.Name)).ToList();
+            parser.cq = CQ.Create(response);
+            var allTypes = parser.ParseAllTypes();
+            var changesTypes = allTypes.Where(x => types.All(y => x.Name != y.Name)).ToList();
             if (changesTypes.Count != 0)
             {
                 await context.Types.AddRangeAsync(changesTypes, cancellationToken);
@@ -84,91 +82,98 @@ namespace OtakuShelter.Mangas
 //                translators = context.Translators.ToList();
 //            }
 
-            response = await client
-                .GetAsync("https://mangachan.me/catalog?offset=0", cancellationToken).Result.Content
-                .ReadAsStringAsync();
-            var mangaListUrLs = parser.ParseMangaList(response);
+            #endregion
 
-            foreach (var mangaListUrl in mangaListUrLs)
+
+            response = await client
+                .GetAsync("https://mangachan.me/catalog", cancellationToken).Result.Content
+                .ReadAsStringAsync();
+            var pagination = PaginationParser
+                .Parse(response);
+
+            foreach (var page in pagination)
             {
                 response = await client
-                    .GetAsync(mangaListUrl, cancellationToken).Result.Content
+                    .GetAsync($"https://mangachan.me/catalog?offset={page}", cancellationToken).Result.Content
                     .ReadAsStringAsync();
+                var mangaListUrLs = parser.ParseMangaList(response);
 
-                parser = new MangaParser
+                foreach (var mangaListUrl in mangaListUrLs)
                 {
-                    cq = CQ.Create(response)
-                };
+                    response = await client
+                        .GetAsync(mangaListUrl, cancellationToken).Result.Content
+                        .ReadAsStringAsync();
 
-                var title = parser.ParseTitle();
-                var manga = await context.Mangas
-                    .Include(m => m.Chapters)
-                    .ThenInclude(c => c.Pages)
-                    .FirstOrDefaultAsync((x) => x.Title == title, cancellationToken: cancellationToken);
+                    parser = new MangaParser
+                    {
+                        cq = CQ.Create(response)
+                    };
 
-                if (manga != null)
-                {
-                    return;
+                    var title = parser.ParseTitle();
+                    if (mangas.Any(x => x.Title == title))
+                    {
+                        continue;
+                    }
+
+                    var description = parser.ParseDescription();
+                    var image = parser.ParseImage();
+                    var type = parser.ParseType();
+                    var parsedAuthors = parser.ParseAuthors();
+                    var parsedTranslators = parser.ParseTranslators();
+                    var parsedTags = parser.ParseTags();
+                    var parsedChapters = parser.ParseChapters();
+
+                    var mangaAuthors = new List<Author>();
+
+                    foreach (var author in parsedAuthors)
+                    {
+                        var containsAuthors = authors.Where(x => x.Name == author.Name).ToList();
+                        if (containsAuthors.Count != 0)
+                            mangaAuthors.AddRange(containsAuthors);
+                        else
+                            mangaAuthors.Add(author);
+                    }
+
+                    var manga = new Manga
+                    {
+                        Title = title,
+                        Description = description,
+                        Image = image,
+                        Type = types.FirstOrDefault(x => x.Name == type.Name),
+                        Tags = parsedTags
+                            .Select(tag =>
+                                new MangaTag
+                                {
+                                    Tag = tags.FirstOrDefault(x => x.Name == tag.Name)
+                                }).ToList(),
+                        Authors = mangaAuthors
+                            .Select(author =>
+                                new MangaAuthor
+                                {
+                                    Author = context.Authors.FirstOrDefault(x => x.Name == author.Name) ?? author
+                                }).ToList(),
+                        Translators = parsedTranslators
+                            .Select(translator =>
+                                new MangaTranslator
+                                {
+                                    Translator = context.Translators.FirstOrDefault(x => x.Name == translator.Name) ??
+                                                 translator
+                                }).ToList(),
+                        Chapters = parsedChapters
+                            .Select(chapter =>
+                                new Chapter
+                                {
+                                    Title = chapter.Result.Title,
+                                    UploadDate = chapter.Result.UploadDate,
+                                    Order = chapter.Result.Order,
+                                    Pages = chapter.Result.Pages
+                                }).ToList()
+                    };
+
+                    context.Mangas.Add(manga);
+                    await context.SaveChangesAsync(cancellationToken);
+                    Console.WriteLine($"{title} done");
                 }
-
-                var description = parser.ParseDescription();
-                var image = parser.ParseImage();
-                var type = parser.ParseType();
-                var parsedAuthors = parser.ParseAuthors();
-                var parsedTranslators = parser.ParseTranslators();
-                var parsedTags = parser.ParseTags();
-                var parsedChapters = parser.ParseChapters();
-
-                var mangaAuthors = new List<Author>();
-
-                foreach (var author in parsedAuthors)
-                {
-                    var containsAuthors = authors.Where(x => x.Name == author.Name).ToList();
-                    if (containsAuthors.Count != 0)
-                        mangaAuthors.AddRange(containsAuthors);
-                    else
-                        mangaAuthors.Add(author);
-                }
-
-                manga = new Manga
-                {
-                    Title = title,
-                    Description = description,
-                    Image = image,
-                    Type = types.FirstOrDefault(x => x.Name == type.Name),
-                    Tags = parsedTags
-                        .Select(tag =>
-                            new MangaTag
-                            {
-                                Tag = tags.FirstOrDefault(x => x.Name == tag.Name)
-                            }).ToList(),
-                    Authors = mangaAuthors
-                        .Select(author =>
-                            new MangaAuthor
-                            {
-                                Author = context.Authors.FirstOrDefault(x => x.Name == author.Name) ?? author
-                            }).ToList(),
-                    Translators = parsedTranslators
-                        .Select(translator =>
-                            new MangaTranslator
-                            {
-                                Translator = context.Translators.FirstOrDefault(x => x.Name == translator.Name) ??
-                                             translator
-                            }).ToList(),
-                    Chapters = parsedChapters
-                        .Select(chapter =>
-                            new Chapter
-                            {
-                                Title = chapter.Result.Title,
-                                UploadDate = chapter.Result.UploadDate,
-                                Order = chapter.Result.Order,
-                                Pages = chapter.Result.Pages
-                            }).ToList()
-                };
-
-                context.Mangas.Add(manga);
-                await context.SaveChangesAsync(cancellationToken);
-                Console.WriteLine($"{title} done");
             }
         }
     }
