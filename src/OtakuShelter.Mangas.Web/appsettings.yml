@@ -1,5 +1,4 @@
 name: mangas
-frontendorigin: http://staging.otaku-shelter.ru
 
 database:
   host: databases.staging.otaku-shelter.ru

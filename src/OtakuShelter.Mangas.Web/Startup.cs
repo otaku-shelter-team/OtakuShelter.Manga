@@ -30,8 +30,6 @@ namespace OtakuShelter.Mangas
 
 		public void Configure(IApplicationBuilder app)
 		{
-			app.UseCors(configuration.FrontendOrigin);
-
 			app.EnsureDatabaseMigrated();
 
 			app.UseMangasHealthchecks();
