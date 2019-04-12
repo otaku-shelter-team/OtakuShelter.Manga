@@ -11,7 +11,7 @@ namespace OtakuShelter.Mangas
 			this.context = context;
 		}
 
-		public async ValueTask<ReadTagResponse> Read(FilterResponse filter)
+		public async ValueTask<ReadTagResponse> Read(FilterRequest filter)
 		{
 			var response = new ReadTagResponse();
 
@@ -20,7 +20,7 @@ namespace OtakuShelter.Mangas
 			return response;
 		}
 		
-		public async ValueTask<ReadTagsByIdResponse> ReadById(int mangaId, FilterResponse filter)
+		public async ValueTask<ReadTagsByIdResponse> ReadById(int mangaId, FilterRequest filter)
 		{
 			var response = new ReadTagsByIdResponse();
 

@@ -8,11 +8,11 @@ namespace OtakuShelter.Mangas
 		{
 			builder.AddController<TranslatorsController>(controller =>
 			{
-				controller.AddRoute("translators", c => c.Read(From.Query<FilterResponse>()))
+				controller.AddRoute("translators", c => c.Read(From.Query<FilterRequest>()))
 					.HttpGet();
 				
 				controller.AddRoute("translators/{mangaId}",
-						c => c.ReadById(From.Route<int>(), From.Query<FilterResponse>()))
+						c => c.ReadById(From.Route<int>(), From.Query<FilterRequest>()))
 					.HttpGet();
 				
 				controller.AddRoute("admin/translators", c => c.AdminCreate(From.Body<AdminCreateTranslatorRequest>()))

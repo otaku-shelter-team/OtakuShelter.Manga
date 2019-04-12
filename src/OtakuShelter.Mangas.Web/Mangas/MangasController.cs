@@ -12,11 +12,11 @@ namespace OtakuShelter.Mangas
 			this.context = context;
 		}
 	
-		public async ValueTask<ReadMangaResponse> Read(FilterResponse filter)
+		public async ValueTask<ReadMangaResponse> Read(FilterByMangaTitleRequest filter)
 		{
 			var response = new ReadMangaResponse();
 			
-			await response.Load(context, filter.Offset, filter.Limit);
+			await response.Load(context, filter);
 			
 			return response;
 		}

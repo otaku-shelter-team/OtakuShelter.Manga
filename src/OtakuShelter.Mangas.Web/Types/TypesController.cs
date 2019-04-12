@@ -11,7 +11,7 @@ namespace OtakuShelter.Mangas
 			this.context = context;
 		}
 		
-		public async ValueTask<ReadTypeResponse> Read(FilterResponse filter)
+		public async ValueTask<ReadTypeResponse> Read(FilterRequest filter)
 		{
 			var response = new ReadTypeResponse();
 

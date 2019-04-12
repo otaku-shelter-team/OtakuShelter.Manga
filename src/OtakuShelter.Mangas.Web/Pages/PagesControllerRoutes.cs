@@ -8,7 +8,7 @@ namespace OtakuShelter.Mangas
 		{
 			builder.AddController<PagesController>(controller =>
 			{
-				controller.AddRoute("{chapterId}/pages", c => c.Read(From.Route<int>(), From.Query<FilterResponse>()))
+				controller.AddRoute("{chapterId}/pages", c => c.Read(From.Route<int>(), From.Query<FilterRequest>()))
 					.HttpGet();
 
 				controller.AddRoute("pages/{pageId}", c => c.ReadById(From.Route<int>()))

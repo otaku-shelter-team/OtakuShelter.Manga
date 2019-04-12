@@ -11,7 +11,7 @@ namespace OtakuShelter.Mangas
 			this.context = context;
 		}
 		
-		public async ValueTask<ReadChapterResponse> Read(int mangaId, FilterResponse filter)
+		public async ValueTask<ReadChapterResponse> Read(int mangaId, FilterRequest filter)
 		{
 			var response = new ReadChapterResponse();
 

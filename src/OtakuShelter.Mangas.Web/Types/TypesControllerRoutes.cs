@@ -8,7 +8,7 @@ namespace OtakuShelter.Mangas
 		{
 			builder.AddController<TypesController>(controller =>
 			{
-				controller.AddRoute("types", c => c.Read(From.Body<FilterResponse>()))
+				controller.AddRoute("types", c => c.Read(From.Body<FilterRequest>()))
 					.HttpGet();
 
 				controller.AddRoute("admin/types", c => c.AdminCreate(From.Body<AdminCreateTypeRequest>()))

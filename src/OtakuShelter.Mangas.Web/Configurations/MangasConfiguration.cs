@@ -4,6 +4,8 @@ namespace OtakuShelter.Mangas
 	{
 		public string Name { get; set; }
 		public string Version { get; set; }
+
+		public string FrontendOrigin { get; set; }
 		
 		public MangasDatabaseConfiguration Database { get; set; }
 		public MangasJwtConfiguration Jwt { get; set; }

@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace OtakuShelter.Mangas
 {
 	[DataContract]
-	public class FilterByMangaChapterAndPageIdRequest : FilterResponse
+	public class FilterByMangaChapterAndPageIdRequest : FilterRequest
 	{
 		[DataMember(Name = "mangaId")]
 		public int? MangaId { get; set; }

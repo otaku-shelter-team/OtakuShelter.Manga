@@ -1,5 +1,4 @@
 using System;
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +14,7 @@ namespace OtakuShelter.Mangas
 		{
 			this.configuration = configuration.Value;
 		}
-		
+
 		public IServiceProvider ConfigureServices(IServiceCollection services)
 		{
 			return services
@@ -31,8 +30,10 @@ namespace OtakuShelter.Mangas
 
 		public void Configure(IApplicationBuilder app)
 		{
+			app.UseCors(configuration.FrontendOrigin);
+
 			app.EnsureDatabaseMigrated();
-			
+
 			app.UseMangasHealthchecks();
 			app.UseAuthentication();
 			app.UseMangasSwagger();

@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace OtakuShelter.Mangas
 {
 	[DataContract]
-	public class FilterResponse
+	public class FilterRequest
 	{
 		[DataMember(Name = "offset")]
 		public int Offset { get; set; }
