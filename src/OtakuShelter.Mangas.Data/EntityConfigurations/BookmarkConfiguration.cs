@@ -52,7 +52,7 @@ namespace OtakuShelter.Mangas
 				.OnDelete(DeleteBehavior.Restrict)
 				.HasConstraintName("FK_page_bookmarks");
 
-			builder.HasIndex(b => new { b.AccountId, b.MangaId, b.ChapterId, b.PageId })
+			builder.HasIndex(b => new {b.AccountId, b.MangaId, b.ChapterId, b.PageId})
 				.IsUnique()
 				.HasFilter(null)
 				.HasName("UQ_accountid_mangaid_chapterid_pageid");

@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-
 using Phema.RabbitMq;
 using Phema.Serialization;
 
@@ -12,7 +11,7 @@ namespace OtakuShelter.Mangas
 			MangasRabbitMqConfiguration configuration)
 		{
 			services.AddPhemaJsonSerializer();
-			
+
 			var builder = services.AddPhemaRabbitMq(configuration.InstanceName,
 				options =>
 				{
@@ -22,11 +21,11 @@ namespace OtakuShelter.Mangas
 					options.HostName = configuration.Hostname;
 					options.VirtualHost = configuration.VirtualHost;
 				});
-			
+
 			builder.AddProducers(options =>
 				options.AddProducer<MangasExceptionPayload>("amq.direct", "errors")
 					.Mandatory());
-			
+
 			return services;
 		}
 	}

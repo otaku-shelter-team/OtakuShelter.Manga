@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Mvc;
 
 namespace OtakuShelter.Mangas
@@ -25,10 +24,11 @@ namespace OtakuShelter.Mangas
 		public async ValueTask<ReadBookmarkResponse> Read(FilterByMangaChapterAndPageIdRequest filter)
 		{
 			var accountId = int.Parse(User.Identity.Name);
-			
+
 			var response = new ReadBookmarkResponse();
 
-			await response.Read(context, accountId, filter.MangaId, filter.ChapterId, filter.PageId, filter.Offset, filter.Limit);
+			await response.Read(context, accountId, filter.MangaId, filter.ChapterId, filter.PageId, filter.Offset,
+				filter.Limit);
 
 			return response;
 		}
@@ -42,15 +42,17 @@ namespace OtakuShelter.Mangas
 			await context.SaveChangesAsync();
 		}
 
-		public async ValueTask<ReadBookmarkResponse> AdminReadById(int accountId, FilterByMangaChapterAndPageIdRequest filter)
+		public async ValueTask<ReadBookmarkResponse> AdminReadById(int accountId,
+			FilterByMangaChapterAndPageIdRequest filter)
 		{
 			var response = new ReadBookmarkResponse();
 
-			await response.Read(context, accountId, filter.MangaId, filter.ChapterId, filter.PageId, filter.Offset, filter.Limit);
+			await response.Read(context, accountId, filter.MangaId, filter.ChapterId, filter.PageId, filter.Offset,
+				filter.Limit);
 
 			return response;
 		}
-		
+
 		public async ValueTask AdminDeleteById(AdminDeleteByIdBookmarkRequest request)
 		{
 			await request.DeleteById(context);

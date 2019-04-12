@@ -13,7 +13,7 @@ namespace OtakuShelter.Mangas
 		{
 			Id = author.Id;
 		}
-		
+
 		[DataMember(Name = "id")]
 		public int Id { get; set; }
 	}

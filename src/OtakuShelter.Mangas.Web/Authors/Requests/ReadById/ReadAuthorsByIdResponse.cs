@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
-
 using Microsoft.EntityFrameworkCore;
 
 namespace OtakuShelter.Mangas
@@ -11,7 +10,7 @@ namespace OtakuShelter.Mangas
 	public class ReadAuthorsByIdResponse
 	{
 		[DataMember(Name = "authors")]
-		public ICollection<ReadAuthorsByIdItemResponse> Authors { get; private set; }		
+		public ICollection<ReadAuthorsByIdItemResponse> Authors { get; private set; }
 
 		public async ValueTask Read(MangasContext context, int mangaId, int offset, int limit)
 		{

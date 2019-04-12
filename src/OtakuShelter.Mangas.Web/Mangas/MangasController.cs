@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 
-
 namespace OtakuShelter.Mangas
 {
 	public class MangasController
@@ -11,13 +10,13 @@ namespace OtakuShelter.Mangas
 		{
 			this.context = context;
 		}
-	
+
 		public async ValueTask<ReadMangaResponse> Read(FilterByMangaTitleRequest filter)
 		{
 			var response = new ReadMangaResponse();
-			
+
 			await response.Load(context, filter);
-			
+
 			return response;
 		}
 
@@ -29,7 +28,7 @@ namespace OtakuShelter.Mangas
 
 			return response;
 		}
-			
+
 		public async ValueTask AdminCreate(AdminCreateMangaRequest request)
 		{
 			await request.Create(context);
@@ -40,14 +39,14 @@ namespace OtakuShelter.Mangas
 		public async ValueTask AdminUpdate(int mangaId, AdminUpdateMangaRequest request)
 		{
 			await request.Update(context, mangaId);
-			
+
 			await context.SaveChangesAsync();
 		}
 
 		public async ValueTask AdminDelete(AdminDeleteMangaRequest request)
 		{
 			await request.Delete(context);
-			
+
 			await context.SaveChangesAsync();
 		}
 	}

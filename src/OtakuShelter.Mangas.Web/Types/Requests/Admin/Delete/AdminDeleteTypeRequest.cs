@@ -9,7 +9,7 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "typeId")]
 		public int TypeId { get; set; }
-		
+
 		public async ValueTask Delete(MangasContext context)
 		{
 			var type = await context.Types.FirstAsync(t => t.Id == TypeId);

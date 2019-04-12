@@ -10,10 +10,10 @@ namespace OtakuShelter.Mangas
 			Id = translator.Id;
 			Name = translator.Name;
 		}
-		
+
 		[DataMember(Name = "id")]
 		public int Id { get; }
-		
+
 		[DataMember(Name = "name")]
 		public string Name { get; }
 	}

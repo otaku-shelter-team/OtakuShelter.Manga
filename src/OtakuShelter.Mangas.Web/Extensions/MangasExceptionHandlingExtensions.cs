@@ -1,7 +1,5 @@
 using System;
-
 using Microsoft.Extensions.DependencyInjection;
-
 using Phema.ExceptionHandling;
 
 namespace OtakuShelter.Mangas

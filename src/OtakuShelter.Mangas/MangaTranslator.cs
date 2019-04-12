@@ -5,7 +5,7 @@ namespace OtakuShelter.Mangas
 		public MangaTranslator()
 		{
 		}
-		
+
 		public MangaTranslator(Translator translator, Manga manga)
 		{
 			Translator = translator;

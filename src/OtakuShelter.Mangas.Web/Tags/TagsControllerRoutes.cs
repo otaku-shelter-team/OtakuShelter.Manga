@@ -10,16 +10,17 @@ namespace OtakuShelter.Mangas
 			{
 				controller.AddRoute("tags", c => c.Read(From.Query<FilterRequest>()))
 					.HttpGet();
-				
+
 				controller.AddRoute("tags/{mangaId}",
 						c => c.ReadById(From.Route<int>(), From.Query<FilterRequest>()))
 					.HttpGet();
-				
+
 				controller.AddRoute("admin/tags", c => c.AdminCreate(From.Body<AdminCreateTagRequest>()))
 					.HttpPost()
 					.Authorize(roles.Admin);
 
-				controller.AddRoute("admin/tags/{tagId}", c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateTagRequest>()))
+				controller.AddRoute("admin/tags/{tagId}",
+						c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateTagRequest>()))
 					.HttpPut()
 					.Authorize(roles.Admin);
 
@@ -27,7 +28,7 @@ namespace OtakuShelter.Mangas
 					.HttpDelete()
 					.Authorize(roles.Admin);
 			});
-			
+
 			return builder;
 		}
 	}

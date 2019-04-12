@@ -4,259 +4,247 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace OtakuShelter.Mangas.Migrations
 {
-    public partial class InitialSchema : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.CreateTable(
-                name: "authors",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_authors", x => x.id);
-                });
+	public partial class InitialSchema : Migration
+	{
+		protected override void Up(MigrationBuilder migrationBuilder)
+		{
+			migrationBuilder.CreateTable(
+				"authors",
+				table => new
+				{
+					id = table.Column<int>()
+						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+					name = table.Column<string>(maxLength: 50)
+				},
+				constraints: table => { table.PrimaryKey("PK_authors", x => x.id); });
 
-            migrationBuilder.CreateTable(
-                name: "tags",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_tags", x => x.id);
-                });
+			migrationBuilder.CreateTable(
+				"tags",
+				table => new
+				{
+					id = table.Column<int>()
+						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+					name = table.Column<string>(maxLength: 50)
+				},
+				constraints: table => { table.PrimaryKey("PK_tags", x => x.id); });
 
-            migrationBuilder.CreateTable(
-                name: "translators",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_translators", x => x.id);
-                });
+			migrationBuilder.CreateTable(
+				"translators",
+				table => new
+				{
+					id = table.Column<int>()
+						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+					name = table.Column<string>(maxLength: 50)
+				},
+				constraints: table => { table.PrimaryKey("PK_translators", x => x.id); });
 
-            migrationBuilder.CreateTable(
-                name: "types",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_types", x => x.id);
-                });
+			migrationBuilder.CreateTable(
+				"types",
+				table => new
+				{
+					id = table.Column<int>()
+						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+					name = table.Column<string>(maxLength: 50)
+				},
+				constraints: table => { table.PrimaryKey("PK_types", x => x.id); });
 
-            migrationBuilder.CreateTable(
-                name: "mangas",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    title = table.Column<string>(maxLength: 50, nullable: false),
-                    description = table.Column<string>(maxLength: 500, nullable: false),
-                    image = table.Column<string>(maxLength: 100, nullable: false),
-                    typeid = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_mangas", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_type_mangas",
-                        column: x => x.typeid,
-                        principalTable: "types",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                });
+			migrationBuilder.CreateTable(
+				"mangas",
+				table => new
+				{
+					id = table.Column<int>()
+						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+					title = table.Column<string>(maxLength: 50),
+					description = table.Column<string>(maxLength: 500),
+					image = table.Column<string>(maxLength: 100),
+					typeid = table.Column<int>()
+				},
+				constraints: table =>
+				{
+					table.PrimaryKey("PK_mangas", x => x.id);
+					table.ForeignKey(
+						"FK_type_mangas",
+						x => x.typeid,
+						"types",
+						"id",
+						onDelete: ReferentialAction.Restrict);
+				});
 
-            migrationBuilder.CreateTable(
-                name: "chapters",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    title = table.Column<string>(maxLength: 50, nullable: false),
-                    uploaddate = table.Column<DateTime>(type: "date", nullable: false),
-                    mangaid = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_chapters", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_manga_chapters",
-                        column: x => x.mangaid,
-                        principalTable: "mangas",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                });
+			migrationBuilder.CreateTable(
+				"chapters",
+				table => new
+				{
+					id = table.Column<int>()
+						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+					title = table.Column<string>(maxLength: 50),
+					uploaddate = table.Column<DateTime>("date"),
+					mangaid = table.Column<int>()
+				},
+				constraints: table =>
+				{
+					table.PrimaryKey("PK_chapters", x => x.id);
+					table.ForeignKey(
+						"FK_manga_chapters",
+						x => x.mangaid,
+						"mangas",
+						"id",
+						onDelete: ReferentialAction.Restrict);
+				});
 
-            migrationBuilder.CreateTable(
-                name: "mangaauthors",
-                columns: table => new
-                {
-                    mangaid = table.Column<int>(nullable: false),
-                    authorid = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_mangaauthors", x => new { x.mangaid, x.authorid });
-                    table.ForeignKey(
-                        name: "FK_author_mangaauthors",
-                        column: x => x.authorid,
-                        principalTable: "authors",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_manga_mangaauthors",
-                        column: x => x.mangaid,
-                        principalTable: "mangas",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                });
+			migrationBuilder.CreateTable(
+				"mangaauthors",
+				table => new
+				{
+					mangaid = table.Column<int>(),
+					authorid = table.Column<int>()
+				},
+				constraints: table =>
+				{
+					table.PrimaryKey("PK_mangaauthors", x => new {x.mangaid, x.authorid});
+					table.ForeignKey(
+						"FK_author_mangaauthors",
+						x => x.authorid,
+						"authors",
+						"id",
+						onDelete: ReferentialAction.Restrict);
+					table.ForeignKey(
+						"FK_manga_mangaauthors",
+						x => x.mangaid,
+						"mangas",
+						"id",
+						onDelete: ReferentialAction.Restrict);
+				});
 
-            migrationBuilder.CreateTable(
-                name: "mangatags",
-                columns: table => new
-                {
-                    mangaid = table.Column<int>(nullable: false),
-                    tagid = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_mangatags", x => new { x.tagid, x.mangaid });
-                    table.ForeignKey(
-                        name: "FK_manga_mangatags",
-                        column: x => x.mangaid,
-                        principalTable: "mangas",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_tag_mangatags",
-                        column: x => x.tagid,
-                        principalTable: "tags",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                });
+			migrationBuilder.CreateTable(
+				"mangatags",
+				table => new
+				{
+					mangaid = table.Column<int>(),
+					tagid = table.Column<int>()
+				},
+				constraints: table =>
+				{
+					table.PrimaryKey("PK_mangatags", x => new {x.tagid, x.mangaid});
+					table.ForeignKey(
+						"FK_manga_mangatags",
+						x => x.mangaid,
+						"mangas",
+						"id",
+						onDelete: ReferentialAction.Restrict);
+					table.ForeignKey(
+						"FK_tag_mangatags",
+						x => x.tagid,
+						"tags",
+						"id",
+						onDelete: ReferentialAction.Restrict);
+				});
 
-            migrationBuilder.CreateTable(
-                name: "mangatranslators",
-                columns: table => new
-                {
-                    mangaid = table.Column<int>(nullable: false),
-                    translatorid = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_mangatranslators", x => new { x.mangaid, x.translatorid });
-                    table.ForeignKey(
-                        name: "FK_manga_mangatranslators",
-                        column: x => x.mangaid,
-                        principalTable: "mangas",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_translator_mangatranslators",
-                        column: x => x.translatorid,
-                        principalTable: "translators",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                });
+			migrationBuilder.CreateTable(
+				"mangatranslators",
+				table => new
+				{
+					mangaid = table.Column<int>(),
+					translatorid = table.Column<int>()
+				},
+				constraints: table =>
+				{
+					table.PrimaryKey("PK_mangatranslators", x => new {x.mangaid, x.translatorid});
+					table.ForeignKey(
+						"FK_manga_mangatranslators",
+						x => x.mangaid,
+						"mangas",
+						"id",
+						onDelete: ReferentialAction.Restrict);
+					table.ForeignKey(
+						"FK_translator_mangatranslators",
+						x => x.translatorid,
+						"translators",
+						"id",
+						onDelete: ReferentialAction.Restrict);
+				});
 
-            migrationBuilder.CreateTable(
-                name: "pages",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    image = table.Column<string>(maxLength: 50, nullable: false),
-                    chapterid = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pages", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_chapter_pages",
-                        column: x => x.chapterid,
-                        principalTable: "chapters",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                });
+			migrationBuilder.CreateTable(
+				"pages",
+				table => new
+				{
+					id = table.Column<int>()
+						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+					image = table.Column<string>(maxLength: 50),
+					chapterid = table.Column<int>()
+				},
+				constraints: table =>
+				{
+					table.PrimaryKey("PK_pages", x => x.id);
+					table.ForeignKey(
+						"FK_chapter_pages",
+						x => x.chapterid,
+						"chapters",
+						"id",
+						onDelete: ReferentialAction.Restrict);
+				});
 
-            migrationBuilder.CreateIndex(
-                name: "IX_chapters_mangaid",
-                table: "chapters",
-                column: "mangaid");
+			migrationBuilder.CreateIndex(
+				"IX_chapters_mangaid",
+				"chapters",
+				"mangaid");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_mangaauthors_authorid",
-                table: "mangaauthors",
-                column: "authorid");
+			migrationBuilder.CreateIndex(
+				"IX_mangaauthors_authorid",
+				"mangaauthors",
+				"authorid");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_mangas_typeid",
-                table: "mangas",
-                column: "typeid");
+			migrationBuilder.CreateIndex(
+				"IX_mangas_typeid",
+				"mangas",
+				"typeid");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_mangatags_mangaid",
-                table: "mangatags",
-                column: "mangaid");
+			migrationBuilder.CreateIndex(
+				"IX_mangatags_mangaid",
+				"mangatags",
+				"mangaid");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_mangatranslators_translatorid",
-                table: "mangatranslators",
-                column: "translatorid");
+			migrationBuilder.CreateIndex(
+				"IX_mangatranslators_translatorid",
+				"mangatranslators",
+				"translatorid");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_pages_chapterid",
-                table: "pages",
-                column: "chapterid");
-        }
+			migrationBuilder.CreateIndex(
+				"IX_pages_chapterid",
+				"pages",
+				"chapterid");
+		}
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "mangaauthors");
+		protected override void Down(MigrationBuilder migrationBuilder)
+		{
+			migrationBuilder.DropTable(
+				"mangaauthors");
 
-            migrationBuilder.DropTable(
-                name: "mangatags");
+			migrationBuilder.DropTable(
+				"mangatags");
 
-            migrationBuilder.DropTable(
-                name: "mangatranslators");
+			migrationBuilder.DropTable(
+				"mangatranslators");
 
-            migrationBuilder.DropTable(
-                name: "pages");
+			migrationBuilder.DropTable(
+				"pages");
 
-            migrationBuilder.DropTable(
-                name: "authors");
+			migrationBuilder.DropTable(
+				"authors");
 
-            migrationBuilder.DropTable(
-                name: "tags");
+			migrationBuilder.DropTable(
+				"tags");
 
-            migrationBuilder.DropTable(
-                name: "translators");
+			migrationBuilder.DropTable(
+				"translators");
 
-            migrationBuilder.DropTable(
-                name: "chapters");
+			migrationBuilder.DropTable(
+				"chapters");
 
-            migrationBuilder.DropTable(
-                name: "mangas");
+			migrationBuilder.DropTable(
+				"mangas");
 
-            migrationBuilder.DropTable(
-                name: "types");
-        }
-    }
+			migrationBuilder.DropTable(
+				"types");
+		}
+	}
 }

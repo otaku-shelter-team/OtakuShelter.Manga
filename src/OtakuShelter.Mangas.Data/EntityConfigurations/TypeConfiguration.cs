@@ -17,7 +17,7 @@ namespace OtakuShelter.Mangas
 				.HasColumnName("name")
 				.HasMaxLength(100)
 				.IsRequired();
-			
+
 			builder.HasIndex(t => t.Name)
 				.IsUnique()
 				.HasName("ux_types_name");

@@ -11,7 +11,7 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "translators")]
 		public ICollection<ReadTranslatorItemResponse> Translators { get; private set; }
-		
+
 		public async ValueTask Read(MangasContext context, int offset, int limit)
 		{
 			Translators = await context.Translators

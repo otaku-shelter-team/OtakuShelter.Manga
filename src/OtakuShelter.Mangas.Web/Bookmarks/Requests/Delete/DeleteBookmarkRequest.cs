@@ -1,6 +1,5 @@
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
-
 using Microsoft.EntityFrameworkCore;
 
 namespace OtakuShelter.Mangas

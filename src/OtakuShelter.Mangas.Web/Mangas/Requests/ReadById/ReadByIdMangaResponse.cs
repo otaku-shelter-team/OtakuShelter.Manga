@@ -9,16 +9,16 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "title")]
 		public string Title { get; private set; }
-		
+
 		[DataMember(Name = "description")]
 		public string Description { get; private set; }
-		
+
 		[DataMember(Name = "image")]
 		public string Image { get; private set; }
-		
+
 		[DataMember(Name = "type")]
 		public ReadTypeItemResponse Type { get; private set; }
-		
+
 		public async ValueTask ReadById(MangasContext context, int mangaId)
 		{
 			var manga = await context.Mangas

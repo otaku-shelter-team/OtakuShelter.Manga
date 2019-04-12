@@ -8,7 +8,7 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "name")]
 		public string Name { get; set; }
-		
+
 		public async ValueTask Create(MangasContext context)
 		{
 			var translator = new Translator

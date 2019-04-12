@@ -2,284 +2,284 @@
 
 namespace OtakuShelter.Mangas.Migrations
 {
-    public partial class RenameColumns : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropForeignKey(
-                name: "FK_author_mangaauthors",
-                table: "mangaauthors");
+	public partial class RenameColumns : Migration
+	{
+		protected override void Up(MigrationBuilder migrationBuilder)
+		{
+			migrationBuilder.DropForeignKey(
+				"FK_author_mangaauthors",
+				"mangaauthors");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_manga_mangaauthors",
-                table: "mangaauthors");
+			migrationBuilder.DropForeignKey(
+				"FK_manga_mangaauthors",
+				"mangaauthors");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_manga_mangatags",
-                table: "mangatags");
+			migrationBuilder.DropForeignKey(
+				"FK_manga_mangatags",
+				"mangatags");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_tag_mangatags",
-                table: "mangatags");
+			migrationBuilder.DropForeignKey(
+				"FK_tag_mangatags",
+				"mangatags");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_manga_mangatranslators",
-                table: "mangatranslators");
+			migrationBuilder.DropForeignKey(
+				"FK_manga_mangatranslators",
+				"mangatranslators");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_translator_mangatranslators",
-                table: "mangatranslators");
+			migrationBuilder.DropForeignKey(
+				"FK_translator_mangatranslators",
+				"mangatranslators");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_mangatranslators",
-                table: "mangatranslators");
+			migrationBuilder.DropPrimaryKey(
+				"PK_mangatranslators",
+				"mangatranslators");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_mangatags",
-                table: "mangatags");
+			migrationBuilder.DropPrimaryKey(
+				"PK_mangatags",
+				"mangatags");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_mangaauthors",
-                table: "mangaauthors");
+			migrationBuilder.DropPrimaryKey(
+				"PK_mangaauthors",
+				"mangaauthors");
 
-            migrationBuilder.RenameTable(
-                name: "mangatranslators",
-                newName: "manga_translators");
+			migrationBuilder.RenameTable(
+				"mangatranslators",
+				newName: "manga_translators");
 
-            migrationBuilder.RenameTable(
-                name: "mangatags",
-                newName: "manga_tags");
+			migrationBuilder.RenameTable(
+				"mangatags",
+				newName: "manga_tags");
 
-            migrationBuilder.RenameTable(
-                name: "mangaauthors",
-                newName: "manga_authors");
+			migrationBuilder.RenameTable(
+				"mangaauthors",
+				newName: "manga_authors");
 
-            migrationBuilder.RenameColumn(
-                name: "translatorid",
-                table: "manga_translators",
-                newName: "translator_id");
+			migrationBuilder.RenameColumn(
+				"translatorid",
+				"manga_translators",
+				"translator_id");
 
-            migrationBuilder.RenameColumn(
-                name: "mangaid",
-                table: "manga_translators",
-                newName: "manga_id");
+			migrationBuilder.RenameColumn(
+				"mangaid",
+				"manga_translators",
+				"manga_id");
 
-            migrationBuilder.RenameIndex(
-                name: "IX_mangatranslators_translatorid",
-                table: "manga_translators",
-                newName: "IX_manga_translators_translator_id");
+			migrationBuilder.RenameIndex(
+				"IX_mangatranslators_translatorid",
+				table: "manga_translators",
+				newName: "IX_manga_translators_translator_id");
 
-            migrationBuilder.RenameIndex(
-                name: "IX_mangatags_manga_id",
-                table: "manga_tags",
-                newName: "IX_manga_tags_manga_id");
+			migrationBuilder.RenameIndex(
+				"IX_mangatags_manga_id",
+				table: "manga_tags",
+				newName: "IX_manga_tags_manga_id");
 
-            migrationBuilder.RenameIndex(
-                name: "IX_mangaauthors_author_id",
-                table: "manga_authors",
-                newName: "IX_manga_authors_author_id");
+			migrationBuilder.RenameIndex(
+				"IX_mangaauthors_author_id",
+				table: "manga_authors",
+				newName: "IX_manga_authors_author_id");
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_manga_translators",
-                table: "manga_translators",
-                columns: new[] { "manga_id", "translator_id" });
+			migrationBuilder.AddPrimaryKey(
+				"PK_manga_translators",
+				"manga_translators",
+				new[] {"manga_id", "translator_id"});
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_manga_tags",
-                table: "manga_tags",
-                columns: new[] { "tag_id", "manga_id" });
+			migrationBuilder.AddPrimaryKey(
+				"PK_manga_tags",
+				"manga_tags",
+				new[] {"tag_id", "manga_id"});
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_manga_authors",
-                table: "manga_authors",
-                columns: new[] { "manga_id", "author_id" });
+			migrationBuilder.AddPrimaryKey(
+				"PK_manga_authors",
+				"manga_authors",
+				new[] {"manga_id", "author_id"});
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_author_manga_authors",
-                table: "manga_authors",
-                column: "author_id",
-                principalTable: "authors",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+			migrationBuilder.AddForeignKey(
+				"FK_author_manga_authors",
+				"manga_authors",
+				"author_id",
+				"authors",
+				principalColumn: "id",
+				onDelete: ReferentialAction.Restrict);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_manga_manga_authors",
-                table: "manga_authors",
-                column: "manga_id",
-                principalTable: "mangas",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+			migrationBuilder.AddForeignKey(
+				"FK_manga_manga_authors",
+				"manga_authors",
+				"manga_id",
+				"mangas",
+				principalColumn: "id",
+				onDelete: ReferentialAction.Restrict);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_manga_manga_tags",
-                table: "manga_tags",
-                column: "manga_id",
-                principalTable: "mangas",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+			migrationBuilder.AddForeignKey(
+				"FK_manga_manga_tags",
+				"manga_tags",
+				"manga_id",
+				"mangas",
+				principalColumn: "id",
+				onDelete: ReferentialAction.Restrict);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_tag_manga_tags",
-                table: "manga_tags",
-                column: "tag_id",
-                principalTable: "tags",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+			migrationBuilder.AddForeignKey(
+				"FK_tag_manga_tags",
+				"manga_tags",
+				"tag_id",
+				"tags",
+				principalColumn: "id",
+				onDelete: ReferentialAction.Restrict);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_manga_manga_translators",
-                table: "manga_translators",
-                column: "manga_id",
-                principalTable: "mangas",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+			migrationBuilder.AddForeignKey(
+				"FK_manga_manga_translators",
+				"manga_translators",
+				"manga_id",
+				"mangas",
+				principalColumn: "id",
+				onDelete: ReferentialAction.Restrict);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_translator_manga_translators",
-                table: "manga_translators",
-                column: "translator_id",
-                principalTable: "translators",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
-        }
+			migrationBuilder.AddForeignKey(
+				"FK_translator_manga_translators",
+				"manga_translators",
+				"translator_id",
+				"translators",
+				principalColumn: "id",
+				onDelete: ReferentialAction.Restrict);
+		}
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropForeignKey(
-                name: "FK_author_manga_authors",
-                table: "manga_authors");
+		protected override void Down(MigrationBuilder migrationBuilder)
+		{
+			migrationBuilder.DropForeignKey(
+				"FK_author_manga_authors",
+				"manga_authors");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_manga_manga_authors",
-                table: "manga_authors");
+			migrationBuilder.DropForeignKey(
+				"FK_manga_manga_authors",
+				"manga_authors");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_manga_manga_tags",
-                table: "manga_tags");
+			migrationBuilder.DropForeignKey(
+				"FK_manga_manga_tags",
+				"manga_tags");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_tag_manga_tags",
-                table: "manga_tags");
+			migrationBuilder.DropForeignKey(
+				"FK_tag_manga_tags",
+				"manga_tags");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_manga_manga_translators",
-                table: "manga_translators");
+			migrationBuilder.DropForeignKey(
+				"FK_manga_manga_translators",
+				"manga_translators");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_translator_manga_translators",
-                table: "manga_translators");
+			migrationBuilder.DropForeignKey(
+				"FK_translator_manga_translators",
+				"manga_translators");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_manga_translators",
-                table: "manga_translators");
+			migrationBuilder.DropPrimaryKey(
+				"PK_manga_translators",
+				"manga_translators");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_manga_tags",
-                table: "manga_tags");
+			migrationBuilder.DropPrimaryKey(
+				"PK_manga_tags",
+				"manga_tags");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_manga_authors",
-                table: "manga_authors");
+			migrationBuilder.DropPrimaryKey(
+				"PK_manga_authors",
+				"manga_authors");
 
-            migrationBuilder.RenameTable(
-                name: "manga_translators",
-                newName: "mangatranslators");
+			migrationBuilder.RenameTable(
+				"manga_translators",
+				newName: "mangatranslators");
 
-            migrationBuilder.RenameTable(
-                name: "manga_tags",
-                newName: "mangatags");
+			migrationBuilder.RenameTable(
+				"manga_tags",
+				newName: "mangatags");
 
-            migrationBuilder.RenameTable(
-                name: "manga_authors",
-                newName: "mangaauthors");
+			migrationBuilder.RenameTable(
+				"manga_authors",
+				newName: "mangaauthors");
 
-            migrationBuilder.RenameColumn(
-                name: "translator_id",
-                table: "mangatranslators",
-                newName: "translatorid");
+			migrationBuilder.RenameColumn(
+				"translator_id",
+				"mangatranslators",
+				"translatorid");
 
-            migrationBuilder.RenameColumn(
-                name: "manga_id",
-                table: "mangatranslators",
-                newName: "mangaid");
+			migrationBuilder.RenameColumn(
+				"manga_id",
+				"mangatranslators",
+				"mangaid");
 
-            migrationBuilder.RenameIndex(
-                name: "IX_manga_translators_translator_id",
-                table: "mangatranslators",
-                newName: "IX_mangatranslators_translatorid");
+			migrationBuilder.RenameIndex(
+				"IX_manga_translators_translator_id",
+				table: "mangatranslators",
+				newName: "IX_mangatranslators_translatorid");
 
-            migrationBuilder.RenameIndex(
-                name: "IX_manga_tags_manga_id",
-                table: "mangatags",
-                newName: "IX_mangatags_manga_id");
+			migrationBuilder.RenameIndex(
+				"IX_manga_tags_manga_id",
+				table: "mangatags",
+				newName: "IX_mangatags_manga_id");
 
-            migrationBuilder.RenameIndex(
-                name: "IX_manga_authors_author_id",
-                table: "mangaauthors",
-                newName: "IX_mangaauthors_author_id");
+			migrationBuilder.RenameIndex(
+				"IX_manga_authors_author_id",
+				table: "mangaauthors",
+				newName: "IX_mangaauthors_author_id");
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_mangatranslators",
-                table: "mangatranslators",
-                columns: new[] { "mangaid", "translatorid" });
+			migrationBuilder.AddPrimaryKey(
+				"PK_mangatranslators",
+				"mangatranslators",
+				new[] {"mangaid", "translatorid"});
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_mangatags",
-                table: "mangatags",
-                columns: new[] { "tag_id", "manga_id" });
+			migrationBuilder.AddPrimaryKey(
+				"PK_mangatags",
+				"mangatags",
+				new[] {"tag_id", "manga_id"});
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_mangaauthors",
-                table: "mangaauthors",
-                columns: new[] { "manga_id", "author_id" });
+			migrationBuilder.AddPrimaryKey(
+				"PK_mangaauthors",
+				"mangaauthors",
+				new[] {"manga_id", "author_id"});
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_author_mangaauthors",
-                table: "mangaauthors",
-                column: "author_id",
-                principalTable: "authors",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+			migrationBuilder.AddForeignKey(
+				"FK_author_mangaauthors",
+				"mangaauthors",
+				"author_id",
+				"authors",
+				principalColumn: "id",
+				onDelete: ReferentialAction.Restrict);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_manga_mangaauthors",
-                table: "mangaauthors",
-                column: "manga_id",
-                principalTable: "mangas",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+			migrationBuilder.AddForeignKey(
+				"FK_manga_mangaauthors",
+				"mangaauthors",
+				"manga_id",
+				"mangas",
+				principalColumn: "id",
+				onDelete: ReferentialAction.Restrict);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_manga_mangatags",
-                table: "mangatags",
-                column: "manga_id",
-                principalTable: "mangas",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+			migrationBuilder.AddForeignKey(
+				"FK_manga_mangatags",
+				"mangatags",
+				"manga_id",
+				"mangas",
+				principalColumn: "id",
+				onDelete: ReferentialAction.Restrict);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_tag_mangatags",
-                table: "mangatags",
-                column: "tag_id",
-                principalTable: "tags",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+			migrationBuilder.AddForeignKey(
+				"FK_tag_mangatags",
+				"mangatags",
+				"tag_id",
+				"tags",
+				principalColumn: "id",
+				onDelete: ReferentialAction.Restrict);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_manga_mangatranslators",
-                table: "mangatranslators",
-                column: "mangaid",
-                principalTable: "mangas",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+			migrationBuilder.AddForeignKey(
+				"FK_manga_mangatranslators",
+				"mangatranslators",
+				"mangaid",
+				"mangas",
+				principalColumn: "id",
+				onDelete: ReferentialAction.Restrict);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_translator_mangatranslators",
-                table: "mangatranslators",
-                column: "translatorid",
-                principalTable: "translators",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
-        }
-    }
+			migrationBuilder.AddForeignKey(
+				"FK_translator_mangatranslators",
+				"mangatranslators",
+				"translatorid",
+				"translators",
+				principalColumn: "id",
+				onDelete: ReferentialAction.Restrict);
+		}
+	}
 }

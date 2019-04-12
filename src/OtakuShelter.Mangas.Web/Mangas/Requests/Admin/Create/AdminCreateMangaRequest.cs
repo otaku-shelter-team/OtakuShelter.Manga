@@ -36,19 +36,19 @@ namespace OtakuShelter.Mangas
 				.FirstAsync(t => t.Id == Type.Id);
 
 			var tagsIds = Tags.Select(t => t.Id).ToList();
-			
+
 			var tags = await context.Tags
 				.Where(tag => tagsIds.Contains(tag.Id))
 				.ToListAsync();
 
 			var translatorsIds = Translators.Select(t => t.Id).ToList();
-			
+
 			var translators = await context.Translators
 				.Where(translator => translatorsIds.Contains(translator.Id))
 				.ToListAsync();
 
 			var authorsIds = Authors.Select(a => a.Id).ToList();
-			
+
 			var authors = await context.Authors
 				.Where(author => authorsIds.Contains(author.Id))
 				.ToListAsync();

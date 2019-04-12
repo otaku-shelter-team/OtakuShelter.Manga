@@ -9,15 +9,12 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "name")]
 		public string Name { get; set; }
-		
+
 		public async ValueTask Update(MangasContext context, int authorId)
 		{
 			var author = await context.Authors.FirstAsync(t => t.Id == authorId);
 
-			if (Name != null)
-			{
-				author.Name = Name;
-			}
+			if (Name != null) author.Name = Name;
 		}
 	}
 }

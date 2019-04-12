@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 
-
 namespace OtakuShelter.Mangas
 {
 	public class PagesController
@@ -29,11 +28,11 @@ namespace OtakuShelter.Mangas
 
 			return response;
 		}
-		
+
 		public async ValueTask AdminCreate(int chapterId, AdminCreatePageRequest request)
 		{
 			await request.Create(context, chapterId);
-			
+
 			await context.SaveChangesAsync();
 		}
 

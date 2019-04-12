@@ -16,10 +16,7 @@ namespace OtakuShelter.Mangas
 
 		public async Task StartAsync(CancellationToken cancellationToken)
 		{
-			foreach (var parser in parsers)
-			{
-				await parser.Parse(cancellationToken);
-			}
+			foreach (var parser in parsers) await parser.Parse(cancellationToken);
 		}
 
 		public Task StopAsync(CancellationToken cancellationToken)

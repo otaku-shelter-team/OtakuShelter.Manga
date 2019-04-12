@@ -11,7 +11,7 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "types")]
 		public ICollection<ReadTypeItemResponse> Types { get; private set; }
-		
+
 		public async ValueTask Load(MangasContext context, int offset, int limit)
 		{
 			Types = await context.Types

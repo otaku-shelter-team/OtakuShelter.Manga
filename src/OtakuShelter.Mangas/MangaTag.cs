@@ -15,10 +15,10 @@ namespace OtakuShelter.Mangas
 		{
 			Manga = manga;
 		}
-		
+
 		public int MangaId { get; set; }
 		public int TagId { get; set; }
-		
+
 		public virtual Manga Manga { get; set; }
 		public virtual Tag Tag { get; set; }
 	}

@@ -13,18 +13,18 @@ namespace OtakuShelter.Mangas
 
 		[DataMember(Name = "order")]
 		public int Order { get; set; }
-		
+
 		[DataMember(Name = "uploadDate")]
 		public DateTime UploadDate { get; set; }
-		
+
 		public async ValueTask Create(MangasContext context, int mangaId)
 		{
 			var manga = await context.Mangas.FirstAsync(m => m.Id == mangaId);
-			
+
 			var chapter = new Chapter
 			{
 				Title = Title,
-				Order =  Order,
+				Order = Order,
 				UploadDate = UploadDate,
 				Manga = manga
 			};

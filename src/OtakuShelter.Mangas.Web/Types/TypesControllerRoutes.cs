@@ -14,8 +14,9 @@ namespace OtakuShelter.Mangas
 				controller.AddRoute("admin/types", c => c.AdminCreate(From.Body<AdminCreateTypeRequest>()))
 					.HttpPost()
 					.Authorize(roles.Admin);
-				
-				controller.AddRoute("admin/types/{typeId}", c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateTypeRequest>()))
+
+				controller.AddRoute("admin/types/{typeId}",
+						c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateTypeRequest>()))
 					.HttpPut()
 					.Authorize(roles.Admin);
 
@@ -23,7 +24,7 @@ namespace OtakuShelter.Mangas
 					.HttpDelete()
 					.Authorize(roles.Admin);
 			});
-			
+
 			return builder;
 		}
 	}

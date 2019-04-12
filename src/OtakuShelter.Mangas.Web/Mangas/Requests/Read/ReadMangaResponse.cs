@@ -11,7 +11,7 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "mangas")]
 		public ICollection<ReadMangaItemResponse> Mangas { get; private set; }
-		
+
 		public async ValueTask Load(MangasContext context, FilterByMangaTitleRequest filter)
 		{
 			var query = context.Mangas
@@ -20,11 +20,8 @@ namespace OtakuShelter.Mangas
 				.Skip(filter.Offset)
 				.Take(filter.Limit);
 
-			if (filter.Title != null)
-			{
-				query = query.Where(m => m.Title == filter.Title);
-			}
-			
+			if (filter.Title != null) query = query.Where(m => m.Title == filter.Title);
+
 			Mangas = await query
 				.Select(manga => new ReadMangaItemResponse(manga))
 				.ToListAsync();

@@ -8,7 +8,7 @@ namespace OtakuShelter.Mangas
 		public void Configure(EntityTypeBuilder<Manga> builder)
 		{
 			builder.ToTable("mangas");
-			
+
 			builder.Property(m => m.Id)
 				.HasColumnName("id")
 				.UseNpgsqlIdentityColumn();
@@ -31,7 +31,7 @@ namespace OtakuShelter.Mangas
 			builder.Property(m => m.TypeId)
 				.HasColumnName("type_id")
 				.IsRequired();
-			
+
 			builder.HasOne(m => m.Type)
 				.WithMany(t => t.Mangas)
 				.IsRequired()

@@ -1,5 +1,4 @@
 using HealthChecks.UI.Client;
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,10 +15,10 @@ namespace OtakuShelter.Mangas
 			services.AddHealthChecks()
 				.AddNpgSql(database.ConnectionString)
 				.AddRabbitMQ(rabbitMq.ConnectionString);
-			
+
 			return services;
 		}
-		
+
 		public static IApplicationBuilder UseMangasHealthchecks(this IApplicationBuilder app)
 		{
 			return app.UseHealthChecks("/health", new HealthCheckOptions

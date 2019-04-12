@@ -14,13 +14,13 @@ namespace OtakuShelter.Mangas
 		{
 			this.configuration = configuration.Value;
 		}
-		
+
 		public IServiceProvider ConfigureServices(IServiceCollection services)
 		{
 			services.AddHostedService<MangaParserHostedService>()
 				.AddMangasDatabase(configuration.Database)
 				.AddSingleton<IMangaParser, DefaultMangaParser>();
-			
+
 			return services.BuildServiceProvider();
 		}
 

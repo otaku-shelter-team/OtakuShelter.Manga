@@ -11,7 +11,7 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "tags")]
 		public ICollection<ReadTagItemResponse> Tags { get; private set; }
-		
+
 		public async ValueTask Load(MangasContext context, int offset, int limit)
 		{
 			Tags = await context.Tags

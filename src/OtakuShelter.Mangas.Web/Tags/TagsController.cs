@@ -19,7 +19,7 @@ namespace OtakuShelter.Mangas
 
 			return response;
 		}
-		
+
 		public async ValueTask<ReadTagsByIdResponse> ReadById(int mangaId, FilterRequest filter)
 		{
 			var response = new ReadTagsByIdResponse();
@@ -28,7 +28,7 @@ namespace OtakuShelter.Mangas
 
 			return response;
 		}
-		
+
 		public async ValueTask AdminCreate(AdminCreateTagRequest request)
 		{
 			await request.Create(context);

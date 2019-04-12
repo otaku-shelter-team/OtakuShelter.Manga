@@ -10,13 +10,13 @@ namespace OtakuShelter.Mangas
 		public string Name { get; set; }
 
 		public DateTime Created { get; set; }
-		
+
 		public int MangaId { get; set; }
 		public virtual Manga Manga { get; set; }
-		
+
 		public int? ChapterId { get; set; }
 		public virtual Chapter Chapter { get; set; }
-		
+
 		public int? PageId { get; set; }
 		public virtual Page Page { get; set; }
 	}

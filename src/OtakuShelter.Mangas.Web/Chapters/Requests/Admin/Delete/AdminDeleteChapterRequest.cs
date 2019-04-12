@@ -9,7 +9,7 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "chapterId")]
 		public int ChapterId { get; set; }
-		
+
 		public async ValueTask Delete(MangasContext context)
 		{
 			var chapter = await context.Chapters

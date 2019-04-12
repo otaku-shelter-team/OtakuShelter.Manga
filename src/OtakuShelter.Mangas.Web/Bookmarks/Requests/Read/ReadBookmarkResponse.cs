@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
-
 using Microsoft.EntityFrameworkCore;
 
 namespace OtakuShelter.Mangas
@@ -12,8 +11,14 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "bookmarks")]
 		public ICollection<ReadBookmarkItemResponse> Bookmarks { get; set; }
-		
-		public async ValueTask Read(MangasContext context, int accountId, int? mangaId, int? chapterId, int? pageId, int offset, int limit)
+
+		public async ValueTask Read(MangasContext context,
+			int accountId,
+			int? mangaId,
+			int? chapterId,
+			int? pageId,
+			int offset,
+			int limit)
 		{
 			var bookmarks = context.Bookmarks
 				.AsNoTracking()
@@ -29,14 +34,14 @@ namespace OtakuShelter.Mangas
 			if (chapterId != null)
 			{
 				var chapter = await context.Chapters.FirstAsync(ch => ch.Id == chapterId);
-				
+
 				bookmarks = bookmarks.Where(b => b.Chapter == chapter);
 			}
 
 			if (pageId != null)
 			{
 				var page = await context.Pages.FirstAsync(p => p.Id == pageId);
-				
+
 				bookmarks = bookmarks.Where(b => b.Page == page);
 			}
 

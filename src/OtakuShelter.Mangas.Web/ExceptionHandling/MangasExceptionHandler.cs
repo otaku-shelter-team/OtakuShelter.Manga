@@ -1,10 +1,8 @@
 using System;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-
 using Phema.ExceptionHandling;
 using Phema.RabbitMq;
 
@@ -13,8 +11,8 @@ namespace OtakuShelter.Mangas
 	public class MangasExceptionHandler : IExceptionHandler<Exception>
 	{
 		private readonly IHttpContextAccessor accessor;
-		private readonly IRabbitMqProducer<MangasExceptionPayload> producer;
 		private readonly MangasConfiguration configuration;
+		private readonly IRabbitMqProducer<MangasExceptionPayload> producer;
 
 		public MangasExceptionHandler(
 			IRabbitMqProducer<MangasExceptionPayload> producer,
@@ -25,7 +23,7 @@ namespace OtakuShelter.Mangas
 			this.configuration = configuration.Value;
 			this.accessor = accessor;
 		}
-		
+
 		public async ValueTask<IActionResult> Handle(Exception exception)
 		{
 			var message = new MangasExceptionPayload
@@ -39,7 +37,7 @@ namespace OtakuShelter.Mangas
 			};
 
 			await producer.Produce(message);
-			
+
 			return new BadRequestObjectResult(new {traceId = message.TraceId});
 		}
 	}

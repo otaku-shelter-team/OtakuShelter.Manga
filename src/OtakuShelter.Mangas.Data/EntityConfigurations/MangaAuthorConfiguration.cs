@@ -8,8 +8,8 @@ namespace OtakuShelter.Mangas
 		public void Configure(EntityTypeBuilder<MangaAuthor> builder)
 		{
 			builder.ToTable("manga_authors");
-			
-			builder.HasKey(mt => new { mt.MangaId, TranslatorId = mt.AuthorId });
+
+			builder.HasKey(mt => new {mt.MangaId, TranslatorId = mt.AuthorId});
 
 			builder.Property(mt => mt.MangaId)
 				.HasColumnName("manga_id")

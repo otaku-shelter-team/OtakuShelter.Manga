@@ -1,7 +1,6 @@
 using System;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
-
 using Microsoft.EntityFrameworkCore;
 
 namespace OtakuShelter.Mangas
@@ -11,13 +10,13 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "name")]
 		public string Name { get; set; }
-		
+
 		[DataMember(Name = "mangaId")]
 		public int MangaId { get; set; }
-		
+
 		[DataMember(Name = "chapterId")]
 		public int? ChapterId { get; set; }
-		
+
 		[DataMember(Name = "pageId")]
 		public int? PageId { get; set; }
 
@@ -28,7 +27,7 @@ namespace OtakuShelter.Mangas
 			var chapter = ChapterId == null
 				? null
 				: await context.Chapters.FirstAsync(ch => ch.Id == ChapterId);
-			
+
 			var page = PageId == null
 				? null
 				: await context.Pages.FirstAsync(p => p.Id == PageId);

@@ -12,7 +12,7 @@ namespace OtakuShelter.Mangas
 
 		public int MangaId { get; set; }
 		public virtual Manga Manga { get; set; }
-		
+
 		public virtual ICollection<Page> Pages { get; set; }
 		public virtual ICollection<Bookmark> Bookmarks { get; set; }
 	}

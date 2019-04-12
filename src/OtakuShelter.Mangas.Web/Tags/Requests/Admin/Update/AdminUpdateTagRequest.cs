@@ -14,10 +14,7 @@ namespace OtakuShelter.Mangas
 		{
 			var tag = await context.Tags.FirstAsync(t => t.Id == tagId);
 
-			if (Name != null)
-			{
-				tag.Name = Name;
-			}
+			if (Name != null) tag.Name = Name;
 		}
 	}
 }

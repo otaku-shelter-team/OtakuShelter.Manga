@@ -10,7 +10,7 @@ namespace OtakuShelter.Mangas
 		{
 			this.context = context;
 		}
-		
+
 		public async ValueTask<ReadAuthorResponse> Read(FilterRequest filter)
 		{
 			var response = new ReadAuthorResponse();
@@ -28,7 +28,7 @@ namespace OtakuShelter.Mangas
 
 			return response;
 		}
-		
+
 		public async ValueTask AdminCreate(AdminCreateAuthorRequest request)
 		{
 			await request.Create(context);

@@ -29,7 +29,7 @@ namespace OtakuShelter.Mangas
 			builder.Property(p => p.ChapterId)
 				.HasColumnName("chapter_id")
 				.IsRequired();
-			
+
 			builder.HasOne(c => c.Chapter)
 				.WithMany(x => x.Pages)
 				.IsRequired()

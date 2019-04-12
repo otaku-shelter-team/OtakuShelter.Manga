@@ -10,7 +10,7 @@ namespace OtakuShelter.Mangas
 		{
 			this.context = context;
 		}
-		
+
 		public async ValueTask<ReadChapterResponse> Read(int mangaId, FilterRequest filter)
 		{
 			var response = new ReadChapterResponse();
@@ -19,7 +19,7 @@ namespace OtakuShelter.Mangas
 
 			return response;
 		}
-		
+
 		public async ValueTask<ReadByIdChapterResponse> ReadById(int chapterId)
 		{
 			var response = new ReadByIdChapterResponse();
@@ -28,7 +28,7 @@ namespace OtakuShelter.Mangas
 
 			return response;
 		}
-		
+
 		public async ValueTask AdminCreate(int mangaId, AdminCreateChapterRequest request)
 		{
 			await request.Create(context, mangaId);
@@ -39,7 +39,7 @@ namespace OtakuShelter.Mangas
 		public async ValueTask AdminUpdate(int chapterId, AdminUpdateChapterRequest request)
 		{
 			await request.Update(context, chapterId);
-			
+
 			await context.SaveChangesAsync();
 		}
 

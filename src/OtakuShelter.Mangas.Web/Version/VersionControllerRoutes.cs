@@ -11,7 +11,7 @@ namespace OtakuShelter.Mangas
 				controller.AddRoute("version", c => c.Version())
 					.HttpGet();
 			});
-			
+
 			return builder;
 		}
 	}

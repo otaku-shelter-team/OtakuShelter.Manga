@@ -11,22 +11,22 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "title")]
 		public string Title { get; set; }
-		
+
 		[DataMember(Name = "description")]
 		public string Description { get; set; }
-		
+
 		[DataMember(Name = "type")]
 		public TypeResponse Type { get; set; }
-		
+
 		[DataMember(Name = "tags")]
 		public ICollection<TagResponse> Tags { get; set; }
-		
-		[DataMember(Name = "translators")] 
+
+		[DataMember(Name = "translators")]
 		public ICollection<TranslatorResponse> Translators { get; set; }
-		
-		[DataMember(Name = "authors")] 
+
+		[DataMember(Name = "authors")]
 		public ICollection<AuthorResponse> Authors { get; set; }
-		
+
 		public async ValueTask Update(MangasContext context, int mangaId)
 		{
 			var manga = await context.Mangas
@@ -34,16 +34,10 @@ namespace OtakuShelter.Mangas
 				.Include(m => m.Translators)
 				.Include(m => m.Authors)
 				.FirstAsync(m => m.Id == mangaId);
-			
-			if (Title != null)
-			{
-				manga.Title = Title;
-			}
 
-			if (Description != null)
-			{
-				manga.Description = Description;
-			}
+			if (Title != null) manga.Title = Title;
+
+			if (Description != null) manga.Description = Description;
 
 			if (Type != null)
 			{
@@ -83,11 +77,11 @@ namespace OtakuShelter.Mangas
 					.Select(translatorId => context.Translators.First(t => t.Id == translatorId))
 					.Select(translator => new MangaTranslator(translator, manga))
 					.ToList();
-				
+
 				context.MangaTranslators.RemoveRange(mangaTranslatorsToRemove);
 				await context.MangaTranslators.AddRangeAsync(mangaTranslatorsToAdd);
 			}
-			
+
 			if (Authors != null)
 			{
 				var modelAuthorIds = Authors.Select(t => t.Id).ToList();
@@ -101,7 +95,7 @@ namespace OtakuShelter.Mangas
 					.Select(authorId => context.Authors.First(t => t.Id == authorId))
 					.Select(author => new MangaAuthor(author, manga))
 					.ToList();
-				
+
 				context.MangaAuthors.RemoveRange(mangaAuthorsToRemove);
 				await context.MangaAuthors.AddRangeAsync(mangaAuthorsToAdd);
 			}

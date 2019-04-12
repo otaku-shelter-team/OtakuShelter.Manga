@@ -10,7 +10,7 @@ namespace OtakuShelter.Mangas
 		{
 			this.configuration = configuration.Value;
 		}
-		
+
 		public ReadVersionResponse Version()
 		{
 			var response = new ReadVersionResponse();

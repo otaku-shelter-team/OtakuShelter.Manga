@@ -6,24 +6,6 @@ namespace OtakuShelter.Mangas
 	[DataContract]
 	public class ReadBookmarkItemResponse
 	{
-		[DataMember(Name = "id")]
-		public int Id { get; }
-		
-		[DataMember(Name = "name")]
-		public string Name { get; }
-		
-		[DataMember(Name = "created")]
-		public DateTime Created { get; }
-		
-		[DataMember(Name = "mangaId")]
-		public int MangaId { get; }
-		
-		[DataMember(Name = "chapterId")]
-		public int? ChapterId { get; }
-		
-		[DataMember(Name = "pageId")]
-		public int? PageId { get; }
-
 		public ReadBookmarkItemResponse(Bookmark bookmark)
 		{
 			Id = bookmark.Id;
@@ -33,5 +15,23 @@ namespace OtakuShelter.Mangas
 			ChapterId = bookmark.ChapterId;
 			PageId = bookmark.PageId;
 		}
+
+		[DataMember(Name = "id")]
+		public int Id { get; }
+
+		[DataMember(Name = "name")]
+		public string Name { get; }
+
+		[DataMember(Name = "created")]
+		public DateTime Created { get; }
+
+		[DataMember(Name = "mangaId")]
+		public int MangaId { get; }
+
+		[DataMember(Name = "chapterId")]
+		public int? ChapterId { get; }
+
+		[DataMember(Name = "pageId")]
+		public int? PageId { get; }
 	}
 }

@@ -9,10 +9,10 @@ namespace OtakuShelter.Mangas
 	{
 		[DataMember(Name = "order")]
 		public int Order { get; set; }
-		
+
 		[DataMember(Name = "image")]
 		public string Image { get; set; }
-      
+
 		public async ValueTask Create(MangasContext context, int chapterId)
 		{
 			var chapter = await context.Chapters.FirstAsync(ch => ch.Id == chapterId);

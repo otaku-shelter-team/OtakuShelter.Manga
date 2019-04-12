@@ -5,7 +5,7 @@ namespace OtakuShelter.Mangas
 		public MangaAuthor()
 		{
 		}
-		
+
 		public MangaAuthor(Author author, Manga manga)
 		{
 			Author = author;
