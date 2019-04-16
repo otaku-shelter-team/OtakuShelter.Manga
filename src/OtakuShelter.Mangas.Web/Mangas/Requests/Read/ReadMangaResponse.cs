@@ -6,25 +6,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OtakuShelter.Mangas
 {
-	[DataContract]
-	public class ReadMangaResponse
-	{
-		[DataMember(Name = "mangas")]
-		public ICollection<ReadMangaItemResponse> Mangas { get; private set; }
+    [DataContract]
+    public class ReadMangaResponse
+    {
+        [DataMember(Name = "mangas")] public ICollection<ReadMangaItemResponse> Mangas { get; private set; }
 
-		public async ValueTask Load(MangasContext context, FilterByMangaTitleRequest filter)
-		{
-			var query = context.Mangas
-				.AsNoTracking()
-				.OrderByDescending(m => m.Id)
-				.Skip(filter.Offset)
-				.Take(filter.Limit);
+        public async ValueTask Load(MangasContext context, FilterByMangaTitleRequest filter)
+        {
+            var query = context.Mangas
+                .AsNoTracking()
+                .OrderByDescending(m => m.Id)
+                .Skip(filter.Offset)
+                .Take(filter.Limit);
 
-			if (filter.Title != null) query = query.Where(m => m.Title == filter.Title);
+            if (filter.Title != null) query = query.Where(m => m.Title.Contains(filter.Title));
 
-			Mangas = await query
-				.Select(manga => new ReadMangaItemResponse(manga))
-				.ToListAsync();
-		}
-	}
+            Mangas = await query
+                .Select(manga => new ReadMangaItemResponse(manga))
+                .ToListAsync();
+        }
+    }
 }
