@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.Serialization;
 
 namespace OtakuShelter.Mangas
@@ -9,6 +10,7 @@ namespace OtakuShelter.Mangas
 		{
 			Id = chapter.Id;
 			Title = chapter.Title;
+			UploadDate = chapter.UploadDate;
 		}
 
 		[DataMember(Name = "id")]
@@ -16,5 +18,8 @@ namespace OtakuShelter.Mangas
 
 		[DataMember(Name = "title")]
 		public string Title { get; }
+		
+		[DataMember(Name = "uploadDate")]
+		public DateTime UploadDate { get; }
 	}
 }
