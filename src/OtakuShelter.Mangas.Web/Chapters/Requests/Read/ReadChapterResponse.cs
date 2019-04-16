@@ -14,7 +14,8 @@ namespace OtakuShelter.Mangas
 
 		public async ValueTask Load(MangasContext context, int mangaId, int offset, int limit)
 		{
-			Chapters = await context.Chapters.Where(ch => ch.MangaId == mangaId)
+			Chapters = await context.Chapters
+				.Where(ch => ch.MangaId == mangaId)
 				.OrderBy(chapter => chapter.Order)
 				.Skip(offset)
 				.Take(limit)

@@ -15,7 +15,6 @@ namespace OtakuShelter.Mangas
 		public async ValueTask Load(MangasContext context, int chapterId, int offset, int limit)
 		{
 			Pages = await context.Pages
-				.AsNoTracking()
 				.Where(p => p.ChapterId == chapterId)
 				.OrderBy(page => page.Order)
 				.Skip(offset)
