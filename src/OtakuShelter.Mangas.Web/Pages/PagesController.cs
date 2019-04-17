@@ -20,14 +20,14 @@ namespace OtakuShelter.Mangas
 			return response;
 		}
 
-		public async ValueTask<ReadByIdPageResponse> ReadById(int pageId)
-		{
-			var response = new ReadByIdPageResponse();
-
-			await response.Load(context, pageId);
-
-			return response;
-		}
+		// public async ValueTask<ReadByIdPageResponse> ReadById(int pageId)
+		// {
+		// 	var response = new ReadByIdPageResponse();
+		//
+		// 	await response.Load(context, pageId);
+		//
+		// 	return response;
+		// }
 
 		public async ValueTask AdminCreate(int chapterId, AdminCreatePageRequest request)
 		{

@@ -10,10 +10,10 @@ namespace OtakuShelter.Mangas
 			{
 				controller.AddRoute("pages/{chapterId}", c => c.Read(From.Route<int>(), From.Query<FilterRequest>()))
 					.HttpGet();
-				
-//				TODO:
-//				controller.AddRoute("pages/{pageId}", c => c.ReadById(From.Route<int>()))
-//					.HttpGet();
+
+				// TODO:
+				// controller.AddRoute("pages/{pageId}", c => c.ReadById(From.Route<int>()))
+				// 	.HttpGet();
 
 				controller.AddRoute("admin/{chapterId}/pages",
 						c => c.AdminCreate(From.Route<int>(), From.Body<AdminCreatePageRequest>()))
