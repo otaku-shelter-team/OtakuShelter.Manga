@@ -11,7 +11,10 @@ namespace OtakuShelter.Mangas
 			Image = page.Image;
 		}
 
+		[DataMember(Name = "id")]
 		public int Id { get; }
+		
+		[DataMember(Name = "image")]
 		public string Image { get; }
 	}
 }
