@@ -15,7 +15,7 @@ namespace OtakuShelter.Mangas
 
 			builder.Property(c => c.Title)
 				.HasColumnName("title")
-				.HasMaxLength(100)
+				.HasMaxLength(200)
 				.IsRequired();
 
 			builder.Property(c => c.Order)
