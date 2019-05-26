@@ -29,7 +29,7 @@ namespace OtakuShelter.Mangas.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("name")
-                        .HasMaxLength(200);
+                        .HasMaxLength(500);
 
                     b.HasKey("Id");
 
@@ -62,7 +62,7 @@ namespace OtakuShelter.Mangas.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("name")
-                        .HasMaxLength(200);
+                        .HasMaxLength(500);
 
                     b.Property<int?>("PageId")
                         .HasColumnName("page_id");
@@ -98,7 +98,7 @@ namespace OtakuShelter.Mangas.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnName("title")
-                        .HasMaxLength(200);
+                        .HasMaxLength(500);
 
                     b.Property<DateTime>("UploadDate")
                         .HasColumnName("upload_date")
@@ -133,7 +133,7 @@ namespace OtakuShelter.Mangas.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnName("title")
-                        .HasMaxLength(200);
+                        .HasMaxLength(500);
 
                     b.Property<int>("TypeId")
                         .HasColumnName("type_id");
@@ -227,7 +227,7 @@ namespace OtakuShelter.Mangas.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("name")
-                        .HasMaxLength(200);
+                        .HasMaxLength(500);
 
                     b.HasKey("Id");
 
@@ -248,7 +248,7 @@ namespace OtakuShelter.Mangas.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("name")
-                        .HasMaxLength(200);
+                        .HasMaxLength(500);
 
                     b.HasKey("Id");
 
@@ -269,7 +269,7 @@ namespace OtakuShelter.Mangas.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("name")
-                        .HasMaxLength(200);
+                        .HasMaxLength(500);
 
                     b.HasKey("Id");
 

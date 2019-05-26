@@ -10,8 +10,8 @@ using OtakuShelter.Mangas;
 namespace OtakuShelter.Mangas.Migrations
 {
     [DbContext(typeof(MangasContext))]
-    [Migration("20190509132500_IncreaseMaxLength")]
-    partial class IncreaseMaxLength
+    [Migration("20190526123651_Increate200To500")]
+    partial class Increate200To500
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

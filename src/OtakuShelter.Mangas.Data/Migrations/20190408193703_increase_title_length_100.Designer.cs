@@ -135,7 +135,7 @@ namespace OtakuShelter.Mangas.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnName("title")
-                        .HasMaxLength(200);
+                        .HasMaxLength(500);
 
                     b.Property<int>("TypeId")
                         .HasColumnName("type_id");
